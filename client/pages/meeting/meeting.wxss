@@ -1,0 +1,92 @@
+/* pages/meeting/meeting.wxss */
+.selected_date {
+  text-align: center;
+  padding-top: 0px;
+}
+
+.selected_date--text {
+  margin:5px 10px;
+  margin-bottom: 0px;
+  font-size:18px;
+  
+}
+
+.selected_date>view {
+  display: inline-block;
+}
+.select_icon {
+  width: 30px;
+  height: 30px;
+  position:relative;
+  top:8px;
+}
+
+.wrapper {
+  padding: 0 30rpx;
+}
+.meeting__container {
+  margin: 15rpx 0;
+  display: flex;
+}
+.meeting__hr {
+  display: block;
+  width: 100%;
+  height: 0px;
+  border-bottom: 1px solid gainsboro;
+}
+
+.meeting__add image {
+   width: 75rpx;
+   height: 75rpx;
+}
+.meeting__departure--container {
+  display: flex;
+}
+.meeting__departure {
+  flex: 1 0;
+  margin-left: 50px;
+  text-align: center;
+  color: #717175;
+}
+.meeting__date {
+  font-size: 12px;
+  padding:7rpx 0;
+  margin-top:15px;
+  color: #8e8e93;
+}
+
+.meeting__time {
+  padding:5px 0;
+  padding-right: 25rpx;
+  color:#c7c7cc;
+  font-size:30rpx;
+}
+
+.meeting__content {
+  flex: 1 0;
+  text-align: center;
+  font-weight: bold;
+  font-size:30rpx;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 7px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+  color: white;
+}
+
+.overlay {
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+}
+
+.spinner {
+  padding-top: 200rpx;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 200rpx;
+  height: 200rpx;
+}

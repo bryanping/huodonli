@@ -1,0 +1,68 @@
+
+<view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+    <image class='spinner' src='../../../../img/loader.gif'></image>
+</view>
+
+<view style='{{loader === true ? "display:none" : "display:block"}}' class='container'>
+  <form bindsubmit="formSubmit">
+    <view class='wrapper'>
+    <view class="section">
+     <view class="section--text">活动标题</view> 
+      <view class='section--elem input'>{{title}}</view>
+    </view>
+    
+    <view class="section">
+      <view class="section--text">活动日期</view>
+      <view class="section--elem input">
+       {{date}}
+      </view>
+    </view>
+     <view class="section">
+      <view class="section--text">活动時間</view>
+      <view class="section--elem input">
+      {{start_time}}-{{end_time}}
+      </view>
+    </view>
+
+   <!-- <view class="section">
+      <view class="section--text">开始时间</view>
+      <view class="section--elem input">{{start_time}}</view>
+    </view>
+    
+   <view class="section">
+      <view class="section--text">活动时长</view>
+      <view class="section--elem input">{{how_long}}</view>
+   </view>
+
+   <view class="section">
+      <view class="section--text">结束时间</view>
+      <view class="section--elem input">{{end_time}}</view>
+   </view> -->
+
+    <view class="section">
+      <view class="section--text">活动地点</view>
+      <view class='section--elem input'>{{destination}}</view>
+    </view>
+
+    <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
+        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="14" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
+    </view>
+
+    <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
+      <text class='section--title'>参与者</text>
+    </view>
+    <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
+      <block wx:for="{{members}}"  wx:key="key"  wx:for-item="item">
+         <navigator url="/pages/user/page/view/view?id={{item.id}}" class='user'> 
+          <image class='user--image' src='{{ item.avatarUrl || "../../../../img/avatar.png" }}'></image>
+          <text class='user--name'>{{item.nickName}}</text>
+        </navigator>
+      </block>
+    </view>
+    <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
+  </view>
+  
+  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享给朋友</button>
+  <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>参加</button>
+  </form>
+</view>

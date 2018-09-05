@@ -1,0 +1,76 @@
+const DB = require('../tools/db');
+
+class EventInvite {
+  constructor(event_id, invited_openid, status, id) {
+    if (id) {
+      this.id = id;
+    }
+    this.event_id = event_id;
+    this.invited_openid = invited_openid;
+    this.status = status;
+  }
+
+  toMysql() {
+    return {
+      event_id: this.event_id,
+      invited_openid: this.invited_openid,
+      status: this.status
+    }
+  }
+
+  static fromObject(obj) {
+    if (!obj) {
+      return undefined;
+    }
+
+    return new EventInvite(obj.event_id, obj.invited_openid, obj.status, obj.id);
+  }
+}
+
+class EventInviteDAO {
+
+  static get TABLE() {
+    return 'event_invite';
+  }
+
+  static async getInvite(event_id, invited_openid) {
+    let elem = await DB.select().from(this.TABLE).whereRaw('event_id = ' + event_id + ' and invited_openid = "' + invited_openid + '"');
+
+    return EventInvite.fromObject(elem[0]);
+  }
+
+  static async getEventsByMonth(openid, year, month){
+    return await DB.select().from(this.TABLE).rightJoin('event', 'event_invite.event_id', '=', 'event.id')
+        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color')
+        .where(DB.raw(`YEAR(event.date) = ${year} AND MONTH(event.date) = ${month} AND event_invite.invited_openid = "${openid}" AND event.deleted IS NULL`))
+        .orderByRaw('event.date, event.start_time');
+  }
+
+  static async getEventsByOpenid(openid){
+    return await DB.select().from(this.TABLE).rightJoin('event', 'event_invite.event_id', '=', 'event.id')
+        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color')
+      .where(DB.raw(`event_invite.invited_openid = "${openid}" AND event.date >= date(now()) AND  event.deleted IS NULL `))
+      // .where(DB.raw(`event_invite.invited_openid = "${openid}" AND event.deleted IS NULL `))
+        .orderByRaw('event.date, event.start_time');
+  }
+
+  static async acceptInvite(event_id, invited_openid) {
+    try {
+      await DB(this.TABLE).insert({
+        event_id: event_id,
+        invited_openid: invited_openid,
+        status: true
+      });
+    }
+    catch (ex) {
+      console.log('EventDAO:' + ex.message);
+      return false;
+    }
+    return true;
+  }
+}
+
+module.exports = {
+  EventInvite: EventInvite,
+  EventInviteDAO: EventInviteDAO
+};

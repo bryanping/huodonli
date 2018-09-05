@@ -1,0 +1,145 @@
+page {
+  background-color: #fbfbfb;
+  font-family: "黑体";
+}
+
+.container {
+  height: auto;
+  position: relative;
+}
+
+form {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  min-height: 25rpx;
+  height: 25rpx;
+  color:#8e8e93;
+  font-family: "黑体";
+}
+
+.picker {
+  width: 20%;
+  text-align: center;
+  font-size: 28rpx;
+  color:#8e8e93;
+}
+
+.colorpoint {
+  width:50rpx;
+  height:50rpx;
+  border-radius:50rpx;
+}
+
+.colorpointselected {
+  width:50rpx;
+  height:50rpx;
+  border-radius:50rpx;
+  -webkit-box-shadow:0rpx 0rpx 20rpx #333;
+}
+
+.section {
+  display:flex;
+  background-color: white;
+  padding: 5rpx;
+  border-bottom: 1px solid #E6E6E5;
+}
+.section:first-child {
+  border-bottom: 2px solid #E6E6E5;
+}
+
+.section--text {
+  color:#8e8e93;
+  font-size: 28rpx;
+  padding: 10rpx 5rpx;
+}
+
+.section--elem{
+  flex:1 0;
+  padding: 10rpx 30rpx;
+}
+
+
+.wrapper {
+  min-height: 100vh;
+  margin-bottom:-50px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+
+.submit {
+  display: block;
+  height:90rpx;
+  width:100%;
+  padding:0;
+  font-size: 36rpx;
+  color: white;
+  border: 0;
+  border-radius: 0;
+  background: -webkit-linear-gradient(left, #0022ff 0%,#0079ff 100%);
+  margin-top:0rpx;
+}
+
+.map_container {
+  padding: 0px!important;
+}
+
+.map {
+  width:100%;
+  height:51vh;
+}
+
+
+.overlay {
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+}
+
+.spinner {
+  padding-top: 200px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 150px;
+  height: 150px;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding:10rpx;
+  max-width:80rpx;
+}
+
+.user--image {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.user--name {
+  text-align: center;
+  font-size: 18rpx;
+  color:#8e8e93;
+  text-overflow: ellipsis;
+}
+
+.members {
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.section--title {
+  width: 100%;
+  text-align: center;
+  color:#8e8e93;
+}

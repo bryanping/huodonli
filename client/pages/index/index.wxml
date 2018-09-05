@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+    <image class='spinner' src='../../img/loader.gif'></image>
+</view>
+<view style='{{ empty ? "display: block" : "display: none" }}' class='year'>开始和朋友分享活动</view>
+ <view class="title">
+好友活动
+</view>
+
+<view style='{{loader === true ? "display:none" : "display:block"}}' class="wrapper">
+<block  wx:for="{{resultArr}}"  wx:key="key"  wx:for-item="dateArr">
+<view class='year'>{{index}}</view>
+  <block wx:for="{{dateArr}}"  wx:key="key"  wx:for-item="dateObj">
+    <view class="request__date">{{index}}  ({{weekArr[dateObj.week]}})</view> 
+    <view class="request__hr"></view>
+      <block  class="wrapper" wx:for="{{dateObj}}" wx:key="key"  wx:for-item="item"  >
+       <view class="request__container">
+        <view class="request__time">
+          {{item.start_time}}
+        </view>
+         <!--<view class="request__content">-->
+        <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="request__content"  >
+        {{ item.title }}
+       <!-- </view>-->
+      </navigator>
+      </view>
+<!--<view class="title2">社团活动</view>
+<view class="title3">附近活动</view>-->
+    </block>
+  </block>
+</block>
+</view>
+

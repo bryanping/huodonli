@@ -1,0 +1,16 @@
+<view class="container">
+  <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+    <image class='spinner' src='../../../../img/loader.gif'></image>
+  </view>
+
+  <view  style='{{loader === true ? "display:none" : "display:block"}}' class="userinfo">
+    <view>
+      <image class='userinfo-avatar' src='{{ avatarUrl }}'></image>
+    </view>
+    <view class='userinfo-nickname'>{{ nickName }}</view>
+    <view class='userinfo-gender'>{{ gender }}</view>
+    <view class='userinfo-location'>
+     {{ country + ' ' + province + ' ' + city  }}
+    </view>
+  </view>
+</view>
