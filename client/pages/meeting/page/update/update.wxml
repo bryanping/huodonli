@@ -8,10 +8,12 @@
   <form style='{{loader === true ? "display:none" : "display:block"}}'  bindsubmit="formSubmit">
     <view class='wrapper'>
     <view class="section">
-      <view class="section--text">活动标题</view>
-      <input rows="1" wrap="off" value="{{title}}" class='section--elem input' name="title" bindinput="bindKeyInput" />
+      <view class="section--text">活动主题：</view>
+     <textarea  auto-height auto-focus value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
     </view>
-    
+     
+   
+
     <view class="section">
       <view class="section--text">活动日期</view>
       <picker mode="date" class="section--elem" value="{{date}}" bindchange="bindDateStart">
@@ -22,35 +24,16 @@
     <view class="section">
       <view class="section--text">开始时间</view>
       <picker mode="time" class="section--elem2" value="{{start_time}}" bindchange="bindTime">
-        <view class="picker">{{start_time}} - </view>
-      </picker><picker mode="time" class="section--elem1" value="{{end_time}}"        bindchange="bindEndTime">
+        <view class="picker">{{start_time}}－</view>
+      </picker>
+      <picker mode="time" class="section--elem1" value="{{end_time}}" bindchange="bindEndTime">
         <view class="picker">{{end_time}}</view>
       </picker>
     </view>
 
-    <!-- <view class="section">
-      <view class="section--text">活动时长</view>
-      <picker mode="time" class="section--elem" value="{{how_long}}" bindchange="bindHowLong">
-        <view class="picker">{{how_long}}</view>
-      </picker>
-    
-    </view>
-
-    <view class="section">
-      <view class="section--text">结束时间</view>
-      
-    </view>-->
-
- <!--   <view class="section">
-      <view class="section--text">活动时长</view>
-      <view class="section--elem1" value="{{how_long}}" bindchange="bindHowLong">
-        <view class="picker">(自动计算)  {{how_long}}</view>
-      </view>
-    </view>> -->
-
     <view class="section">
       <view class="section--text">活动地点</view>
-      <input rows="1" wrap="off" class='section--elem input' name="destination" value="{{destination}}" bindinput="bindDestinationInput" />
+      <input rows="1" wrap="off" class='section--elem input1' name="destination" value="{{destination}}" bindinput="bindDestinationInput" />
     </view>
     <view class="search--box">
       <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">
@@ -73,7 +56,8 @@
     </view>
 
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-      <text class='section--title'>参与者</text>
+      <text class='section--text'>参与者</text>
+       <text class="section--title">参与总人数：{{AllMembers.length}} 人</text>
     </view>
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
       <block wx:for="{{members}}"  wx:key="key"  wx:for-item="item">
@@ -83,11 +67,11 @@
         </navigator>
       </block>
     </view>
-    <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
+    <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"}}' class='showmanber'>{{ showAllText }}</button>
 
   <view class='section1'>
     <button bindtap='onDelete' loading='{{loadingDelete}}' class='control--button delete'>删除活动</button>
-   <button formType="submit" loading='{{loadingUpdate}}' class='control--button update'>更新</button> 
+   <!-- <button formType="submit" loading='{{loadingUpdate}}' class='control--button update'>更新</button>  -->
   </view>
   </view>
 

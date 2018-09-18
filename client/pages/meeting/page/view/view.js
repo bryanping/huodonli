@@ -147,25 +147,64 @@ Page({
   
   },
 
+  actionSheetTap: function () {
+    wx.showActionSheet({
+      itemList: ['分享給好友', '保存圖片分享朋友圈'],
+      success: function (e) {
+        if (tapIndex == 0) {
+        console.log('Share');
+        console.log(res);
+        }
+        if (tapIndex == 1) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+          })
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 1500
+          });
+        }	
+
+      },
+       fail: function (res) {
+        console.log(res.errMsg)
+      }   
+    })
+  },
+  
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  // onShareAppMessage: function (res) {
 
-    return {
-      title: '分享' + this.data.title,
-      path: 'pages/share/share?id=' + this.data.id,
-      success: function (res) {
-        // Forwarding successful
-        console.log("Share successfull");
-        console.log(res);
-      },
-      fail: function (res) {
-        // Forwarding failed
-        console.log("Share failed");
-        console.log(res);
-      }
-    }
+  //   return {
+  //     title: '分享' + this.data.title,
+  //     path: 'pages/share/share?id=' + this.data.id,
+  //     success: function (res) {
+  //       // Forwarding successful
+  //       console.log("Share successfull");
+  //       console.log(res);
+  //     },
+  //     fail: function (res) {
+  //       // Forwarding failed
+  //       console.log("Share failed");
+  //       console.log(res);
+  //     }
+  //   }
+  // },
+  openActionSheet(e) {
+    var self = this;
+    self.setData({
+      actionSheetHidden: !self.data.actionSheetHidden
+    });
+
+  },
+  listenerActionSheet: function () {
+    var self = this;
+    self.setData({
+      actionSheetHidden: !self.data.actionSheetHidden
+    })
   },
   
   formSubmit: function (e) {
@@ -203,7 +242,7 @@ Page({
       });
     } else {
       let members = [];
-      for (let i = 0; i <= 7; i++) {
+      for (let i = 0; i < 7; i++) {
         members.push(this.data.AllMembers[i]);
       }
       this.setData({

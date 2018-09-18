@@ -60,10 +60,11 @@ Page({
   },
 
   onShow: function () {
+     const { options } = this.data;
     var today = new Date();
     var y = today.getFullYear();
     var mon = Util.checkTime(today.getMonth() + 1);
-    var D = today.getDate();
+
     var d = today.getDate();
     var i = today.getDay();
 
@@ -71,7 +72,7 @@ Page({
       this.setData({
         curYear: y,
         curMonth: mon,
-        curDate: D,
+        curDate: d,
         selectedDate: y + '/' + mon + '/' + d,
         selectedWeek: this.data.weekArr[i],
         meeting: meeting.data.data,
@@ -114,6 +115,7 @@ Page({
       dateList: dateList
     });
   },
+  
   getMeetingsByDate: function (year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {

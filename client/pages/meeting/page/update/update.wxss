@@ -13,17 +13,17 @@ form {
 }
 
 .input {
+  font-size: 28rpx;
+  color:#8e8e93;
+  line-height:20px;
+}
+.input1 {
   width: 100%;
   text-align: center;
   font-size: 28rpx;
-  min-height: initial;
-  height: auto;
+  min-height: 25rpx;
+  height: 40rpx;
   color:#8e8e93;
-  text-align-last: center;
-  font-family: "黑体";
-  resize: none;
-  white-space: nowrap;
-  padding:0px 30rpx!important;
 }
 
 
@@ -32,6 +32,8 @@ form {
   text-align: center;
   font-size: 28rpx;
   color:#8e8e93;
+  letter-spacing:2px;
+
 }
 
 .colorpoint {
@@ -72,14 +74,15 @@ form {
 }
 .section--elem1{
   flex:1 0;
-  padding: 10rpx 30rpx;
-  margin-left:-60%;
+  padding: 10rpx 0rpx;
+  margin-left:-50%;
 }
 .section--elem2{
   flex:1 0;
-  padding: 10rpx 30rpx;
- 
+  padding: 10rpx 0rpx;
+  margin-left:2%;
 }
+
 .section--elem{
   flex:1 0;
   padding: 10rpx 30rpx;
@@ -89,23 +92,25 @@ form {
   text-align: center;
 }
 
+
 .wrapper {
   min-height: 100vh;
-  margin-bottom:-50px;
-  padding-bottom: 50px;
+  margin-bottom:-7vh;
+  padding-bottom: 0rpx;
   box-sizing: border-box;
 }
 
 .submit {
   display: block;
-  height:50px;
+  height:100rpx;
   width:100%;
   padding:0;
-  font-size: 18px;
+  font-size: 36rpx;
   color: white;
   border: 0;
   border-radius: 0;
-  background-color: green;
+  background: -webkit-linear-gradient(left, #0022ff 0%,#0079ff 100%);
+  margin-bottom:0rpx;
 }
 
 .map_container {
@@ -132,14 +137,17 @@ form {
   width: 50%;
   flex: 1 1 0px;
   color: #8e8e93;
-
   font-size: 15px;
- 
   padding-top:2px;
-  
-
 }
 
+.showmanber {
+  width: 100%;
+  flex: 1 1 0px;
+  color: #8e8e93;
+  font-size: 15px;
+  padding-top:2px;
+}
 .update {
  background: -webkit-linear-gradient(left, #ffffff 0%,#ffffff 100%);
 }
@@ -194,7 +202,9 @@ form {
 }
 
 .section--title {
-  width: 100%;
-  text-align: center;
   color:#8e8e93;
+  font-size: 28rpx;
+  padding: 10rpx 5rpx;
+  flex:1 0;
+  text-align-last: center;
 }

@@ -156,7 +156,7 @@ Page({
   onShareAppMessage: function (res) {
 
     return {
-      title: 'Invite to ' + this.data.title,
+      title: '分享' + this.data.title,
       path: 'pages/meeting/page/view/view?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful
@@ -199,7 +199,7 @@ Page({
     if (showAllMembers){
       this.setData({
         members: this.data.AllMembers,
-        showAllText: 'Hide',
+        showAllText: '隐藏',
         showAllMembers: showAllMembers
       });
     } else {
@@ -209,7 +209,7 @@ Page({
       }
       this.setData({
         showAllMembers: showAllMembers,
-        showAllText: 'Show all',
+        showAllText: '显示全部名单',
         members: members
       });
     }

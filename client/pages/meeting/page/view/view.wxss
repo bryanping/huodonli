@@ -16,17 +16,7 @@ form {
   width: 100%;
   text-align: center;
   font-size: 28rpx;
-  min-height: 25rpx;
-  height: 25rpx;
-  color:#8e8e93;
-  font-family: "黑体";
-}
-
-
-.picker {
-  width: 100%;
-  text-align: center;
-  font-size: 28rpx;
+  min-height: 28rpx;
   color:#8e8e93;
 }
 
@@ -62,9 +52,20 @@ form {
 .section--elem{
   flex:1 0;
   padding: 10rpx 30rpx;
+  letter-spacing:2px;
 }
+.section--elem1{
+  flex:3 0;
+  padding: 10rpx 0rpx;
+  letter-spacing:2px;
+}
+.section--elem2{
+  flex:3 0;
+  padding: 10rpx 0rpx;
+  letter-spacing:2px;
+  margin-right:5px;
 
-
+}
 .wrapper {
   min-height: 100vh;
   margin-bottom:-7vh;
@@ -74,7 +75,7 @@ form {
 
 .submit {
   display: block;
-  height:90rpx;
+  height:100rpx;
   width:100%;
   padding:0;
   font-size: 36rpx;
@@ -82,7 +83,7 @@ form {
   border: 0;
   border-radius: 0;
   background: -webkit-linear-gradient(left, #0022ff 0%,#0079ff 100%);
-  margin-top:0rpx;
+  margin-bottom:0rpx;
 }
 
 .map_container {
@@ -145,7 +146,9 @@ form {
 }
 
 .section--title {
-  width: 100%;
-  text-align: center;
   color:#8e8e93;
+  font-size: 28rpx;
+  padding: 10rpx 5rpx;
+  flex:1 0;
+  text-align-last: center;
 }

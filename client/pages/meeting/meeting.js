@@ -67,22 +67,6 @@ Page({
       this.mergeResult();
     });
   },
-/**var that = this 
-var list = wx.getStorageSync('winAwards') || {data:[]}
-    var that = this;
-    wx.request({
-      url: app.globalData.web_url + 'yourApi?open_id=' + wx.getStorageSync('open_id'),
-      success: function (res) {
-        that.setData({
-          cartList: res.data.cartList,
-          cartSize: res.data.cartSize,
-          totalAmount: res.data.totalAmount
-        })
-      }
-    })*/
-
- 
-
 
   /**
    * 生命周期函数--监听页面隐藏
