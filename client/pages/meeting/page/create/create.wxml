@@ -3,8 +3,8 @@
   <form bindsubmit="formSubmit">
     <view class='wrapper'>
     <view class="section">
-      <view class="section--text">活动主题：</view>
-      <textarea  auto-height auto-focus value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
+      <view class="section--text">活动资讯：</view>
+      <textarea  auto-height value="{{title}}" placeholder="请输入活动内容 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
     </view>
     
     <view class="section">

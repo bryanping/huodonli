@@ -7,23 +7,23 @@
   <form bindsubmit="formSubmit">
     <view class='wrapper'>
     <view class="section">
-     <view class="section--text">活动主题</view> 
-      <view class='section--elem input'>{{title}}</view>
+     <view class="section--text">资讯：</view> 
+      <text auto-height  class='section--elem input' >{{title}}</text>
     </view>
     
     <view class="section">
-      <view class="section--text">活动日期 :</view>
+      <view class="section--text">时间：</view>
       <view class="section--elem1 input">
       {{date}}
       </view>
       <view class="section--elem2 input">
-      时间: {{start_time}}-{{end_time}}
+      {{start_time}} － {{end_time}}
       </view>
     </view>
 
 
     <view class="section">
-      <view class="section--text">活动地点 :</view>
+      <view class="section--text">地点：</view>
       <view class='section--elem input'>{{destination}}</view>
     </view>
 
@@ -46,8 +46,12 @@
     <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
   </view>
 
-  <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">参加</button>
-  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit'  type="primary" bindtap="actionSheetTap">分享给朋友</button>
+
+<button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享给朋友</button>
+  <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>参加</button>
+
+  <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">参加</button>
+  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
 
   <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
    <action-sheet-item open-type="share">

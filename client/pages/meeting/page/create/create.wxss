@@ -21,6 +21,7 @@ form {
   min-height: 25rpx;
   height: 40rpx;
   color:#8e8e93;
+  padding: 0;
 }
 
 .input {
@@ -86,7 +87,7 @@ form {
 .section--elem3{
   flex:1 0;
   padding: 10rpx 0rpx;
-  margin-left:-50%;
+  margin-left:-43%;
 }
 .section--elem2{
   flex:1 0;

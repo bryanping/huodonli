@@ -8,32 +8,26 @@
   <form style='{{loader === true ? "display:none" : "display:block"}}'  bindsubmit="formSubmit">
     <view class='wrapper'>
     <view class="section">
-      <view class="section--text">活动主题：</view>
-     <textarea  auto-height auto-focus value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
+      <view class="section--text">资讯：</view>
+     <textarea rows="2" auto-height value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
     </view>
      
-   
-
     <view class="section">
-      <view class="section--text">活动日期</view>
-      <picker mode="date" class="section--elem" value="{{date}}" bindchange="bindDateStart">
+      <view class="section--text">时间：</view>
+      <picker mode="date" class="section--elem1" value="{{date}}" bindchange="bindDateStart">
         <view class="picker">{{date}}</view>
       </picker>
-    </view>
-
-    <view class="section">
-      <view class="section--text">开始时间</view>
-      <picker mode="time" class="section--elem2" value="{{start_time}}" bindchange="bindTime">
+       <picker mode="time" class="section--elem2" value="{{start_time}}" bindchange="bindTime">
         <view class="picker">{{start_time}}－</view>
       </picker>
-      <picker mode="time" class="section--elem1" value="{{end_time}}" bindchange="bindEndTime">
+      <picker mode="time" class="section--elem3" value="{{end_time}}" bindchange="bindEndTime">
         <view class="picker">{{end_time}}</view>
       </picker>
     </view>
 
     <view class="section">
-      <view class="section--text">活动地点</view>
-      <input rows="1" wrap="off" class='section--elem input1' name="destination" value="{{destination}}" bindinput="bindDestinationInput" />
+      <view class="section--text">地点：</view>
+      <input rows="1" wrap="off" class='section--elem input' name="destination" value="{{destination}}" bindinput="bindDestinationInput" />
     </view>
     <view class="search--box">
       <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">

@@ -13,11 +13,9 @@ form {
 }
 
 .input {
-  width: 100%;
-  text-align: center;
   font-size: 28rpx;
-  min-height: 28rpx;
   color:#8e8e93;
+  line-height:20px;
 }
 
 .colorpoint {
@@ -50,22 +48,19 @@ form {
 }
 
 .section--elem{
-  flex:1 0;
-  padding: 10rpx 30rpx;
+  flex:3 0;
+  padding: 10rpx 10rpx;
   letter-spacing:2px;
 }
 .section--elem1{
-  flex:3 0;
-  padding: 10rpx 0rpx;
-  letter-spacing:2px;
+  padding: 10rpx 10rpx;
+  margin-right:15%;
 }
 .section--elem2{
-  flex:3 0;
   padding: 10rpx 0rpx;
-  letter-spacing:2px;
-  margin-right:5px;
-
+  margin-left:-12%;
 }
+
 .wrapper {
   min-height: 100vh;
   margin-bottom:-7vh;

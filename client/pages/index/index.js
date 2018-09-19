@@ -38,6 +38,9 @@ Page({
       this.mergeResult();
     });
   },
+  onShareAppMessage: function () {
+
+  },
   nextMonth: function () {
     var vm = this;
     var curYear = vm.data.curYear;

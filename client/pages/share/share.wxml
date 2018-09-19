@@ -6,24 +6,23 @@
   <form bindsubmit="formSubmit">
     <view class='wrapper'>
     <view class="section">
-       <view class="section--text">活动主题</view> 
-      <view class='section--elem input'>{{title}}</view>
+       <view class="section--text">资讯：</view> 
+     <text auto-height  class='section--elem input'>{{title}}</text>
     </view>
     
     <view class="section">
-      <view class="section--text">活动日期</view>
+      <view class="section--text">时间：</view>
       <view class="section--elem1 input">
       {{date}}
       </view>
       <view class="section--elem2 input">
-      时间: {{start_time}}-{{end_time}}
+      {{start_time}} － {{end_time}}
       </view>
     </view>
 
-   
-
+  
     <view class="section">
-      <view class="section--text">活动地点</view>
+      <view class="section--text">地点</view>
       <view class='section--elem input'>{{destination}}</view>
     </view>
 

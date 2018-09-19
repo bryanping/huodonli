@@ -13,20 +13,9 @@ form {
 }
 
 .input {
-  width: 100%;
-  text-align: center;
-  font-size: 28rpx;
-  min-height: 25rpx;
-  height: 25rpx;
-  color:#8e8e93;
-  font-family: "黑体";
-}
-
-.picker {
-  width: 20%;
-  text-align: center;
   font-size: 28rpx;
   color:#8e8e93;
+  line-height:20px;
 }
 
 .colorpoint {
@@ -46,10 +35,10 @@ form {
   display:flex;
   background-color: white;
   padding: 5rpx;
-  border-bottom: 1px solid #E6E6E5;
+  border-bottom: 1rpx solid #E6E6E5;
 }
 .section:first-child {
-  border-bottom: 2px solid #E6E6E5;
+  border-bottom: 2rpx solid #E6E6E5;
 }
 
 .section--text {
@@ -59,21 +48,17 @@ form {
 }
 
 .section--elem{
-  flex:1 0;
-  padding: 10rpx 30rpx;
+  flex:3 0;
+  padding: 10rpx 10rpx;
   letter-spacing:2px;
 }
 .section--elem1{
-  flex:3 0;
-  padding: 10rpx 0rpx;
-  letter-spacing:2px;
+  padding: 10rpx 10rpx;
+  margin-right:15%;
 }
 .section--elem2{
-  flex:3 0;
   padding: 10rpx 0rpx;
-  letter-spacing:2px;
-  margin-right:5px;
-
+  margin-left:-12%;
 }
 
 .wrapper {
@@ -102,9 +87,14 @@ form {
 
 .map {
   width:100%;
-  height:51vh;
+  height:43vh;
 }
 
+.search--box {
+  text-align:center;
+  background-color:white;
+  font-size:25rpx;
+}
 
 .overlay {
   background-color: white;
@@ -113,12 +103,12 @@ form {
 }
 
 .spinner {
-  padding-top: 200px;
+  padding-top: 200rpx;
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  width: 150px;
-  height: 150px;
+  width: 200rpx;
+  height: 200rpx;
 }
 
 .user {
@@ -130,8 +120,8 @@ form {
 }
 
 .user--image {
-  width: 60rpx;
-  height: 60rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   display: block;
   margin: 0 auto;
@@ -139,7 +129,7 @@ form {
 
 .user--name {
   text-align: center;
-  font-size: 18rpx;
+  font-size: 20rpx;
   color:#8e8e93;
   text-overflow: ellipsis;
 }
@@ -151,7 +141,9 @@ form {
 }
 
 .section--title {
-  width: 100%;
-  text-align: center;
   color:#8e8e93;
+  font-size: 28rpx;
+  padding: 10rpx 5rpx;
+  flex:1 0;
+  text-align-last: center;
 }
