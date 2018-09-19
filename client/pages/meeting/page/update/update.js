@@ -113,7 +113,14 @@ Page({
       }
     }
   },
-
+  bindlinechange: function (e) {
+    var height = e.detail.height;
+    var heightRpx = e.detail.heightRpx;
+    var lineCount = e.detail.lineCount;
+    this.setData({
+      log: "height=" + height + "  |  heightRpx=" + heightRpx + "  |  lineCount=" + lineCount
+    })
+  },
 
   bindKeyInput: function (e) {
     let str = e.detail.value;

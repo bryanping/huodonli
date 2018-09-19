@@ -12,17 +12,20 @@ form {
   width: 100%;
 }
 
-
 .input {
   width: 100%;
   font-size: 28rpx;
-  min-height: 25rpx;
-  height: 40rpx;
+  color:#8e8e93;
+  line-height:20px;
+  height:150rpx;
+  margin-top:2px;
+}
+.input1 {
+  width: 100%;
+  font-size: 28rpx;
   color:#8e8e93;
   line-height:20px;
 }
-
-
 .picker {
   width: 100%;
   text-align: center;

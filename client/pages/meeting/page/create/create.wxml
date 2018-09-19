@@ -4,7 +4,7 @@
     <view class='wrapper'>
     <view class="section">
       <view class="section--text">活动资讯：</view>
-      <textarea  auto-height value="{{title}}" placeholder="请输入活动内容 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
+      <textarea  bindlinechange="bindlinechange" placeholder="请输入活动内容 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
     </view>
     
     <view class="section">

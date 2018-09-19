@@ -179,10 +179,18 @@ Page({
         url: '/pages/meeting/page/view/view?id=' +  res.data.data.id,
       })
     });
-
   },
-  bindTime: function(e){
+  
+  bindlinechange: function (e) {
+    var height = e.detail.height;
+    var heightRpx = e.detail.heightRpx;
+    var lineCount = e.detail.lineCount;
+    this.setData({
+      log: "height=" + height + "  |  heightRpx=" + heightRpx + "  |  lineCount=" + lineCount
+    })
+  },
 
+  bindTime: function(e){
     let time = new Date(this.data.date + ' ' + e.detail.value);
     time.setMinutes(time.getMinutes() + parseInt(this.data.how_long.split(':')[1]));
     time.setHours(time.getHours() + parseInt(this.data.how_long.split(':')[0]));

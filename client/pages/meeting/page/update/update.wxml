@@ -9,7 +9,7 @@
     <view class='wrapper'>
     <view class="section">
       <view class="section--text">资讯：</view>
-     <textarea rows="2" auto-height value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
+     <textarea  bindlinechange="bindlinechange" fixed="true" value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
     </view>
      
     <view class="section">
@@ -27,7 +27,7 @@
 
     <view class="section">
       <view class="section--text">地点：</view>
-      <input rows="1" wrap="off" class='section--elem input' name="destination" value="{{destination}}" bindinput="bindDestinationInput" />
+      <input rows="1" wrap="off" class='section--elem input1' name="destination" value="{{destination}}" bindinput="bindDestinationInput" />
     </view>
     <view class="search--box">
       <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">
