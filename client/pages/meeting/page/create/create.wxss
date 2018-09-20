@@ -133,6 +133,7 @@ form {
   height:35vh;
 }
 
+
 .search--box {
   text-align:center;
   background-color:white;

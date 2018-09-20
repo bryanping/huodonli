@@ -69,9 +69,8 @@ form {
   color:#8e8e93;
   font-size: 28rpx;
   padding: 10rpx 5rpx;
-  font-family: "黑体";
-  height: 28rpx;
 }
+
 .section--elem1{
   padding: 10rpx 10rpx;
   margin-right:15%;

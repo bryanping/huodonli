@@ -165,7 +165,10 @@ Page({
       }
       resultArr[Y][monthDay].push(meeting[i]);
     }
-    console.log(resultArr);
+    // console.log('resultArr=');
+    // console.log(resultArr);
+    // console.log('dateList=')
+    // console.log(dateList);
     this.setData({
       resultArr: resultArr
     }); 

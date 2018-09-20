@@ -32,8 +32,7 @@
     </view>
 
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-      <text class='section--text'>参与者</text>
-       <text class="section--title">参与总人数：{{AllMembers.length}} 人</text>
+      <text class='section--text'>关注活动总人数：{{AllMembers.length}} 人</text>
     </view>
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
       <block wx:for="{{members}}"  wx:key="key"  wx:for-item="item">
@@ -48,9 +47,9 @@
 
 
 <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享给朋友</button>
-  <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>参加</button>
+  <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>关注活动</button>
 
-  <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">参加</button>
+  <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">关注活动</button>
   <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
 
   <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">

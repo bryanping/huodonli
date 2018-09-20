@@ -50,8 +50,8 @@
     </view>
 
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-      <text class='section--text'>参与者</text>
-       <text class="section--title">参与总人数：{{AllMembers.length}} 人</text>
+      <text class='section--text'>关注活动总人数：{{AllMembers.length}} 人</text>
+      
     </view>
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
       <block wx:for="{{members}}"  wx:key="key"  wx:for-item="item">

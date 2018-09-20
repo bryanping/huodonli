@@ -123,6 +123,9 @@ Page({
     var days = Math.ceil((date2 - date1) / (24 * 60 * 60 * 1000));
     return days;
   },
+  submit: function (e) {
+    console.log(e.detail.formId);
+  },
 
   formSubmit: function (e) {
     if(this.data.loading){
@@ -217,6 +220,8 @@ Page({
       end_time: Util.checkTime(time.getHours()) + ':' + Util.checkTime(time.getMinutes())
     });
   },
+
+
   bindDestinationInput: function (e) {
     let that = this;
     let keywords = e.detail.value;
@@ -236,9 +241,11 @@ Page({
       }
     })
   },
+
   mapEvent: function (e) {
     console.log(e);
   },
+
   bindSearch: function (e) {
     let id = e.target.dataset.id;
     let elem = this.data.tips.find(s => s.id === id);

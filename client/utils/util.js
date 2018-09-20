@@ -109,7 +109,8 @@ function shatterDate(d){
   return {
     Y: date.getFullYear(),
     M: this.checkTime(date.getMonth() + 1),
-    D: date.getDate()
+    D: date.getDate(),
+    W: date.getDay(),
   }
 }
 

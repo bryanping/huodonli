@@ -1,6 +1,6 @@
 <!--pages/meeting/page/create/create.wxml-->
 <view class='container'>
-  <form bindsubmit="formSubmit">
+  <form bindsubmit="formSubmit"  report-submit='true'>
     <view class='wrapper'>
     <view class="section">
       <view class="section--text">活动资讯：</view>

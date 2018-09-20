@@ -11,7 +11,7 @@
 <block  wx:for="{{resultArr}}"  wx:key="key"  wx:for-item="dateArr">
 <view class='year'>{{index}}</view>
   <block wx:for="{{dateArr}}"  wx:key="key"  wx:for-item="dateObj">
-    <view class="request__date">{{index}}  ({{weekArr[dateObj.week]}})</view> 
+    <view class="request__date">{{index}} ({{weekArr[dateObj[0].date.W]}})</view> 
     <view class="request__hr"></view>
       <block  class="wrapper" wx:for="{{dateObj}}" wx:key="key"  wx:for-item="item"  >
        <view class="request__container">
