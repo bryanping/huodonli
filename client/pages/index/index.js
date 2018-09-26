@@ -83,7 +83,7 @@ Page({
       });
 
       //this.getDateList(y, mon - 1);
-      console.log(meeting.data.data)
+     
       this.mergeResult();
     });
 
@@ -125,7 +125,6 @@ Page({
         wx.request({
           url: Config.service.getInvites + `?year=${year}&month=${month}&token=${token}`,
           success(result) {
-            console.log(result);
             resolve(result.data)
           },
           fail(error) {
@@ -150,9 +149,9 @@ Page({
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
         meeting[i].color = 'e6e6e5';
       } else {
-        //console.log(meeting[i]);
+        
       }
-      console.log(meeting[i]);
+     
 
       meeting[i].date = Util.shatterDate(meeting[i].date);
       let Y = meeting[i].date.Y;

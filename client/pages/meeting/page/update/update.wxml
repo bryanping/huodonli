@@ -65,7 +65,7 @@
 
   <view class='section1'>
     <button bindtap='onDelete' loading='{{loadingDelete}}' class='control--button delete'>删除活动</button>
-   <!-- <button formType="submit" loading='{{loadingUpdate}}' class='control--button update'>更新</button>  -->
+   <button formType="submit" loading='{{loadingUpdate}}' class='control--button update'>更新</button> 
   </view>
   </view>
 

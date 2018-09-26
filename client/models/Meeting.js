@@ -44,7 +44,7 @@ class Meeting extends Model {
   validate(){
     let errors = [];
 
-    if (!this.title || this.title == '' || this.title.length == 0){
+    if (!this.title || this.title == '' || this.title.length == 0) {
       errors.push("Title can't be empty");
     }
 

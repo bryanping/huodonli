@@ -196,6 +196,7 @@ Page({
           url: Config.service.getEventList + `?year=${year}&month=${month}&token=${token}`,
           success(result) {
             resolve(result.data)
+            console.log(result.data);
           },
           fail(error) {
             reject(error);
