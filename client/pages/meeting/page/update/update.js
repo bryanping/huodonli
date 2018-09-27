@@ -108,20 +108,21 @@ Page({
   onShareAppMessage: function (res) {
 
     return {
-      title: 'Invite to ' + this.data.title,
+      title: '分享 ' + this.data.title,
       path: 'pages/share/share?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful
-        console.log("Share successfull");
+        console.log("分享成功");
         console.log(res);
       },
       fail: function (res) {
         // Forwarding failed
-        console.log("Share failed");
+        console.log("分享失敗");
         console.log(res);
       }
     }
   },
+  
   bindlinechange: function (e) {
     var height = e.detail.height;
     var heightRpx = e.detail.heightRpx;
@@ -136,13 +137,14 @@ Page({
     this.setData({
       title: str
     });
-
   },
+
   bindDateStart: function (e) {
     this.setData({
       date: e.detail.value
     })
   },
+
   changecolor: function (e) {
     let color = e.currentTarget.dataset.color;
     this.setData({
@@ -150,6 +152,7 @@ Page({
     })
   },
   formSubmit: function (e) {
+    console.log('formSubmit', e.detail.value)
     if (this.data.loadingUpdate || this.data.loadingDelete) {
       return false;
     }
@@ -191,11 +194,13 @@ Page({
     let eventDate = new Date(`${date} ${start_time}`);
     Meeting.update(obj).then(x => {
       wx.reLaunch({
-        url: `/pages/meeting/meeting?y=${eventDate.getFullYear()}&mon=${eventDate.getMonth() + 1}`,
+        url: `/pages/meeting/meeting`,
+      
       })
     });
 
   },
+
   bindTime: function (e) {
 
     let time = new Date(this.data.date + ' ' + e.detail.value);
@@ -256,8 +261,8 @@ Page({
       iconPath: "../../../../img/marker.png",
       longitude: buff[0],
       latitude: buff[1],
-      width: 35,
-      height: 35
+      width: 20,
+      height: 28
     };
     mapObj.markers.push(marker);
     if (elem && elem.name) {
@@ -285,8 +290,6 @@ Page({
 
        success: function (res) {
          if (res.confirm) {
-           console.log('request success', res.confirm)
-            
            that.setData({
              loadingDelete: true
            });

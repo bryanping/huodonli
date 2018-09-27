@@ -30,7 +30,6 @@ form {
   color:#8e8e93;
   line-height:20px;
   height:150rpx;
-  margin-top:2px;
 }
 
 

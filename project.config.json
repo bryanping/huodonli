@@ -1,18 +1,19 @@
 {
-	"client": "./client",
-	"svr": "./server",
-	"miniprogramRoot": "./client",
-	"qcloudRoot": "./server",
+	"client": "client/",
+	"svr": "server/",
+	"miniprogramRoot": "client/",
+	"qcloudRoot": "server/",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true
 	},
 	"appid": "wx9814cfc5cf43159d",
 	"projectname": "0815001",
-	"libVersion": "2.2.4",
+	"libVersion": "2.3.0",
 	"compileType": "miniprogram",
 	"condition": {
 		"search": {
