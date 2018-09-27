@@ -195,7 +195,7 @@ Page({
     Meeting.update(obj).then(x => {
       wx.reLaunch({
         url: `/pages/meeting/meeting`,
-      
+      // ?y=${ eventDate.getFullYear() } & mon=${ eventDate.getMonth() + 1 }
       })
     });
 

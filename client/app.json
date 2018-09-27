@@ -32,16 +32,16 @@
         "selectedIconPath": "img/UI-3i@3x.png"
       },
       {
-        "pagePath": "pages/user/user",   
-        "text": "会员",
-        "iconPath": "img/UI-2@3x.png",
-        "selectedIconPath": "img/UI-2i@3x.png"
-      },
-      {
         "pagePath": "pages/meeting/page/create/create",
         "text": "新增活动",
         "iconPath": "img/UI-5@3x.png",
         "selectedIconPath": "img/UI-5i@3x.png"
+      },
+      {
+        "pagePath": "pages/user/user",   
+        "text": "会员",
+        "iconPath": "img/UI-2@3x.png",
+        "selectedIconPath": "img/UI-2i@3x.png"
       }
     ],
     "color": "#c6c6c6",
