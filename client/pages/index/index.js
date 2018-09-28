@@ -151,7 +151,6 @@ Page({
       } else {
         
       }
-     
 
       meeting[i].date = Util.shatterDate(meeting[i].date);
       let Y = meeting[i].date.Y;

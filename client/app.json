@@ -43,9 +43,10 @@
         "iconPath": "img/UI-2@3x.png",
         "selectedIconPath": "img/UI-2i@3x.png"
       }
+      
     ],
     "color": "#c6c6c6",
-    "selectedColor": "green",
+    "selectedColor": "#c6c6c6",
     "borderStyle": "white",
     "position": "bottom"
   },

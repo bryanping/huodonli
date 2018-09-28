@@ -28,20 +28,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     let date = new Date();
     let time = Util.checkTime(date.getHours()) + ':' + Util.checkTime(date.getMinutes());
     this.setData({
@@ -58,10 +44,22 @@ Page({
   },
 
   /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  },
+
+  /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
   },
 
   /**
@@ -166,14 +164,18 @@ Page({
 
     let that = this;
     meeting.save().then((res) => {
+      let date = new Date();
+      let time = Util.checkTime(date.getHours()) + ':' + Util.checkTime(date.getMinutes());
+
       that.setData({
         title: '',
-        date: '',
-        start_time: '',
-        end_time: '',
+        start_time: time,
+        end_time: time,
+        date: date.getFullYear() + '-' + Util.checkTime(date.getMonth() + 1) + '-' + Util.checkTime(date.getDate()),
         destination: '',
         color: 'ff6280',
         mapObj: false,
+        how_long: '00:00',
         tips: [],
         loading: false
       });

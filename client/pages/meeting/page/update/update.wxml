@@ -62,7 +62,7 @@
         </navigator>
       </block>
     </view>
-    
+
     <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"}}' class='showmanber'>{{ showAllText }}</button>
 
   <view class='section1'>
