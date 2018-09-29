@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 .title {
   color: white;
   background-color: #4cd964;
@@ -6,8 +7,9 @@
   padding: 5px;
   text-align: center;
   font-size: 15px;
-  margin-top:15rpx;
+  margin-top: 15rpx;
 }
+
 .title2 {
   color: white;
   background-color: rgb(0, 17, 255);
@@ -15,27 +17,31 @@
   padding: 0px;
   text-align: center;
   font-size: 15px;
-  margin-top:35rpx;
-}.title3 {
+  margin-top: 35rpx;
+}
+
+.title3 {
   color: white;
   background-color: rgb(255, 145, 19);
   width: 100%;
   padding: 0px;
   text-align: center;
   font-size: 15px;
-  margin-top:35rpx;
+  margin-top: 35rpx;
 }
+
 .wrapper {
   padding: 0 30rpx;
 }
 
 .year {
-  margin-top:15rpx;
-  margin-bottom:-25rpx;
+  margin-top: 15rpx;
+  margin-bottom: -25rpx;
   font-size: 20px;
   text-align: left;
   color: #8e8e93;
 }
+
 .request__container {
   margin: 15rpx 0;
   display: flex;
@@ -50,40 +56,37 @@
 
 .request__date {
   font-size: 12px;
-  padding:7rpx 0;
-  margin-top:15px;
+  padding: 7rpx 0;
+  margin-top: 15px;
   color: #8e8e93;
 }
 
 .icon {
-  width:20px;
-  height:20px;
-  padding:4px 3px;
+  width: 20px;
+  height: 20px;
+  padding: 4px 3px;
 }
 
 .request__time {
-  padding:3px 20rpx 0px 0px;
-  flex:1;
-  color:#c7c7cc;
-  font-size:30rpx;
+  padding: 3px 20rpx 0px 0px;
+  flex: 1;
+  color: #c7c7cc;
+  font-size: 30rpx;
 }
-
 
 .request__content {
   flex: 7 0;
   text-align: center;
   font-weight: bold;
-  font-size:30rpx;
+  font-size: 16px;
   padding: 5px;
   box-sizing: border-box;
   border-radius: 7px;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   color: white;
 }
-
-
 
 .selected_date {
   text-align: center;
@@ -91,20 +94,22 @@
 }
 
 .selected_date--text {
-  margin:5px 10px;
+  margin: 5px 10px;
   margin-bottom: 0px;
-  font-size:18px;
+  font-size: 18px;
 }
 
 .selected_date>view {
   display: inline-block;
 }
+
 .select_icon {
   width: 30px;
   height: 30px;
-  position:relative;
-  top:6px;
+  position: relative;
+  top: 6px;
 }
+
 .overlay {
   background-color: white;
   width: 100%;

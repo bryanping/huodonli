@@ -32,7 +32,8 @@
     </view>
 
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-      <text class='section--text'>关注活动总人数：{{AllMembers.length}} 人</text>
+       <text class='section--text'>关注数：{{AllMembers.length}} 人 ｜</text>
+      <text class='section--text'> 参与数：开发中敬请期待｜总名额</text>
     </view>
     <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
       <block wx:for="{{members}}"  wx:key="key"  wx:for-item="item">
@@ -46,7 +47,7 @@
   </view>
 
 
-<button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享给朋友</button>
+<button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享好友</button>
   <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>关注活动</button>
 
   <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">关注活动</button>

@@ -17,7 +17,7 @@ form {
 .input1 {
   width: 100%;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 15px;
   min-height: 25rpx;
   height: 40rpx;
   color:#8e8e93;
@@ -26,7 +26,7 @@ form {
 
 .input {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 15px;
   color:#8e8e93;
   line-height:20px;
   height:150rpx;
@@ -36,7 +36,7 @@ form {
 .picker {
   width: 100%;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 15px;
   color:#8e8e93;
   letter-spacing:2px;
 }
@@ -66,20 +66,20 @@ form {
 
 .section--text {
   color:#8e8e93;
-  font-size: 28rpx;
+  font-size: 15px;
   padding: 10rpx 5rpx;
 }
 
 .section--text1 {
   color:#8e8e93;
-  font-size: 28rpx;
+  font-size: 15px;
   padding: 10rpx 5rpx;
   margin-top:5px;
 }
 
 .section--elem{
   flex:1 0;
-  padding: 10rpx 30rpx;
+  padding: 6px 2px;
 }
 
 .section--elem1{
@@ -136,7 +136,7 @@ form {
 .search--box {
   text-align:center;
   background-color:white;
-  font-size:25rpx;
+  font-size:15px;
 }
 
 .text_box {
