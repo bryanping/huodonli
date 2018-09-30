@@ -1,6 +1,4 @@
 
 <view class="container" >
-    <image class='container1'></image>
-
-    <button class='btn-success' open-type="getUserInfo" bindgetuserinfo="getUserInfo">开启你的活动历</button>
+    <button bindtap='getUserInfo' class='btn-success' open-type="getUserInfo" bindgetuserinfo="getUserInfo">一款・串联朋友的行事历</button>
 </view>
