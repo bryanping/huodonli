@@ -1,28 +1,70 @@
 /**menber.wxss**/
+
 .userinfo {
-  padding-top: 200px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  width: 100%;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 20rpx;
   border-radius: 50%;
+  float: left;
 }
 
-.userinfo-nickname {
+.nickname {
+  color: #aaa;
+  width: 40%;
+}
+
+.devent {
   color: #aaa;
 }
 
 .spinner {
-  padding-top: 120px;
+  padding-top: 200rpx;
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  width: 150px;
-  height: 150px;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.swiper-tab {
+  display: flex;
+  flex-direction: row;
+  line-height: 40rpx;
+  margin: 20px 0 0;
+}
+
+.tab-item {
+  width: 20%;
+  color: rgb(161, 161, 161);
+  text-align: center;
+  font-size: 12px;
+}
+
+.on {
+  color: rgb(75, 75, 75);
+  font-weight:bold;
+  border-bottom: 12rpx solid #5ac8fa;
+}
+
+.swiper {
+  height: 81vh;
+  width: 100%;
+  color: white;
+}
+
+.swiper-item {
+  background: #008cff;
+  text-align: center;
+  height: 17vh;
+  padding: 10vh 0 0;
+}
+
+.block {
+  flex: 2 2;
+  line-height: 10vh;
 }

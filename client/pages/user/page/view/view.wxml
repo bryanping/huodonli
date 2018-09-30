@@ -1,16 +1,33 @@
+<!--menber.wxml-->
 <view class="container">
-  <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
-    <image class='spinner' src='../../../../img/loader.gif'></image>
-  </view>
+  <cover-view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+    <cover-image class='spinner' src='../../../../img/loader.gif'></cover-image>
+  </cover-view>
 
-  <view  style='{{loader === true ? "display:none" : "display:block"}}' class="userinfo">
+  <form class="userinfo" style='{{loader === true ? "display:none" : "display:block"}}'>
+    <view class="block">
+      <image class="avatar" src='{{avatarUrl}}'></image>
+      <text class="nickname">{{ nickName }} </text>
+      <text class="devent">{{ gender }}</text>
+    </view>
     <view>
-      <image class='userinfo-avatar' src='{{ avatarUrl }}'></image>
+      <!--顶部导航栏-->
+      <view class="swiper-tab">
+        <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+          介绍</view>
+        <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+          成就</view>
+      </view>
+
+      <!--内容主体-->
+      <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
+        <swiper-item>
+          <view class="swiper-item">开发中敬请期待</view>
+        </swiper-item>
+        <swiper-item>
+          <view class="swiper-item">开发中敬请期待</view>
+        </swiper-item>
+      </swiper>
     </view>
-    <view class='userinfo-nickname'>{{ nickName }}</view>
-    <view class='userinfo-gender'>{{ gender }}</view>
-    <view class='userinfo-location'>
-     {{ country + ' ' + province + ' ' + city  }}
-    </view>
-  </view>
+  </form>
 </view>
