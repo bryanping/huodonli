@@ -1,59 +1,58 @@
-
 <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
-    <image class='spinner' src='../../../../img/loader.gif'></image>
+  <image class='spinner' src='../../../../img/loader.gif'></image>
 </view>
 
 <view style='{{loader === true ? "display:none" : "display:block"}}' class='container'>
   <form bindsubmit="formSubmit">
     <view class='wrapper'>
-    <view class="section">
-     <view class="section--text">资讯：</view> 
-      <text auto-height  class='section--elem input' >{{title}}</text>
-    </view>
-    
-    <view class="section">
-      <view class="section--text">时间：</view>
-      <view class="section--elem1 input">
-      {{date}}
+      <view class="section">
+        <view class="section--text">资讯：</view>
+        <text auto-height class='section--elem input'>{{title}}</text>
       </view>
-      <view class="section--elem2 input">
-      {{start_time}} － {{end_time}}
+
+      <view class="section">
+        <view class="section--text">时间：</view>
+        <view class="section--elem1 input">
+          {{date}}
+        </view>
+        <view class="section--elem2 input">
+          {{start_time}} － {{end_time}}
+        </view>
       </view>
-    </view>
 
 
-    <view class="section">
-      <view class="section--text">地点：</view>
-      <view class='section--elem input'>{{destination}}</view>
-    </view>
+      <view class="section">
+        <view class="section--text">地点：</view>
+        <view class='section--elem input'>{{destination}}</view>
+      </view>
 
-    <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
+      <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
         <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="14" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
+      </view>
+
+      <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
+        <text class='section--text'>参与状态：{{AllMembers.length}}人关注 ｜</text>
+        <text class='section--text'> (参与\总名额)开发中敬请期待</text>
+      </view>
+      <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
+        <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
+          <navigator url="/pages/user/page/view/view?id={{item.id}}" class='user'>
+            <image class='user--image' src='{{ item.avatarUrl || "../../../../img/avatar.png" }}'></image>
+            <text class='user--name'>{{item.nickName}}</text>
+          </navigator>
+        </block>
+      </view>
+      <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
     </view>
 
-    <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-       <text class='section--text'>关注数：{{AllMembers.length}} 人 ｜</text>
-      <text class='section--text'> 参与数：开发中敬请期待｜总名额</text>
-    </view>
-    <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
-      <block wx:for="{{members}}"  wx:key="key"  wx:for-item="item">
-         <navigator url="/pages/user/page/view/view?id={{item.id}}" class='user'> 
-          <image class='user--image' src='{{ item.avatarUrl || "../../../../img/avatar.png" }}'></image>
-          <text class='user--name'>{{item.nickName}}</text>
-        </navigator>
-      </block>
-    </view>
-    <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
-  </view>
 
+    <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享好友</button>
+    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>关注活动</button>
 
-<button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享好友</button>
-  <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>关注活动</button>
-
-  <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">关注活动</button>
+    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">关注活动</button>
   <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
 
-  <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+    <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
    <action-sheet-item open-type="share">
          <button open-type="share">分享给好友</button>
    </action-sheet-item>

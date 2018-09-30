@@ -7,9 +7,9 @@
   <image bindtap="nextMonth" class="select_icon" src="/img/right.png"></image>
 </view>
 
-<cover-view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
-  <cover-image class='spinner' src='../../img/loader.gif'></cover-image>
-</cover-view>
+<view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+  <image class='spinner' src='../../img/loader.gif'></image>
+</view>
 
 <view class="wrapper" style='{{loader === true ? "display:none" : "display:block"}}' >
   <block wx:for="{{resultArr}}" wx:key="key" wx:for-item="dateArr">
