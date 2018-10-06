@@ -4,10 +4,10 @@
   color: white;
   background-color: #4cd964;
   width: 100%;
-  padding: 5px;
+  padding:2px 0 2px;
   text-align: center;
-  font-size: 15px;
-  margin-top: 15rpx;
+  font-size: 18px;
+  font-weight:bold;
 }
 
 .title2 {

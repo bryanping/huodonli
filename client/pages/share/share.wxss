@@ -68,16 +68,15 @@ form {
 }
 
 .submit {
-  display: block;
-  height:13vh;
-  width:100%;
-  padding:0;
-  font-size:42rpx;
+ display: block;
+  height: 14vh;
+  width: 100%;
+  padding: 10px;
+  font-size: 42rpx;
   color: white;
   border: 0;
   border-radius: 0;
-  background: -webkit-linear-gradient(left, #0022ff 0%,#0079ff 100%);
-  margin-bottom:0rpx;
+  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
 }
 
 .map_container {

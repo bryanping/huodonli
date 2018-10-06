@@ -14,9 +14,9 @@
 <view class="wrapper" style='{{loader === true ? "display:none" : "display:block"}}' >
   <block wx:for="{{resultArr}}" wx:key="key" wx:for-item="dateArr">
     <block wx:for="{{dateArr}}" wx:key="key" wx:for-item="dateObj">
-      <view class="meeting__date">
+      <navigator class="meeting__date" url="/pages/meeting/page/create/create" open-type="switchTab" hover-class='other-navigator-hover'>
         {{curMonth}}.{{dateObj.date}} ({{weekArr[dateObj.week]}})
-      </view>
+      </navigator>
       <view class="meeting__hr"></view>
       <block class="wrapper" wx:for="{{dateObj.meetings}}" wx:key="key" wx:for-item="item">
         <!-- <view class="meeting__container" wx:if="{{item.departure}}">
