@@ -90,12 +90,12 @@ form {
 .section--elem3{
   flex:1 0;
   padding: 10rpx 0rpx;
-  margin-left:-43%;
+  margin-left:-40%;
 }
 .section--elem2{
   flex:1 0;
   padding: 10rpx 0rpx;
-  margin-left:2%;
+ 
 }
 
 .color-picker {
