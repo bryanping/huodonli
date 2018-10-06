@@ -1,6 +1,5 @@
 // pages/meeting/page/create/create.js
 import amapFile from '../../../../libs/amap-wx.js';
-
 import Meeting from '../../../../models/Meeting';
 import Util from '../../../../utils/util.js';
 import Config from '../../../../config.js';
@@ -126,6 +125,7 @@ Page({
   },
 
   formSubmit: function (e) {
+    console.log(e.detail.formId);
     if(this.data.loading){
       return; 
     }

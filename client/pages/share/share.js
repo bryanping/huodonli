@@ -32,6 +32,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let marker = {
+      iconPath: "../../../../img/marker.png"};
     let obj = Meeting.findById(options.id).then(resp => {
       if(!resp.data || !resp.data.data){
         wx.showModal({

@@ -32,13 +32,28 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "掃描小程序",
 					"pathName": "pages/meeting/meeting",
+					"query": "",
 					"scene": "1047"
+				},
+				{
+					"id": -1,
+					"name": "小程序消息卡片",
+					"pathName": "pages/meeting/page/view/view",
+					"query": "",
+					"scene": "1008"
+				},
+				{
+					"id": 2,
+					"name": "sherry",
+					"pathName": "pages/share/share",
+					"query": "",
+					"scene": "1008"
 				}
 			]
 		}

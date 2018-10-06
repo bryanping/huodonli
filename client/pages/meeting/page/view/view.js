@@ -35,7 +35,7 @@ Page({
   onLoad: function (options) {
     let obj = Meeting.findById(options.id).then(resp => {
       let obj = resp.data.data;
-
+      
       let submit_text = '';
       switch (obj.user) {
         case Meeting.USER_CREATOR:
@@ -176,23 +176,26 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function (res) {
+  onShareAppMessage: function (res) {
 
-  //   return {
-  //     title: '分享' + this.data.title,
-  //     path: 'pages/share/share?id=' + this.data.id,
-  //     success: function (res) {
-  //       // Forwarding successful
-  //       console.log("Share successfull");
-  //       console.log(res);
-  //     },
-  //     fail: function (res) {
-  //       // Forwarding failed
-  //       console.log("Share failed");
-  //       console.log(res);
-  //     }
-  //   }
-  // },
+    return {
+      title: '分享' + this.data.title,
+      path: 'pages/share/share?id=' + this.data.id,
+      
+      success: function (res) {
+        // Forwarding successful
+        console.log("Share successfull");
+        console.log(res);
+      },
+      fail: function (res) {
+        // Forwarding failed
+        console.log("Share failed");
+        console.log(res);
+      }
+    }
+    console.log('pages/share/share?id=' + this.data.id)
+  },
+
   openActionSheet(e) {
     var self = this;
     self.setData({
@@ -200,10 +203,12 @@ Page({
     });
 
   },
+
   listenerActionSheet: function () {
     var self = this;
     self.setData({
       actionSheetHidden: !self.data.actionSheetHidden
+      
     })
   },
   
