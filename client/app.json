@@ -13,7 +13,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Calendar",
+    "navigationBarTitleText": "活动历",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
   },
