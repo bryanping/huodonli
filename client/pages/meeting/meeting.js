@@ -7,7 +7,7 @@ import Config from '../../config.js';
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据測試測試
    */
   data: {
     meeting: [],
