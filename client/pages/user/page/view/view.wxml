@@ -12,22 +12,22 @@
     </view>
     <view>
       <!--顶部导航栏-->
-      <view class="swiper-tab">
+      <!-- <view class="swiper-tab">
         <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
           介绍</view>
         <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
           成就</view>
-      </view>
+      </view> -->
 
       <!--内容主体-->
-      <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
+      <!-- <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
         <swiper-item>
           <view class="swiper-item">开发中敬请期待</view>
         </swiper-item>
         <swiper-item>
           <view class="swiper-item">开发中敬请期待</view>
         </swiper-item>
-      </swiper>
+      </swiper> -->
     </view>
   </form>
 </view>
