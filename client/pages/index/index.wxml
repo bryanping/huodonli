@@ -2,9 +2,10 @@
 <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
   <image class='spinner' src='../../img/loader.gif'></image>
 </view>
-<view style='{{ empty ? "display: block" : "display: none" }}' class='year'>  开始和朋友分享活动 </view>
+<view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'>  邀请朋友来分享活动 </view>
+
 <view class="title">
-  好友活动
+  好友发起
 </view>
 
 <view style='{{loader === true ? "display:none" : "display:block"}}' class="wrapper">

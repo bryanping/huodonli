@@ -39,7 +39,7 @@ Page({
         wx.showModal({
           title: '',
           content: '活动已取消',
-          confirmText: "Ok",
+          confirmText: '确认',
           showCancel: false,
           success: function (res) {
             wx.reLaunch({

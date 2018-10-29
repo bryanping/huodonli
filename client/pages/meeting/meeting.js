@@ -213,6 +213,7 @@ Page({
     let dateList = this.data.dateList;
     let nowDate = new Date();
     console.log(`nowDate=${nowDate}`);
+
     for (let i = 0; i < meeting.length; i++) {
       // console.log(meeting[i].date + ' ' + meeting[i].start_time);
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {

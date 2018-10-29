@@ -19,7 +19,7 @@ Page({
     options: null,
   },
 
-  preMonth: function () {
+  preMonth: function() {
     var vm = this;
     var curYear = vm.data.curYear;
     var curMonth = Util.checkTime(vm.data.curMonth, true);
@@ -38,10 +38,10 @@ Page({
       this.mergeResult();
     });
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
-  nextMonth: function () {
+  nextMonth: function() {
     var vm = this;
     var curYear = vm.data.curYear;
     var curMonth = Util.checkTime(vm.data.curMonth, true);
@@ -62,8 +62,10 @@ Page({
     });
   },
 
-  onShow: function () {
-     const { options } = this.data;
+  onShow: function() {
+    const {
+      options
+    } = this.data;
     var today = new Date();
     var y = today.getFullYear();
     var mon = Util.checkTime(today.getMonth() + 1);
@@ -79,17 +81,17 @@ Page({
         selectedDate: y + '/' + mon + '/' + d,
         selectedWeek: this.data.weekArr[i],
         meeting: meeting.data.data,
-        loader:false
+        loader: false
       });
 
       //this.getDateList(y, mon - 1);
-     
+
       this.mergeResult();
     });
 
   },
 
-  getDateList: function (y, mon) {
+  getDateList: function(y, mon) {
     var vm = this;
     //如果是否闰年，则2月是29日
     var daysCountArr = this.data.daysCountArr;
@@ -101,7 +103,7 @@ Page({
     }
     var dateList = [];
     dateList[0] = [];
-    var weekIndex = 0;//第几个星期
+    var weekIndex = 0; //第几个星期
     for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
       var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
       dateList[weekIndex].push({
@@ -118,8 +120,8 @@ Page({
       dateList: dateList
     });
   },
-  
-  getMeetingsByDate: function (year, month) {
+
+  getMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
@@ -134,8 +136,8 @@ Page({
       });
     });
   },
-  
-  mergeResult: function () {
+
+  mergeResult: function() {
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date().getTime();
@@ -143,32 +145,46 @@ Page({
     this.setData({
       empty: meeting.length === 0
     });
-      //控制顯示內容
-    for(let i = 0; i < meeting.length; i++){
+    //控制顯示內容
+    for (let i = 0; i < meeting.length; i++) {
       // If event is outdated
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
         meeting[i].color = 'e6e6e5';
       } else {
-        
+
       }
 
       meeting[i].date = Util.shatterDate(meeting[i].date);
       let Y = meeting[i].date.Y;
       let monthDay = meeting[i].date.M + '.' + meeting[i].date.D;
-      if (!resultArr[Y]){
+      if (!resultArr[Y]) {
         resultArr[Y] = {};
       }
-      if (!resultArr[Y][monthDay]){
+      if (!resultArr[Y][monthDay]) {
         resultArr[Y][monthDay] = [];
       }
       resultArr[Y][monthDay].push(meeting[i]);
     }
-    // console.log('resultArr=');
-    // console.log(resultArr);
-    // console.log('dateList=')
-    // console.log(dateList);
+   
     this.setData({
       resultArr: resultArr
-    }); 
+    });
+  },
+  swichNav: function (e) {
+    console.log(e);
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current,
+      })
+    }
+  },
+  swiperChange: function (e) {
+    console.log(e);
+    this.setData({
+      currentTab: e.detail.current,
+    })
   }
 })
