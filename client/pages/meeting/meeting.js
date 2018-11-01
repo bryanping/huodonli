@@ -27,7 +27,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       options,
     });
@@ -37,14 +37,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     const {
       options
     } = this.data;
@@ -53,8 +53,6 @@ Page({
     let mon = Util.checkTime(options.mon || (today.getMonth() + 1));
     let d = today.getDate();
     let i = today.getDay();
-
-
     this.getMeetingsByDate(y, mon).then(resp => {
       this.setData({
         curYear: y,
@@ -74,39 +72,39 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
-  getDateList: function(y, mon) {
+  getDateList: function (y, mon) {
     var vm = this;
     //如果是否闰年，则2月是29日
     var daysCountArr = this.data.daysCountArr;
@@ -135,7 +133,7 @@ Page({
       dateList: dateList
     });
   },
-  preMonth: function() {
+  preMonth: function () {
     if (this.data.loader) {
       return false;
     }
@@ -163,7 +161,7 @@ Page({
       this.mergeResult();
     });
   },
-  nextMonth: function() {
+  nextMonth: function () {
     if (this.data.loader) {
       return false;
     }
@@ -192,7 +190,7 @@ Page({
       this.mergeResult();
     });
   },
-  getMeetingsByDate: function(year, month) {
+  getMeetingsByDate: function (year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
@@ -208,14 +206,14 @@ Page({
       });
     });
   },
-  mergeResult: function() {
+  mergeResult: function () {
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
     console.log(`nowDate=${nowDate}`);
 
     for (let i = 0; i < meeting.length; i++) {
-      // console.log(meeting[i].date + ' ' + meeting[i].start_time);
+      console.log('時間'+ meeting[i].date + ' ' + meeting[i].start_time);
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
         meeting[i].color = 'e6e6e5';
       }

@@ -68,11 +68,7 @@
   color: #8e8e93;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
-  padding: 4px 3px;
-}
+
 
 .request__time {
   padding: 3px 20rpx 0px 0px;

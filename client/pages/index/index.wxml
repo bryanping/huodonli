@@ -2,11 +2,12 @@
 <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
   <image class='spinner' src='../../img/loader.gif'></image>
 </view>
-<view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'>  邀请朋友来分享活动 </view>
+
 
 <view class="title">
   好友发起
 </view>
+<view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'>  可关注朋友的活动获取资讯 </view>
 
 <view style='{{loader === true ? "display:none" : "display:block"}}' class="wrapper">
   <block wx:for="{{resultArr}}" wx:key="key" wx:for-item="dateArr">

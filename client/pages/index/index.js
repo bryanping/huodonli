@@ -4,6 +4,7 @@ import Config from '../../config.js';
 
 Page({
   data: {
+    meeting: [],
     request: [],
     selectedDate: '',
     selectedWeek: '',
@@ -14,12 +15,11 @@ Page({
     daysCountArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     dateList: [],
     resultArr: [],
-    meeting: [],
     loader: true,
     options: null,
   },
 
-  preMonth: function() {
+  preMonth: function () {
     var vm = this;
     var curYear = vm.data.curYear;
     var curMonth = Util.checkTime(vm.data.curMonth, true);
@@ -38,10 +38,10 @@ Page({
       this.mergeResult();
     });
   },
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
-  nextMonth: function() {
+  nextMonth: function () {
     var vm = this;
     var curYear = vm.data.curYear;
     var curMonth = Util.checkTime(vm.data.curMonth, true);
@@ -62,17 +62,15 @@ Page({
     });
   },
 
-  onShow: function() {
+  onShow: function () {
     const {
       options
     } = this.data;
     var today = new Date();
     var y = today.getFullYear();
     var mon = Util.checkTime(today.getMonth() + 1);
-
     var d = today.getDate();
     var i = today.getDay();
-
     this.getMeetingsByDate().then((meeting) => {
       this.setData({
         curYear: y,
@@ -91,7 +89,7 @@ Page({
 
   },
 
-  getDateList: function(y, mon) {
+  getDateList: function (y, mon) {
     var vm = this;
     //如果是否闰年，则2月是29日
     var daysCountArr = this.data.daysCountArr;
@@ -121,7 +119,7 @@ Page({
     });
   },
 
-  getMeetingsByDate: function(year, month) {
+  getMeetingsByDate: function (year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
@@ -137,7 +135,7 @@ Page({
     });
   },
 
-  mergeResult: function() {
+  mergeResult: function () {
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date().getTime();
@@ -165,7 +163,7 @@ Page({
       }
       resultArr[Y][monthDay].push(meeting[i]);
     }
-   
+
     this.setData({
       resultArr: resultArr
     });
