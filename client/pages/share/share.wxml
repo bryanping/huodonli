@@ -23,7 +23,7 @@
 
       <view class="section">
         <view class="section--text">地点：</view>
-        <view class='section--elem input'>{{destination}}</view>
+        <view class='section--elem input' bindtouchstart="bindMaptop">{{destination}}</view>
       </view>
 
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">

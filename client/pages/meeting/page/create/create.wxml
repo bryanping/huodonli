@@ -33,7 +33,7 @@
 
     <view class="section">
       <view class="section--text">活动地点</view>
-      <input class="section--elem input1" placeholder="请输入目的地" placeholder-style="color: #d3d3d4" name="title" value="{{destination}}" bindinput="bindDestinationInput" />
+      <input class="section--elem input1" placeholder="请输入目的地" placeholder-style="color: #d3d3d4" name="title" value="{{destination}}" bindinput="bindDestinationInput" bindtouchstart="bindMapSelection" />
     </view>
           <view class="search--box">
         <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">

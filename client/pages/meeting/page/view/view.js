@@ -26,6 +26,7 @@ Page({
     showAllText: 'Show all',
     showSubmit: false,
     loader: true,
+    information: '',
     request: false
   },
 
@@ -202,6 +203,21 @@ Page({
       actionSheetHidden: !self.data.actionSheetHidden
     });
 
+  },
+
+  bindMaptop: function () {
+    // console.log({
+    //   longitude: this.data.mapObj.longitude,
+    //   latitude: this.data.mapObj.latitude,
+    //   name: this.data.destination,
+    //   address: this.data.mapObj.address
+    // });
+    wx.openLocation({
+      longitude: Number(this.data.mapObj.longitude),
+      latitude: Number(this.data.mapObj.latitude),
+      name: this.data.destination,
+      address: this.data.mapObj.address
+    })
   },
 
   listenerActionSheet: function () {

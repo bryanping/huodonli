@@ -28,6 +28,7 @@ Page({
     showAllMembers: false,
     weekArr: ['日', '一', '二', '三', '四', '五', '六'],
     showAllText: 'Show all',
+    information: '',
   },
 
   /**
@@ -252,6 +253,36 @@ Page({
       }
     })
   },
+
+  bindMapSelection: function (e) {
+    console.log('hello world');
+    wx.chooseLocation({
+      success: (res) => {
+        console.log(res)
+        let mapObj = {};
+        // let buff = elem.location.split(',');
+        mapObj.longitude = res.longitude;
+        mapObj.latitude = res.latitude;
+        mapObj.markers = [];
+        let marker = {
+          iconPath: "../../../../img/marker.png",
+          longitude: res.longitude,
+          latitude: res.latitude,
+          width: 20,
+          height: 30
+        };
+        mapObj.markers.push(marker);
+
+        this.setData({
+          tips: [],
+          destination: res.name,
+          mapObj: mapObj
+        });
+
+      }
+    })
+  },
+  
   bindSearch: function(e) {
     let id = e.target.dataset.id;
     let elem = this.data.tips.find(s => s.id === id);

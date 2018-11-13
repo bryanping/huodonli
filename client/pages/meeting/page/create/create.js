@@ -244,6 +244,36 @@ Page({
     })
   },
 
+  bindMapSelection: function (e) {
+    console.log('hello world');
+    wx.chooseLocation({
+      success: (res) => {
+        console.log(res)
+        let mapObj = {};
+        // let buff = elem.location.split(',');
+        mapObj.longitude = res.longitude;
+        mapObj.latitude = res.latitude;
+        mapObj.address = res.address;
+        mapObj.markers = [];
+        let marker = {
+          iconPath: "../../../../img/marker.png",
+          longitude: res.longitude,
+          latitude: res.latitude,
+          width: 20,
+          height: 30
+        };
+        mapObj.markers.push(marker);
+
+        this.setData({
+          tips: [],
+          destination: res.name,
+          mapObj: mapObj
+        });
+
+      }
+    })
+  },
+
   mapEvent: function (e) {
     console.log(e);
   },
@@ -251,6 +281,7 @@ Page({
   bindSearch: function (e) {
     let id = e.target.dataset.id;
     let elem = this.data.tips.find(s => s.id === id);
+    console.log(elem);
     let mapObj = elem;
     let buff = elem.location.split(',');
     mapObj.longitude = buff[0];
