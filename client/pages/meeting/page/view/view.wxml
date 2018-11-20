@@ -16,7 +16,7 @@
           {{date}}
         </view>
         <view class="section--elem2 input">
-          {{start_time}} － {{end_time}}
+          {{start_time}}-{{end_time}}
         </view>
       </view>
 

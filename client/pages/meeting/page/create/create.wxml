@@ -45,7 +45,7 @@
         <map class="map" id="map" catchtap='mapEvent' longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="14" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
     </view>
 
-    <view class='section color-pick'>
+    <!-- <view class='section color-pick'>
       <view class='section--text1'>主题色</view>
       <view class='section--elem color-picker'>
       <image class='{{color=="ff6280"?"colorpointselected":"colorpoint"}}' data-color='ff6280' catchtap='changecolor' src='/img/colorpoint/ff6280.png' mode='aspectFit'></image>
@@ -53,7 +53,7 @@
       <image class='{{color=="ffb040"?"colorpointselected":"colorpoint"}}' data-color='ffb040' catchtap='changecolor' src='/img/colorpoint/ffb040.png' mode='aspectFit'></image>
       <image class='{{color=="5edd74"?"colorpointselected":"colorpoint"}}' data-color='5edd74' catchtap='changecolor' src='/img/colorpoint/5edd74.png' mode='aspectFit'></image>
       </view>
-    </view>
+    </view> -->
 
   </view>
   <button formType="submit" loading="{{loading}}" class='submit'>保存</button>

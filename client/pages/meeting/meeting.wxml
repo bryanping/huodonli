@@ -1,8 +1,6 @@
 <!--pages/meeting/meeting.wxml-->
 <view style='{{selectedDate === "" ? "display:none" : "display:block"}}' class="selected_date">
-<!-- <view class="selected_date--text">
-    {{selectedDate+' ('+selectedWeek+')'}}
-  </view> -->
+
   <image bindtap="preMonth" class="select_icon" src="/img/left.png"></image>
   <view class="selected_date--text">
     {{curYear+' · '+curMonth}}
