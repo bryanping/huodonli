@@ -27,24 +27,23 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
       options,
     });
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     const {
       options
     } = this.data;
@@ -53,58 +52,66 @@ Page({
     let mon = Util.checkTime(options.mon || (today.getMonth() + 1));
     let d = today.getDate();
     let i = today.getDay();
-    this.getMeetingsByDate(y, mon).then(resp => {
-      this.setData({
-        curYear: y,
-        curMonth: mon,
-        curDate: d,
-        selectedDate: y + '/' + mon + '/' + d,
-        selectedWeek: this.data.weekArr[i],
-        meeting: resp.data.data,
-        loader: false
-      });
+    this.getSelfMeetingsByDate(y, mon).then(resp1 => {
+      var selfMeetingData = resp1.data.data;
 
-      this.getDateList(y, mon - 1);
-      this.mergeResult();
+      this.getInvitedMeetingsByDate(y, mon).then(resp2 => {
+        var invitedMeetingData = resp2.data.data;
+        for (var i = 0; i < invitedMeetingData.length; i++) {
+          invitedMeetingData[i].type = 'invited';
+        }
+        this.setData({
+          curYear: y,
+          curMonth: mon,
+          curDate: d,
+          selectedDate: y + '/' + mon + '/' + d,
+          selectedWeek: this.data.weekArr[i],
+          meeting: selfMeetingData.concat(invitedMeetingData),
+          loader: false
+        });
+        this.getDateList(y, mon - 1);
+        this.mergeResult();
+
+      });
     });
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
-  getDateList: function (y, mon) {
+  getDateList: function(y, mon) {
     var vm = this;
     //如果是否闰年，则2月是29日
     var daysCountArr = this.data.daysCountArr;
@@ -133,7 +140,7 @@ Page({
       dateList: dateList
     });
   },
-  preMonth: function () {
+  preMonth: function() {
     if (this.data.loader) {
       return false;
     }
@@ -149,9 +156,16 @@ Page({
       curYear: curYear,
       curMonth: curMonth
     });
+    this.getSelfMeetingsByDate(curYear, curMonth).then(resp => {
+      this.setData({
+        meeting: resp.data.data,
+        loader: false
+      });
 
-
-    this.getMeetingsByDate(curYear, curMonth).then(resp => {
+      this.getDateList(curYear, curMonth - 1);
+      this.mergeResult();
+    });
+    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
       this.setData({
         meeting: resp.data.data,
         loader: false
@@ -161,7 +175,8 @@ Page({
       this.mergeResult();
     });
   },
-  nextMonth: function () {
+
+  nextMonth: function() {
     if (this.data.loader) {
       return false;
     }
@@ -179,8 +194,7 @@ Page({
       curYear: curYear,
       curMonth: curMonth,
     });
-
-    this.getMeetingsByDate(curYear, curMonth).then(resp => {
+    this.getSelfMeetingsByDate(curYear, curMonth).then(resp => {
       this.setData({
         meeting: resp.data.data,
         loader: false
@@ -189,15 +203,22 @@ Page({
       this.getDateList(curYear, curMonth - 1);
       this.mergeResult();
     });
+    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
+      this.setData({
+        meeting: resp.data.data,
+        loader: false
+      });
+      this.getDateList(curYear, curMonth - 1);
+      this.mergeResult();
+    });
   },
-  getMeetingsByDate: function (year, month) {
+  getSelfMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
           url: Config.service.getEventList + `?year=${year}&month=${month}&token=${token}`,
           success(result) {
             resolve(result.data)
-            console.log(result.data);
           },
           fail(error) {
             reject(error);
@@ -206,16 +227,35 @@ Page({
       });
     });
   },
-  mergeResult: function () {
+  getInvitedMeetingsByDate: function(year, month) {
+    return new Promise((resolve, reject) => {
+      getApp().getToken().then(token => {
+        wx.request({
+
+          url: Config.service.getInvites + `?year=${year}&month=${month}&token=${token}`,
+          success(result) {
+            resolve(result.data)
+          },
+          fail(error) {
+            reject(error);
+          }
+        })
+      });
+    });
+  },
+
+  mergeResult: function() {
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
-    console.log(`nowDate=${nowDate}`);
 
     for (let i = 0; i < meeting.length; i++) {
-      console.log('時間'+ meeting[i].date + ' ' + meeting[i].start_time);
-      if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
+      if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) { // overdued meeting
         meeting[i].color = 'e6e6e5';
+      } else if (meeting[i].type == 'invited') {
+        console.log(" case 2: non-expired self: ");
+        console.log(meeting[i]);
+        meeting[i].color = '5eda74' // <<= 改成你要的顏色
       }
     }
     for (let arrList of dateList) {
