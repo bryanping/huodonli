@@ -133,6 +133,7 @@ Page({
       log: "height=" + height + "  |  heightRpx=" + heightRpx + "  |  lineCount=" + lineCount
     })
   },
+
   bindKeyInput: function(e) {
     let str = e.detail.value;
 
@@ -153,6 +154,7 @@ Page({
       color: color
     })
   },
+  
   formSubmit: function(e) {
     console.log('formSubmit', e.detail.value)
     if (this.data.loadingUpdate || this.data.loadingDelete) {
@@ -292,6 +294,7 @@ Page({
     mapObj.latitude = buff[1];
     mapObj.markers = [];
     let marker = {
+      
       iconPath: "../../../../img/marker.png",
       longitude: buff[0],
       latitude: buff[1],
@@ -303,7 +306,7 @@ Page({
       this.setData({
         tips: [],
         destination: elem.name,
-        mapObj: mapObj
+        mapObj: mapObj,
       });
     }
 

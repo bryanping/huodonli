@@ -20,6 +20,7 @@ Page({
     color: 'ff6280',
     mapObj: undefined,
     tips: [],
+    weekArr: ['日', '一', '二', '三', '四', '五', '六'],
     loading: false
   },
 
@@ -53,41 +54,43 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
-  }, 
+
+  },
 
   bindKeyInput: function (e) {
     let str = e.detail.value;
@@ -102,14 +105,43 @@ Page({
     })
   },
 
-  changecolor: function (e) {
-    let color = e.currentTarget.dataset.color;
-    this.setData({
-      color: color
-    })
+  // changecolor: function(e) {
+  //   let color = e.currentTarget.dataset.color;
+  //   this.setData({
+  //     color: color
+  //   })
+  // },
+  getDateList: function (y, mon) {
+    var vm = this;
+    //如果是否闰年，则2月是29日
+    var daysCountArr = this.data.daysCountArr;
+    if (y % 4 == 0 && y % 100 != 0) {
+      this.data.daysCountArr[1] = 29;
+      this.setData({
+        daysCountArr: daysCountArr
+      });
+    }
+    var dateList = [];
+    dateList[0] = [];
+    var weekIndex = 0; //第几个星期
+    for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
+      var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
+      dateList[weekIndex].push({
+        value: y + '/' + (mon + 1) + '/' + (i + 1),
+        date: i + 1,
+        week: week
+      });
+      if (week == 0) {
+        weekIndex++;
+        dateList[weekIndex] = [];
+      }
+    }
+    vm.setData({
+      dateList: dateList
+    });
   },
-
-   getdays: function (day1, day2) {
+  
+  getdays: function (day1, day2) {
     var that = this;
     var d1 = day1;
     var d2 = day2;
@@ -120,14 +152,15 @@ Page({
     var days = Math.ceil((date2 - date1) / (24 * 60 * 60 * 1000));
     return days;
   },
+
   submit: function (e) {
     console.log(e.detail.formId);
   },
 
   formSubmit: function (e) {
     console.log(e.detail.formId);
-    if(this.data.loading){
-      return; 
+    if (this.data.loading) {
+      return;
     }
     let title = this.data.title;
     let color = this.data.color;
@@ -136,7 +169,6 @@ Page({
     let end_time = this.data.end_time;
     let mapObj = this.data.mapObj;
     let destination = this.data.destination;
-
     let obj = {
       title: title,
       color: color,
@@ -146,27 +178,23 @@ Page({
       destination: destination,
       mapObj: mapObj
     }
-
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
-
-    if (errors.length > 0){
+    if (errors.length > 0) {
       wx.showToast({
         title: errors[0],
         icon: 'none',
         duration: 1200
       });
       return;
-     }
+    }
     this.setData({
       loading: true
     });
-
     let that = this;
     meeting.save().then((res) => {
       let date = new Date();
       let time = Util.checkTime(date.getHours()) + ':' + Util.checkTime(date.getMinutes());
-
       that.setData({
         title: '',
         start_time: time,
@@ -179,13 +207,12 @@ Page({
         tips: [],
         loading: false
       });
-      
       wx.navigateTo({
-        url: '/pages/meeting/page/view/view?id=' +  res.data.data.id,
+        url: '/pages/meeting/page/view/view?id=' + res.data.data.id,
       })
     });
   },
-  
+
   bindlinechange: function (e) {
     var height = e.detail.height;
     var heightRpx = e.detail.heightRpx;
@@ -195,17 +222,16 @@ Page({
     })
   },
 
-  bindTime: function(e){
+  bindTime: function (e) {
     let time = new Date(this.data.date + ' ' + e.detail.value);
     time.setMinutes(time.getMinutes() + parseInt(this.data.how_long.split(':')[1]));
     time.setHours(time.getHours() + parseInt(this.data.how_long.split(':')[0]));
-    
     this.setData({
       start_time: e.detail.value,
-      end_time: Util.checkTime(time.getHours()) + ':' + Util.checkTime(time.getMinutes()) 
+      end_time: Util.checkTime(time.getHours()) + ':' + Util.checkTime(time.getMinutes())
     });
-
   },
+
   bindEndTime: function (e) {
     let how_long = Util.calculateHowLong(this.data.start_time, e.detail.value);
     this.setData({
@@ -213,7 +239,8 @@ Page({
       how_long: how_long
     });
   },
-  bindHowLong: function (e){
+
+  bindHowLong: function (e) {
     let time = new Date(this.data.date + ' ' + this.data.start_time);
     time.setMinutes(time.getMinutes() + parseInt(e.detail.value.split(':')[1]));
     time.setHours(time.getHours() + parseInt(e.detail.value.split(':')[0]));
@@ -227,7 +254,9 @@ Page({
   bindDestinationInput: function (e) {
     let that = this;
     let keywords = e.detail.value;
-    let myAmapFun = new amapFile.AMapWX({ key: Config.key.AMapWX });
+    let myAmapFun = new amapFile.AMapWX({
+      key: Config.key.AMapWX
+    });
 
     myAmapFun.getInputtips({
       keywords: keywords,
@@ -246,8 +275,9 @@ Page({
 
   bindMapSelection: function (e) {
     console.log('hello world');
+    var that = this
     wx.chooseLocation({
-      success: (res) => {
+      success: function (res) {
         console.log(res)
         let mapObj = {};
         // let buff = elem.location.split(',');
@@ -263,9 +293,10 @@ Page({
           height: 30
         };
         mapObj.markers.push(marker);
-
-        this.setData({
+        console.log(mapObj);
+        that.setData({
           tips: [],
+          hasLocation: true,
           destination: res.name,
           mapObj: mapObj
         });
@@ -295,13 +326,12 @@ Page({
       height: 30
     };
     mapObj.markers.push(marker);
-    if(elem && elem.name){
+    if (elem && elem.name) {
       this.setData({
         tips: [],
         destination: elem.name,
         mapObj: mapObj
       });
     }
-    
   }
 })

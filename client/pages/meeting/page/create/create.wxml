@@ -1,51 +1,45 @@
 <!--pages/meeting/page/create/create.wxml-->
 <view class='container'>
-  <form bindsubmit="formSubmit"  report-submit='true'>
+  <form bindsubmit="formSubmit" report-submit='true'>
     <view class='wrapper'>
-    <view class="section">
-      <view class="section--text">活动资讯：</view>
-      <textarea  bindlinechange="bindlinechange" placeholder="请输入活动内容 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
-    </view>
-    
-    <view class="section">
-      <view class="section--text">活动日期：</view>
-      <picker mode="date" class="section--elem" value="{{date}}" bindchange="bindDateStart">
-        <view class="picker">{{date}}</view>
-      </picker>
-    </view>
-
-     <view class="section">
-      <view class="section--text">开始时间：</view>
-      <picker mode="time" class="section--elem2" value="{{start_time}}" bindchange="bindTime">
-        <view class="picker">{{start_time}}  －</view>
-      </picker>
-      <picker mode="time" class="section--elem3" value="{{end_time}}" bindchange="bindEndTime">
-        <view class="picker">{{end_time}}</view>
-      </picker>
+      <view class="section">
+        <view class="section--text">资讯</view>
+        <textarea bindlinechange="bindlinechange" placeholder=" 请输入活动内容 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
       </view>
 
-    <view class="section">
-      <view class="section--text">活动时长</view>
-      <view class="section--elem1" value="{{how_long}}" bindchange="bindHowLong">
-      <view class="picker">{{how_long}} (自动计算)</view>
-      </view>
+      <view class="section">
+        <view class="section--text">日期</view>
+        <picker mode="date" class="section--elem" value="{{date}}" bindchange="bindDateStart">
+          <view class="picker">{{date}}</view>
+        </picker>
       </view>
 
-    <view class="section">
-      <view class="section--text">活动地点</view>
-      <input class="section--elem input1" placeholder="请输入目的地" placeholder-style="color: #d3d3d4" name="title" value="{{destination}}" bindinput="bindDestinationInput" bindtouchstart="bindMapSelection" />
-    </view>
-          <view class="search--box">
+      <view class="section">
+        <view class="section--text">时间</view>
+        <picker mode="time" class="start" value="{{start_time}}" bindchange="bindTime">
+          <view class="picker">开始 {{start_time}} ｜</view>
+        </picker>
+        <picker mode="time" class="end" value="{{end_time}}" bindchange="bindEndTime">
+          <view class="picker">结束 {{end_time}}</view>
+        </picker>
+        <view class="howlong">({{how_long}}) </view>
+      </view>
+
+      <view class="section">
+        <view class="section--text">地点</view>
+        <input class="section--elem input1" placeholder="请输入目的地" placeholder-style="color: #d3d3d4" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
+      </view>
+      <view class="search--box">
         <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">
-      {{i.name}}
+          {{i.name}}
+        </view>
       </view>
-    </view>
 
-    <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container">
+      <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container">
         <map class="map" id="map" catchtap='mapEvent' longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="14" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
-    </view>
+      </view>
 
-    <!-- <view class='section color-pick'>
+      <!-- <view class='section color-pick'>
       <view class='section--text1'>主题色</view>
       <view class='section--elem color-picker'>
       <image class='{{color=="ff6280"?"colorpointselected":"colorpoint"}}' data-color='ff6280' catchtap='changecolor' src='/img/colorpoint/ff6280.png' mode='aspectFit'></image>
@@ -55,7 +49,7 @@
       </view>
     </view> -->
 
-  </view>
-  <button formType="submit" loading="{{loading}}" class='submit'>保存</button>
+    </view>
+    <button formType="submit" loading="{{loading}}" class='submit'>保存</button>
   </form>
 </view>

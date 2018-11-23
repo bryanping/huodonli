@@ -3,7 +3,7 @@ const DB = require('../tools/db');
 const dateToYMD = require('../tools/helper').dateToYMD;
 
 class Event {
-  constructor(title, date, start_time, end_time, destination, color, creator_openid, mapObj, id) {
+  constructor(title, date, start_time, end_time, destination, color, creator_openid, mapObj, id, ) {
     if (id) {
       this.id = id;
     }
@@ -15,6 +15,7 @@ class Event {
     this.color = color || '';
     this.creator_openid = creator_openid || '';
     this.mapObj = mapObj || '';
+    this.productInfo = productInfo || '';
   }
 
   validate() {
@@ -27,12 +28,11 @@ class Event {
       errors.push('请输入活动地点');
     }
     if (!this.mapObj || this.mapObj === '') {
-      errors.push('mapObj is empty');
+      errors.push('请输入活动地点');
     }
     if (this.start_time === '' || this.end_time === '' || this.date === '') {
-      errors.push('Time or date is empty');
+      errors.push('请选择时间');
     }
-
     if (this.creator_openid === '') {
       errors.push('creator_openid is empty');
     }
