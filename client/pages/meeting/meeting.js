@@ -54,11 +54,10 @@ Page({
     let i = today.getDay();
     this.getSelfMeetingsByDate(y, mon).then(resp1 => {
       var selfMeetingData = resp1.data.data;
-
       this.getInvitedMeetingsByDate(y, mon).then(resp2 => {
-        var invitedMeetingData = resp2.data.data;
-        for (var i = 0; i < invitedMeetingData.length; i++) {
-          invitedMeetingData[i].type = 'invited';
+        var invitedMeetingsData = resp2.data.data;
+        for (var i = 0; i < invitedMeetingsData.length; i++) {
+          invitedMeetingsData[i].type = 'invited';
         }
         this.setData({
           curYear: y,
@@ -66,12 +65,12 @@ Page({
           curDate: d,
           selectedDate: y + '/' + mon + '/' + d,
           selectedWeek: this.data.weekArr[i],
-          meeting: selfMeetingData.concat(invitedMeetingData),
+          meeting: selfMeetingData.concat(invitedMeetingsData),
           loader: false
         });
         this.getDateList(y, mon - 1);
         this.mergeResult();
-
+        console.log(invitedMeetingsData)
       });
     });
   },
@@ -156,24 +155,20 @@ Page({
       curYear: curYear,
       curMonth: curMonth
     });
-    this.getSelfMeetingsByDate(curYear, curMonth).then(resp => {
+    var mettings = []
+    this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
+      mettings.push(...resp.data.data)
+      return this.getInvitedMeetingsByDate(curYear, curMonth)
+    }).then((resp) => {
+      mettings.push(...resp.data.data)
       this.setData({
-        meeting: resp.data.data,
+        meeting: mettings,
         loader: false
       });
 
       this.getDateList(curYear, curMonth - 1);
       this.mergeResult();
-    });
-    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
-      this.setData({
-        meeting: resp.data.data,
-        loader: false
-      });
-
-      this.getDateList(curYear, curMonth - 1);
-      this.mergeResult();
-    });
+    })
   },
 
   nextMonth: function() {
@@ -194,23 +189,20 @@ Page({
       curYear: curYear,
       curMonth: curMonth,
     });
-    this.getSelfMeetingsByDate(curYear, curMonth).then(resp => {
+    var mettings = []
+    this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
+      mettings.push(...resp.data.data)
+      return this.getInvitedMeetingsByDate(curYear, curMonth)
+    }).then((resp) => {
+      mettings.push(...resp.data.data)
       this.setData({
-        meeting: resp.data.data,
+        meeting: mettings,
         loader: false
       });
 
       this.getDateList(curYear, curMonth - 1);
-      this.mergeResult();
-    });
-    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
-      this.setData({
-        meeting: resp.data.data,
-        loader: false
-      });
-      this.getDateList(curYear, curMonth - 1);
-      this.mergeResult();
-    });
+      this.mergeResult ();
+    })
   },
   getSelfMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
@@ -228,6 +220,7 @@ Page({
     });
   },
   getInvitedMeetingsByDate: function(year, month) {
+    console.log("time:" + year, month);
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
@@ -241,6 +234,7 @@ Page({
           }
         })
       });
+      
     });
   },
 

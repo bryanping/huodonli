@@ -148,10 +148,7 @@ Page({
       // If event is outdated
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
         meeting[i].color = 'e6e6e5';
-      } else {
-
-      }
-
+      } 
       meeting[i].date = Util.shatterDate(meeting[i].date);
       let Y = meeting[i].date.Y;
       let monthDay = meeting[i].date.M + '.' + meeting[i].date.D;
@@ -163,11 +160,11 @@ Page({
       }
       resultArr[Y][monthDay].push(meeting[i]);
     }
-
     this.setData({
       resultArr: resultArr
     });
   },
+  
   swichNav: function (e) {
     console.log(e);
     var that = this;
