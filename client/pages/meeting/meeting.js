@@ -56,6 +56,8 @@ Page({
       var selfMeetingData = resp1.data.data;
       this.getInvitedMeetingsByDate(y, mon).then(resp2 => {
         var invitedMeetingsData = resp2.data.data;
+        console.log("print invited");
+        console.log(invitedMeetingsData);
         for (var i = 0; i < invitedMeetingsData.length; i++) {
           invitedMeetingsData[i].type = 'invited';
         }
@@ -199,7 +201,6 @@ Page({
         meeting: mettings,
         loader: false
       });
-
       this.getDateList(curYear, curMonth - 1);
       this.mergeResult ();
     })
@@ -239,11 +240,14 @@ Page({
   },
 
   mergeResult: function() {
+    console.log("triggered mergeResult")
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
+    console.log("meeting length =" + meeting.length);
 
     for (let i = 0; i < meeting.length; i++) {
+      console.log(meeting[i]);
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) { // overdued meeting
         meeting[i].color = 'e6e6e5';
       } else if (meeting[i].type == 'invited') {
