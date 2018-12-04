@@ -3,7 +3,7 @@ import Config from '../../config.js';
 import Util from '../../utils/util.js';
 
 Page({
-  
+
   /**
    * 页面的初始数据
    */
@@ -19,6 +19,7 @@ Page({
     mapObj: undefined,
     tips: [],
     submit_text: '',
+    weekArr: '',
     members: [],
     AllMembers: [],
     showAllMembers: false,
@@ -32,10 +33,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let marker = {
-      iconPath: "../../../../img/marker.png"};
+  
     let obj = Meeting.findById(options.id).then(resp => {
-      if(!resp.data || !resp.data.data){
+      if (!resp.data || !resp.data.data) {
         wx.showModal({
           title: '',
           content: '活动已取消',
@@ -48,8 +48,7 @@ Page({
           }
         });
       }
-      
-      let obj  = resp.data.data;
+      let obj = resp.data.data;
 
       let submit_text = '';
       switch (obj.user) {
@@ -61,12 +60,12 @@ Page({
           submit_text = 'Join';
           break;
       }
-      
+
       let members = [];
-      if(obj.members.length > 7){
-          for(let i = 0;  i < 7; i++){
-            members.push(obj.members[i]);
-          }
+      if (obj.members.length > 7) {
+        for (let i = 0; i < 7; i++) {
+          members.push(obj.members[i]);
+        }
       } else {
         members = obj.members;
       }
@@ -114,42 +113,42 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
@@ -173,21 +172,6 @@ Page({
       }
     }
   },
-  
-  bindMaptop: function () {
-    // console.log({
-    //   longitude: this.data.mapObj.longitude,
-    //   latitude: this.data.mapObj.latitude,
-    //   name: this.data.destination,
-    //   address: this.data.mapObj.address
-    // });
-    wx.openLocation({
-      longitude: Number(this.data.mapObj.longitude),
-      latitude: Number(this.data.mapObj.latitude),
-      name: this.data.destination,
-      address: this.data.mapObj.address
-    })
-  },
 
   formSubmit: function (e) {
     let id = this.data.id;
@@ -198,7 +182,10 @@ Page({
     let options = {
       url: Config.service.acceptInvite,
       method: "post",
-      data: { token: token, event_id: id },
+      data: {
+        token: token,
+        event_id: id
+      },
       login: true,
       success(result) {
         console.log('request success', result)
@@ -212,9 +199,9 @@ Page({
     }
     wx.request(options);
   },
-  viewAllMembers: function (e){
+  viewAllMembers: function (e) {
     let showAllMembers = !this.data.showAllMembers;
-    if (showAllMembers){
+    if (showAllMembers) {
       this.setData({
         members: this.data.AllMembers,
         showAllText: '隐藏',
@@ -231,5 +218,13 @@ Page({
         members: members
       });
     }
-  }
+  },
+  bindMaptop: function () {
+    wx.openLocation({
+      longitude: Number(this.data.mapObj.longitude),
+      latitude: Number(this.data.mapObj.latitude),
+      name: this.data.destination,
+      address: this.data.mapObj.address
+    })
+  },
 })

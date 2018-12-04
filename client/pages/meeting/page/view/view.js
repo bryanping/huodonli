@@ -35,6 +35,19 @@ Page({
    */
   onLoad: function (options) {
     let obj = Meeting.findById(options.id).then(resp => {
+      if (!resp.data || !resp.data.data) {
+        wx.showModal({
+          title: '',
+          content: '活动已取消',
+          confirmText: '确认',
+          showCancel: false,
+          success: function (res) {
+            wx.reLaunch({
+              url: '/pages/index/index',
+            });
+          }
+        });
+      }
       let obj = resp.data.data;
       
       let submit_text = '';
@@ -87,7 +100,6 @@ Page({
       }
 
       this.setData({
-        
         id: obj.id,
         title: obj.title,
         color: obj.color,
@@ -182,7 +194,6 @@ Page({
     return {
       title: '分享' + this.data.title,
       path: 'pages/share/share?id=' + this.data.id,
-      
       success: function (res) {
         // Forwarding successful
         console.log("Share successfull");
@@ -237,7 +248,10 @@ Page({
     let options = {
       url: Config.service.acceptInvite,
       method: "post",
-      data: { token: token, event_id: id },
+      data: { 
+        token: token, 
+        event_id: id 
+        },
       login: true,
       success(result) {
         console.log('request success', result)

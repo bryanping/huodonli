@@ -16,7 +16,7 @@ form {
   width: 100%;
   font-size: 15px;
   min-height: initial;
-  color: #8e8e93;
+  color: #333;
   line-height: 20px;
   height: 10vh;
 }
@@ -24,15 +24,16 @@ form {
 .input1 {
   width: 100%;
   font-size: 15px;
-  color: #8e8e93;
+  color: #333;
   line-height: 20px;
+  height:40rpx;
 }
 
 .picker {
   width: 100%;
   text-align: center;
   font-size: 15px;
-  color: #8e8e93;
+  color: #333;
   letter-spacing: 2px;
 }
 
@@ -53,15 +54,15 @@ form {
   display: flex;
   background-color: white;
   padding: 0rpx 2rpx;
-  border-bottom: 1px solid #e6e6e5;
+  border-bottom: 1px solid #d3d3d3;
 }
 
 .section:first-child {
-  border-bottom: 2rpx solid #e6e6e5;
+  border-bottom: 2rpx solid #d3d3d3;
 }
 
 .section--text {
-  color: #8e8e93;
+  color: #333;
   font-size: 15px;
   padding: 14rpx 5rpx
 }
@@ -86,9 +87,9 @@ form {
   padding: 14rpx 10rpx;
 }
 
-.color-picker {
+/* .color-picker {
   text-align: center;
-}
+} */
 
 .wrapper {
   min-height: 87vh;
@@ -96,6 +97,18 @@ form {
 }
 
 .submit {
+  display: block;
+  height: 14vh;
+  width: 100%;
+  padding: 10px;
+  font-size: 42rpx;
+  color: white;
+  border: 0;
+  border-radius: 0;
+  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+}
+
+.share {
   display: block;
   height: 14vh;
   width: 100%;
@@ -194,9 +207,16 @@ form {
 }
 
 .section--title {
-  color: #8e8e93;
+  color: #333;
   font-size: 15px;
   padding: 10rpx 10rpx;
   flex: 1 0;
   text-align-last: center;
+}
+.nav_icon {
+  width: 30px;
+  height: 30px;
+  position:relative;
+  top:2px;
+  right:5px;
 }

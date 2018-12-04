@@ -22,6 +22,7 @@ Page({
     resultArr: [],
     loader: true,
     options: null,
+    tipe: ''
   },
 
   /**
@@ -73,6 +74,7 @@ Page({
         this.getDateList(y, mon - 1);
         this.mergeResult();
         console.log(invitedMeetingsData)
+        console.log(selfMeetingData)
       });
     });
   },
@@ -221,11 +223,9 @@ Page({
     });
   },
   getInvitedMeetingsByDate: function(year, month) {
-    console.log("time:" + year, month);
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
-
           url: Config.service.getInvites + `?year=${year}&month=${month}&token=${token}`,
           success(result) {
             resolve(result.data)
@@ -235,7 +235,6 @@ Page({
           }
         })
       });
-      
     });
   },
 

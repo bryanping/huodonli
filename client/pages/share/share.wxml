@@ -16,7 +16,7 @@
           {{date}}
         </view>
         <view class="section--elem2 input">
-          {{start_time}} － {{end_time}}
+          {{start_time}}-{{end_time}}
         </view>
       </view>
 
@@ -24,6 +24,7 @@
       <view class="section">
         <view class="section--text">地点：</view>
         <view class='section--elem input' bindtouchstart="bindMaptop">{{destination}}</view>
+          <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
       </view>
 
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
@@ -31,8 +32,8 @@
       </view>
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-        <text class='section--text'>参与状态：{{AllMembers.length}}人关注 ｜</text>
-        <text class='section--text'> (参与\总名额)开发中敬请期待</text>
+        <text class='section--text'>参与状态：{{AllMembers.length}}人参与 ｜</text>
+        <text class='section--text'> (关注\总名额)开发中敬请期待</text>
       </view>
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
         <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
@@ -47,6 +48,17 @@
 
 
     <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit' open-type="share" type="primary">分享好友</button>
-    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>关注活动</button>
+    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit'>参与行程</button>
+
+    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">关注活动</button>
+  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
+
+    <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+   <action-sheet-item open-type="share">
+         <button open-type="share">分享给好友</button>
+   </action-sheet-item>
+   <action-sheet-item>生成分享卡片</action-sheet-item>
+   <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet> -->
   </form>
 </view>

@@ -39,14 +39,14 @@
   margin-bottom: -25rpx;
   font-size: 20px;
   text-align: left;
-  color: #8e8e93;
+  color: #333;
 }
 
 .eventnon {
   margin-bottom: 15rpx;
   font-size: 20px;
   text-align: center;
-  color: #8e8e93;
+  color: #333;
 }
 
 .request__container {
@@ -65,7 +65,7 @@
   font-size: 12px;
   padding: 7rpx 0;
   margin-top: 15px;
-  color: #8e8e93;
+  color: #333;
 }
 
 

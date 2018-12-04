@@ -27,7 +27,7 @@ Page({
     curMonth = curMonth - 1 ? curMonth - 1 : 12;
     curMonth = Util.checkTime(curMonth);
 
-    this.getMeetingsByDate(curYear, curMonth).then(resp => {
+    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
       this.setData({
         curYear: curYear,
         curMonth: curMonth,
@@ -50,7 +50,7 @@ Page({
     curMonth = curMonth + 1 === 13 ? 1 : curMonth + 1;
     curMonth = Util.checkTime(curMonth);
 
-    this.getMeetingsByDate(curYear, curMonth).then(resp => {
+    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
       this.setData({
         curYear: curYear,
         curMonth: curMonth,
@@ -71,7 +71,7 @@ Page({
     var mon = Util.checkTime(today.getMonth() + 1);
     var d = today.getDate();
     var i = today.getDay();
-    this.getMeetingsByDate().then((meeting) => {
+    this.getInvitedMeetingsByDate().then((meeting) => {
       this.setData({
         curYear: y,
         curMonth: mon,
@@ -119,7 +119,7 @@ Page({
     });
   },
 
-  getMeetingsByDate: function (year, month) {
+  getInvitedMeetingsByDate: function (year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
         wx.request({
@@ -146,9 +146,7 @@ Page({
     //控制顯示內容
     for (let i = 0; i < meeting.length; i++) {
       // If event is outdated
-      if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
-        meeting[i].color = 'e6e6e5';
-      } 
+      meeting[i].color = '5eda74';
       meeting[i].date = Util.shatterDate(meeting[i].date);
       let Y = meeting[i].date.Y;
       let monthDay = meeting[i].date.M + '.' + meeting[i].date.D;

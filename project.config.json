@@ -13,7 +13,7 @@
 	},
 	"appid": "wx9814cfc5cf43159d",
 	"projectname": "0815001",
-	"libVersion": "2.4.0",
+	"libVersion": "1.2.4",
 	"compileType": "miniprogram",
 	"condition": {
 		"search": {

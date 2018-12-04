@@ -284,7 +284,20 @@ Page({
       }
     })
   },
-  
+  bindMaptop: function () {
+    // console.log({
+    //   longitude: this.data.mapObj.longitude,
+    //   latitude: this.data.mapObj.latitude,
+    //   name: this.data.destination,
+    //   address: this.data.mapObj.address
+    // });
+    wx.openLocation({
+      longitude: Number(this.data.mapObj.longitude),
+      latitude: Number(this.data.mapObj.latitude),
+      name: this.data.destination,
+      address: this.data.mapObj.address
+    })
+  },
   bindSearch: function(e) {
     let id = e.target.dataset.id;
     let elem = this.data.tips.find(s => s.id === id);

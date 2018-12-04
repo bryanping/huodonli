@@ -14,7 +14,7 @@ form {
 
 .input {
   font-size: 15px;
-  color:#8e8e93;
+  color: #333;
   line-height:20px;
 }
 
@@ -42,7 +42,7 @@ form {
 }
 
 .section--text {
-  color:#8e8e93;
+  color: #333;
   font-size: 15px;
 
   padding: 10rpx 5rpx;
@@ -128,7 +128,7 @@ form {
 .user--name {
   text-align: center;
   font-size: 18rpx;
-  color:#8e8e93;
+  color: #333;
   text-overflow: ellipsis;
 }
 
@@ -139,10 +139,17 @@ form {
 }
 
 .section--title {
-  color:#8e8e93;
+  color: #333;
   font-size: 15px;
 
   padding: 10rpx 5rpx;
   flex:1 0;
   text-align-last: center;
+}
+.nav_icon {
+  width: 30px;
+  height: 30px;
+  position:relative;
+  top:2px;
+  right:5px;
 }

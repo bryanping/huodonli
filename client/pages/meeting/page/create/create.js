@@ -4,6 +4,8 @@ import Meeting from '../../../../models/Meeting';
 import Util from '../../../../utils/util.js';
 import Config from '../../../../config.js';
 
+var sourceType = [['camera'], ['album'], ['camera', 'album']]
+var sizeType = [['compressed'], ['original'], ['compressed', 'original']]
 Page({
 
   /**
@@ -19,9 +21,18 @@ Page({
     destination: '',
     color: 'ff6280',
     mapObj: undefined,
+    imageList: [],
     tips: [],
     weekArr: ['日', '一', '二', '三', '四', '五', '六'],
-    loading: false
+    daysCountArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    loading: false,
+    sourceTypeIndex: 2,
+    sourceType: ['拍照', '相册', '拍照或相册'],
+    sizeTypeIndex: 2,
+    sizeType: ['压缩', '原图', '压缩或原图'],
+    countIndex: 2,
+    count: [1, 2, 3,],
+    options: null,
   },
 
   /**
@@ -39,6 +50,7 @@ Page({
       color: 'ff6280',
       mapObj: false,
       how_long: '00:00',
+      imageList: '',
       tips: []
     });
   },
@@ -54,7 +66,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const {
+      options
+    } = this.data;
+    var today = new Date();
+    var y = today.getFullYear();
+    var mon = Util.checkTime(today.getMonth() + 1);
+    var d = today.getDate();
+    var i = today.getDay();
   },
 
   /**
@@ -111,47 +130,47 @@ Page({
   //     color: color
   //   })
   // },
-  getDateList: function (y, mon) {
-    var vm = this;
-    //如果是否闰年，则2月是29日
-    var daysCountArr = this.data.daysCountArr;
-    if (y % 4 == 0 && y % 100 != 0) {
-      this.data.daysCountArr[1] = 29;
-      this.setData({
-        daysCountArr: daysCountArr
-      });
-    }
-    var dateList = [];
-    dateList[0] = [];
-    var weekIndex = 0; //第几个星期
-    for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
-      var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
-      dateList[weekIndex].push({
-        value: y + '/' + (mon + 1) + '/' + (i + 1),
-        date: i + 1,
-        week: week
-      });
-      if (week == 0) {
-        weekIndex++;
-        dateList[weekIndex] = [];
-      }
-    }
-    vm.setData({
-      dateList: dateList
-    });
-  },
+  // getDateList: function (y, mon) {
+  //   var vm = this;
+  //   //如果是否闰年，则2月是29日
+  //   var daysCountArr = this.data.daysCountArr;
+  //   if (y % 4 == 0 && y % 100 != 0) {
+  //     this.data.daysCountArr[1] = 29;
+  //     this.setData({
+  //       daysCountArr: daysCountArr
+  //     });
+  //   }
+  //   var dateList = [];
+  //   dateList[0] = [];
+  //   var weekIndex = 0; //第几个星期
+  //   for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
+  //     var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
+  //     dateList[weekIndex].push({
+  //       value: y + '/' + (mon + 1) + '/' + (i + 1),
+  //       date: i + 1,
+  //       week: week
+  //     });
+  //     if (week == 0) {
+  //       weekIndex++;
+  //       dateList[weekIndex] = [];
+  //     }
+  //   }
+  //   vm.setData({
+  //     dateList: dateList
+  //   });
+  // },
   
-  getdays: function (day1, day2) {
-    var that = this;
-    var d1 = day1;
-    var d2 = day2;
-    d1 = d1.replace(/\-/g, "/");
-    d2 = d2.replace(/\-/g, "/");
-    var date1 = new Date(d1);
-    var date2 = new Date(d2);
-    var days = Math.ceil((date2 - date1) / (24 * 60 * 60 * 1000));
-    return days;
-  },
+  // getdays: function (day1, day2) {
+  //   var that = this;
+  //   var d1 = day1;
+  //   var d2 = day2;
+  //   d1 = d1.replace(/\-/g, "/");
+  //   d2 = d2.replace(/\-/g, "/");
+  //   var date1 = new Date(d1);
+  //   var date2 = new Date(d2);
+  //   var days = Math.ceil((date2 - date1) / (24 * 60 * 60 * 1000));
+  //   return days;
+  // },
 
   submit: function (e) {
     console.log(e.detail.formId);
@@ -169,6 +188,7 @@ Page({
     let end_time = this.data.end_time;
     let mapObj = this.data.mapObj;
     let destination = this.data.destination;
+    let imageList = this.data.imageList;
     let obj = {
       title: title,
       color: color,
@@ -176,7 +196,8 @@ Page({
       start_time: start_time,
       end_time: end_time,
       destination: destination,
-      mapObj: mapObj
+      mapObj: mapObj,
+      imageList: imageList,
     }
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
@@ -205,10 +226,11 @@ Page({
         mapObj: false,
         how_long: '00:00',
         tips: [],
+        imageList: [],
         loading: false
       });
       wx.navigateTo({
-        url: '/pages/meeting/page/view/view?id=' + res.data.data.id,
+        url: '/pages/meeting/page/update/update?id=' + res.data.data.id,
       })
     });
   },
@@ -251,27 +273,26 @@ Page({
   },
 
 
-  bindDestinationInput: function (e) {
-    let that = this;
-    let keywords = e.detail.value;
-    let myAmapFun = new amapFile.AMapWX({
-      key: Config.key.AMapWX
-    });
+  // bindDestinationInput: function (e) {
+  //   let that = this;
+  //   let keywords = e.detail.value;
+  //   let myAmapFun = new amapFile.AMapWX({
+  //     key: Config.key.AMapWX
+  //   });
+  //   myAmapFun.getInputtips({
+  //     keywords: keywords,
+  //     location: '',
+  //     success: function (data) {
+  //       if (data && data.tips) {
+  //         let tips = data.tips;
+  //         that.setData({
+  //           tips: tips.filter(tip => tip.location.length > 0)
+  //         });
+  //       }
 
-    myAmapFun.getInputtips({
-      keywords: keywords,
-      location: '',
-      success: function (data) {
-        if (data && data.tips) {
-          let tips = data.tips;
-          that.setData({
-            tips: tips.filter(tip => tip.location.length > 0)
-          });
-        }
-
-      }
-    })
-  },
+  //     }
+  //   })
+  // },
 
   bindMapSelection: function (e) {
     console.log('hello world');
@@ -280,6 +301,7 @@ Page({
       success: function (res) {
         console.log(res)
         let mapObj = {};
+        console.log(mapObj);
         // let buff = elem.location.split(',');
         mapObj.longitude = res.longitude;
         mapObj.latitude = res.latitude;
@@ -297,7 +319,7 @@ Page({
         that.setData({
           tips: [],
           hasLocation: true,
-          destination: res.name,
+          destination: res.name + ' - ' +res.address,
           mapObj: mapObj
         });
 
@@ -308,7 +330,6 @@ Page({
   mapEvent: function (e) {
     console.log(e);
   },
-
   bindSearch: function (e) {
     let id = e.target.dataset.id;
     let elem = this.data.tips.find(s => s.id === id);
@@ -333,5 +354,27 @@ Page({
         mapObj: mapObj
       });
     }
+  },
+  chooseImage: function () {
+    var that = this
+    wx.chooseImage({
+      sourceType: sourceType[this.data.sourceTypeIndex],
+      sizeType: sizeType[this.data.sizeTypeIndex],
+      count: this.data.count[this.data.countIndex],
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          imageList: res.tempFilePaths
+        })
+      }
+    })
+  },
+  previewImage: function (e) {
+    var current = e.target.dataset.src
+
+    wx.previewImage({
+      current: current,
+      urls: this.data.imageList
+    })
   }
 })
