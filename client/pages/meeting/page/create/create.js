@@ -33,6 +33,7 @@ Page({
     countIndex: 2,
     count: [1, 2, 3,],
     options: null,
+    formId: '',
   },
 
   /**
@@ -175,9 +176,21 @@ Page({
   submit: function (e) {
     console.log(e.detail.formId);
   },
+  
 
   formSubmit: function (e) {
-    console.log(e.detail.formId);
+    let formId = e.detail.formId;
+    this.dealFormIds(formId);
+    let type = e.detail.target.dataset.type;
+    // 忽略开发者工具里边的formId
+    if (formId && formId !== 'the formId is a mock one') {
+      wx.request({
+        method: 'POST',
+        url: '/api/collectFormId', // 该接口只用来收集formId
+        data: { formId: formId } // 只传了一个formId，因为openid和当前用户通常会事先在后台做一个关联，看具体业务了
+      });
+    }
+    console.log("推送碼為：" + e.detail.formId)
     if (this.data.loading) {
       return;
     }
@@ -198,6 +211,7 @@ Page({
       destination: destination,
       mapObj: mapObj,
       imageList: imageList,
+      formId,
     }
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
@@ -229,12 +243,23 @@ Page({
         imageList: [],
         loading: false
       });
+      
       wx.navigateTo({
         url: '/pages/meeting/page/update/update?id=' + res.data.data.id,
       })
     });
   },
-
+  dealFormIds: function (formId) {
+    let formIds = app.globaData.globaFormIds;
+    if (!formIds) formIds = [];
+    let data = {
+      formId: formId,
+      expire: parseInt(new Date().getTime() / 1000) + 604800
+    }
+    formIds.push(data);
+    app.globaData.globaFormIds = formIds;
+  },
+  
   bindlinechange: function (e) {
     var height = e.detail.height;
     var heightRpx = e.detail.heightRpx;
