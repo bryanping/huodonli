@@ -26,8 +26,8 @@
 
       <view class="section">
         <view class="section--text">地点：</view>
-         <input class="section--elem input1" name="title" value="{{destination}}"  bindtouchstart="bindMapSelection" />
-         <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
+        <input class="section--elem input1" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
+        <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
       </view>
       <!-- <view class="search--box">
         <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">
@@ -50,8 +50,8 @@
       </view> -->
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-        <text class='section--text'>参与状态：{{AllMembers.length}}人关注 ｜</text>
-        <text class='section--text'> (参与\总名额)开发中敬请期待</text>
+        <text class='section--text'>参与状态：{{AllMembers.length}}人参与 ｜</text>
+        <text class='section--text'> (关注\总名额)开发中敬请期待</text>
       </view>
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>

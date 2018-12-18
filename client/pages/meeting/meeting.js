@@ -48,11 +48,11 @@ Page({
     const {
       options
     } = this.data;
-    let today = new Date();
-    let y = options.y || today.getFullYear();
-    let mon = Util.checkTime(options.mon || (today.getMonth() + 1));
-    let d = today.getDate();
-    let i = today.getDay();
+    var today = new Date();
+    var y = options.y || today.getFullYear();
+    var mon = Util.checkTime(options.mon || (today.getMonth() + 1));
+    var d = today.getDate();
+    var i = today.getDay();
     this.getSelfMeetingsByDate(y, mon).then(resp1 => {
       var selfMeetingData = resp1.data.data;
       this.getInvitedMeetingsByDate(y, mon).then(resp2 => {
@@ -143,6 +143,7 @@ Page({
       dateList: dateList
     });
   },
+
   preMonth: function() {
     if (this.data.loader) {
       return false;

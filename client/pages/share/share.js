@@ -190,7 +190,7 @@ Page({
       success(result) {
         console.log('request success', result)
         wx.reLaunch({
-          url: '/pages/index/index',
+          url: '/pages/meeting/meeting',
         })
       },
       fail(error) {
