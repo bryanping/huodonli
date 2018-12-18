@@ -19,49 +19,6 @@ Page({
     options: null,
   },
 
-  preMonth: function () {
-    var vm = this;
-    var curYear = vm.data.curYear;
-    var curMonth = Util.checkTime(vm.data.curMonth, true);
-    curYear = curMonth - 1 ? curYear : curYear - 1;
-    curMonth = curMonth - 1 ? curMonth - 1 : 12;
-    curMonth = Util.checkTime(curMonth);
-
-    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
-      this.setData({
-        curYear: curYear,
-        curMonth: curMonth,
-        meeting: resp.data.data
-      });
-
-      this.getDateList(curYear, curMonth - 1);
-      this.mergeResult();
-    });
-  },
-  onShareAppMessage: function () {
-
-  },
-  nextMonth: function () {
-    var vm = this;
-    var curYear = vm.data.curYear;
-    var curMonth = Util.checkTime(vm.data.curMonth, true);
-
-    curYear = curMonth + 1 === 13 ? curYear + 1 : curYear;
-    curMonth = curMonth + 1 === 13 ? 1 : curMonth + 1;
-    curMonth = Util.checkTime(curMonth);
-
-    this.getInvitedMeetingsByDate(curYear, curMonth).then(resp => {
-      this.setData({
-        curYear: curYear,
-        curMonth: curMonth,
-        meeting: resp.data.data
-      });
-
-      this.getDateList(curYear, curMonth - 1);
-      this.mergeResult();
-    });
-  },
-
   onShow: function () {
     const {
       options
@@ -81,12 +38,12 @@ Page({
         meeting: meeting.data.data,
         loader: false
       });
-
       //this.getDateList(y, mon - 1);
-
       this.mergeResult();
     });
+  },
 
+  onShareAppMessage: function () {
   },
 
   getDateList: function (y, mon) {
