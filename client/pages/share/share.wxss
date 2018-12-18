@@ -4,8 +4,9 @@ page {
 }
 
 .container {
-  height: auto;
+  height: 80%;
   position: relative;
+  padding:0 0 20%;
 }
 
 form {
@@ -67,16 +68,16 @@ form {
   box-sizing: border-box;
 }
 
-.submit {
-  display: block;
-  height: 14vh;
-  width: 100%;
-  padding: 10px;
-  font-size: 42rpx;
-  color: white;
-  border: 0;
-  border-radius: 0;
-  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+.share {
+  height:100rpx;
+  width:60%;
+  font-size:40rpx;
+  color:white;
+  border-radius:100rpx;
+  background:-webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+  left:36%;
+  bottom:50rpx;
+  position:fixed;
 }
 
 .map_container {
