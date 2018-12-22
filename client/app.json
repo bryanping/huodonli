@@ -33,7 +33,7 @@
       },
       {
         "pagePath": "pages/meeting/page/create/create",
-        "text": "新增活动",
+        "text": "创建行程",
         "iconPath": "img/UI-5@3x.png",
         "selectedIconPath": "img/UI-5i@3x.png"
       },
