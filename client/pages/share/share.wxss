@@ -51,7 +51,7 @@ form {
 
 .section--elem{
   flex:3 0;
-  padding: 10rpx 10rpx;
+  padding: 5rpx 10rpx;
   letter-spacing:2px;
 }
 .section--elem1{
@@ -148,9 +148,8 @@ form {
   text-align-last: center;
 }
 .nav_icon {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   position:relative;
-  top:2px;
-  right:5px;
+  right:15rpx;
 }

@@ -10,9 +10,14 @@
     "pages/share/share",
     "pages/login/login"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置讯息将用于导航使用"
+    }
+  },
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "backgroundTextStyle": "bold",
+    "navigationBarBackgroundColor": "black",
     "navigationBarTitleText": "活动历",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
@@ -45,11 +50,12 @@
       }
       
     ],
-    "color": "#c6c6c6",
-    "selectedColor": "#c6c6c6",
+    "color": "#000000",
+    "selectedColor": "#0022ff",
     "borderStyle": "white",
     "position": "bottom"
   },
+  
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 10000,

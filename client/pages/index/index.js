@@ -17,8 +17,10 @@ Page({
     resultArr: [],
     loader: true,
     options: null,
+    currentTab: 0,
   },
 
+  
   onShow: function () {
     const {
       options

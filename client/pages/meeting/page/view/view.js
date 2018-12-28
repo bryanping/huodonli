@@ -17,9 +17,13 @@ Page({
     destination: '',
     color: '',
     mapObj: undefined,
-    tips: [],
     submit_text: '',
-    weekArr: '',
+    selectedDate: '',
+    selectedWeek: '',
+    curYear: '',
+    curMonth: '',
+    curDate: '',
+    weekArr: ['日', '一', '二', '三', '四', '五', '六'],
     members: [],
     AllMembers: [],
     showAllMembers: false,
@@ -62,11 +66,11 @@ Page({
       }
 
       // <DEBUG ONLY>
-      /*let fakeMembers = [];
-      for(let j = 0; j < 50; j++){
-        fakeMembers.push(obj.members[0]);
-      }
-      obj.members = fakeMembers; */
+      // let fakeMembers = [];
+      // for(let j = 0; j < 50; j++){
+      //   fakeMembers.push(obj.members[0]);
+      // }
+      // obj.members = fakeMembers; 
       // </DEBUG ONLY>
 
       let members = [];
@@ -114,6 +118,8 @@ Page({
         AllMembers: obj.members,
         members: members
       });
+      console.log(obj);
+      
     });
   },
 
@@ -129,7 +135,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    const {
+      options
+    } = this.data;
+    var today = new Date();
+    var y = today.getFullYear();
+    var mon = Util.checkTime(today.getMonth() + 1);
+    var d = today.getDate();
+    var i = today.getDay();
+    
+    this.setData({
+        curYear: y,
+        curMonth: mon,
+        curDate: d,
+        selectedDate: y + '/' + mon + '/' + d,
+        selectedWeek: this.data.weekArr[i],
+        
+        loader: false
+      });
+ 
   },
 
   /**
@@ -192,8 +216,8 @@ Page({
   onShareAppMessage: function (res) {
 
     return {
-      title: '分享' + this.data.title,
-      path: 'pages/share/share?id=' + this.data.id,
+      title: this.data.title,
+      path: 'pages/meeting/page/view/view?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful
         console.log("Share successfull");
@@ -205,7 +229,7 @@ Page({
         console.log(res);
       }
     }
-    console.log('pages/share/share?id=' + this.data.id)
+    console.log('pages/meeting/page/view/view?id=' + this.data.id)
   },
 
   openActionSheet(e) {

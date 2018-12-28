@@ -4,8 +4,16 @@ import Meeting from '../../../../models/Meeting';
 import Util from '../../../../utils/util.js';
 import Config from '../../../../config.js';
 
-var sourceType = [['camera'], ['album'], ['camera', 'album']]
-var sizeType = [['compressed'], ['original'], ['compressed', 'original']]
+var sourceType = [
+  ['camera'],
+  ['album'],
+  ['camera', 'album']
+]
+var sizeType = [
+  ['compressed'],
+  ['original'],
+  ['compressed', 'original']
+]
 Page({
 
   /**
@@ -21,8 +29,11 @@ Page({
     destination: '',
     color: 'ff6280',
     mapObj: undefined,
-    imageList: [],
     tips: [],
+    selectedWeek: '',
+    curYear: '',
+    curMonth: '',
+    curDate: '',
     weekArr: ['日', '一', '二', '三', '四', '五', '六'],
     daysCountArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     loading: false,
@@ -33,7 +44,8 @@ Page({
     countIndex: 2,
     count: [1, 2, 3,],
     options: null,
-    formId: '',
+    imageList: [],
+    // formId: '',
   },
 
   /**
@@ -67,14 +79,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const {
-      options
-    } = this.data;
-    var today = new Date();
-    var y = today.getFullYear();
-    var mon = Util.checkTime(today.getMonth() + 1);
-    var d = today.getDate();
-    var i = today.getDay();
+
   },
 
   /**
@@ -125,69 +130,119 @@ Page({
     })
   },
 
-  // changecolor: function(e) {
-  //   let color = e.currentTarget.dataset.color;
-  //   this.setData({
-  //     color: color
-  //   })
-  // },
-  // getDateList: function (y, mon) {
-  //   var vm = this;
-  //   //如果是否闰年，则2月是29日
-  //   var daysCountArr = this.data.daysCountArr;
-  //   if (y % 4 == 0 && y % 100 != 0) {
-  //     this.data.daysCountArr[1] = 29;
-  //     this.setData({
-  //       daysCountArr: daysCountArr
-  //     });
-  //   }
-  //   var dateList = [];
-  //   dateList[0] = [];
-  //   var weekIndex = 0; //第几个星期
-  //   for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
-  //     var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
-  //     dateList[weekIndex].push({
-  //       value: y + '/' + (mon + 1) + '/' + (i + 1),
-  //       date: i + 1,
-  //       week: week
-  //     });
-  //     if (week == 0) {
-  //       weekIndex++;
-  //       dateList[weekIndex] = [];
-  //     }
-  //   }
-  //   vm.setData({
-  //     dateList: dateList
-  //   });
-  // },
-  
-  // getdays: function (day1, day2) {
-  //   var that = this;
-  //   var d1 = day1;
-  //   var d2 = day2;
-  //   d1 = d1.replace(/\-/g, "/");
-  //   d2 = d2.replace(/\-/g, "/");
-  //   var date1 = new Date(d1);
-  //   var date2 = new Date(d2);
-  //   var days = Math.ceil((date2 - date1) / (24 * 60 * 60 * 1000));
-  //   return days;
-  // },
+  getDateList: function (y, mon) {
+    var vm = this;
+    //如果是否闰年，则2月是29日
+    var daysCountArr = this.data.daysCountArr;
+    if (y % 4 == 0 && y % 100 != 0) {
+      this.data.daysCountArr[1] = 29;
+      this.setData({
+        daysCountArr: daysCountArr
+      });
+    }
+    var dateList = [];
+    dateList[0] = [];
+    var weekIndex = 0; //第几个星期
+    for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
+      var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
+      dateList[weekIndex].push({
+        value: y + '/' + (mon + 1) + '/' + (i + 1),
+        date: i + 1,
+        week: week
+      });
+      if (week == 0) {
+        weekIndex++;
+        dateList[weekIndex] = [];
+      }
+    }
+    vm.setData({
+      dateList: dateList
+    });
+  },
 
   submit: function (e) {
     console.log(e.detail.formId);
-  },
-  
+    var self = this;
+    let _access_token = '16_U3DKcQB7s0QvpWb88lcGsc-v2MqnS0hJWqUKMGqM3cKlNRA0iSwqlfJYQ2qoGC6cXUBg0nL4YpS6YuuHfCJRbIrQXronNBp8kKd-ktwtOwgAxc8Cw13Tobg-EdPA1nxyrLqKLHrIJXRq3WeVDRGeACAWKZ';
 
+    let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + _access_token;
+
+    let _jsonData = {
+      access_token: _access_token,
+      touser: e.detail.openid,
+      template_id: 'rDeY1jJEERWh5bXo4aZM0oCAkb2JtL9NP51oR90xTAs',
+      form_id: e.detail.formId,
+      page: "pages/index/index",
+      data: {
+        "keyword1": {
+          "value": "测试数据一",
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": "测试数据二",
+          "color": "#173177"
+        },
+        "keyword3": {
+          "value": "测试数据三",
+          "color": "#173177"
+        },
+        "keyword4": {
+          "value": "测试数据四",
+          "color": "#173177"
+        },
+        "keyword5": {
+          "value": "测试数据三",
+          "color": "#173177"
+        },
+        "keyword6": {
+          "value": "测试数据四",
+          "color": "#173177"
+        },
+      }
+    }
+    wx.request({
+      url: url,
+      data: data,
+      method: method,
+      success: function (res) {
+        console.log(res)
+      },
+      fail: function (err) {
+        console.log('request fail ', err);
+      },
+      complete: function (res) {
+        console.log("request completed!");
+      }
+    })
+  },
+
+  switch1Change: function (e) {
+    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
+  },
+
+
+  // dealFormIds: function (formId) {
+  //   let formIds = globaData.globaFormIds;
+  //   if (!formIds) formIds = [];
+  //   let data = {
+  //     formId: formId,
+  //     expire: parseInt(new Date().getTime() / 1000) + 604800
+  //   }
+  //   formIds.push(data);
+  //   globaData.globaFormIds = formIds;
+  // },
   formSubmit: function (e) {
     let formId = e.detail.formId;
-    this.dealFormIds(formId);
+    // this.dealFormIds(formId);
     let type = e.detail.target.dataset.type;
     // 忽略开发者工具里边的formId
     if (formId && formId !== 'the formId is a mock one') {
       wx.request({
         method: 'POST',
         url: '/api/collectFormId', // 该接口只用来收集formId
-        data: { formId: formId } // 只传了一个formId，因为openid和当前用户通常会事先在后台做一个关联，看具体业务了
+        data: {
+          formId: formId
+        } // 只传了一个formId，因为openid和当前用户通常会事先在后台做一个关联，看具体业务了
       });
     }
     console.log("推送碼為：" + e.detail.formId)
@@ -241,25 +296,18 @@ Page({
         how_long: '00:00',
         tips: [],
         imageList: [],
-        loading: false
+        loading: false,
+        formId: '',
       });
-      
+
       wx.navigateTo({
         url: '/pages/meeting/page/update/update?id=' + res.data.data.id,
       })
     });
   },
-  dealFormIds: function (formId) {
-    let formIds = app.globaData.globaFormIds;
-    if (!formIds) formIds = [];
-    let data = {
-      formId: formId,
-      expire: parseInt(new Date().getTime() / 1000) + 604800
-    }
-    formIds.push(data);
-    app.globaData.globaFormIds = formIds;
-  },
-  
+
+
+
   bindlinechange: function (e) {
     var height = e.detail.height;
     var heightRpx = e.detail.heightRpx;
@@ -297,28 +345,6 @@ Page({
     });
   },
 
-
-  // bindDestinationInput: function (e) {
-  //   let that = this;
-  //   let keywords = e.detail.value;
-  //   let myAmapFun = new amapFile.AMapWX({
-  //     key: Config.key.AMapWX
-  //   });
-  //   myAmapFun.getInputtips({
-  //     keywords: keywords,
-  //     location: '',
-  //     success: function (data) {
-  //       if (data && data.tips) {
-  //         let tips = data.tips;
-  //         that.setData({
-  //           tips: tips.filter(tip => tip.location.length > 0)
-  //         });
-  //       }
-
-  //     }
-  //   })
-  // },
-
   bindMapSelection: function (e) {
     console.log('hello world');
     var that = this
@@ -333,18 +359,18 @@ Page({
         mapObj.address = res.address;
         mapObj.markers = [];
         let marker = {
-          iconPath: "../../../../img/marker.png",
+          iconPath: "../../../../img/UI-3i@3x.png",
           longitude: res.longitude,
           latitude: res.latitude,
-          width: 20,
-          height: 30
+          width: 40,
+          height: 40,
         };
         mapObj.markers.push(marker);
         console.log(mapObj);
         that.setData({
           tips: [],
           hasLocation: true,
-          destination: res.name + ' - ' +res.address,
+          destination: res.name + ' - ' + res.address,
           mapObj: mapObj
         });
 
@@ -401,5 +427,31 @@ Page({
       current: current,
       urls: this.data.imageList
     })
-  }
+  },
+  // bindDestinationInput: function (e) {
+  //   let that = this;
+  //   let keywords = e.detail.value;
+  //   let myAmapFun = new amapFile.AMapWX({
+  //     key: Config.key.AMapWX
+  //   });
+  //   myAmapFun.getInputtips({
+  //     keywords: keywords,
+  //     location: '',
+  //     success: function (data) {
+  //       if (data && data.tips) {
+  //         let tips = data.tips;
+  //         that.setData({
+  //           tips: tips.filter(tip => tip.location.length > 0)
+  //         });
+  //       }
+
+  //     }
+  //   })
+  // },
+  // changecolor: function(e) {
+  //   let color = e.currentTarget.dataset.color;
+  //   this.setData({
+  //     color: color
+  //   })
+  // },
 })

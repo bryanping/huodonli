@@ -1,6 +1,8 @@
 page {
   background-color: white;
   font-family: "黑体";
+  color: #333;
+  font-size: 16px;
 }
 
 .container {
@@ -13,54 +15,42 @@ form {
   width: 100%;
 }
 
-.input {
-  font-size: 15px;
-  color: #333;
-  line-height:20px;
-}
-
-.colorpoint {
-  width:50rpx;
-  height:50rpx;
-  border-radius:50rpx;
-}
-
-.colorpointselected {
-  width:50rpx;
-  height:50rpx;
-  border-radius:50rpx;
-  -webkit-box-shadow:0rpx 0rpx 20rpx #333;
-}
-
 .section {
   display:flex;
   background-color: white;
   padding: 5rpx;
-  border-bottom: 2rpx solid #E6E6E5;
+  border-bottom: 2rpx solid #e3e3e2;
 }
 .section:first-child {
-  border-bottom: 2rpx solid #E6E6E5;
+  border-bottom: 16rpx solid #e3e3e2;
 }
 
 .section--text {
-  color: #333;
-  font-size: 15px;
 
-  padding: 10rpx 5rpx;
+  padding: 12rpx 5rpx;
 }
 
 .section--elem{
   flex:3 0;
-  padding: 10rpx 10rpx;
-  letter-spacing:2px;
+  padding: 12rpx 10rpx;
+
 }
-.section--elem1{
-  padding: 10rpx 10rpx;
-  margin-right:15%;
+.date{
+  padding: 12rpx 10rpx;
+
 }
-.section--elem2{
-  padding: 10rpx 0rpx;
-  margin-left:-12%;
+.time{
+  padding: 12rpx 0rpx;
+  margin-left:5%;
+
+}
+
+.howlong {
+  text-align: right;
+  font-size: 12px;
+  color: #8e8e93;
+  padding: 8px 20px;
+
 }
 
 .wrapper {
@@ -92,7 +82,7 @@ form {
 .search--box {
   text-align:center;
   background-color:white;
-  font-size:15px;
+
 }
 
 .overlay {
@@ -129,7 +119,6 @@ form {
 .user--name {
   text-align: center;
   font-size: 18rpx;
-  color: #333;
   text-overflow: ellipsis;
 }
 
@@ -139,18 +128,9 @@ form {
   align-items:flex-start;
 }
 
-.section--title {
-  color: #333;
-  font-size: 15px;
-
-  padding: 10rpx 5rpx;
-  flex:1 0;
-  text-align-last: center;
-}
 .nav_icon {
-  width: 30px;
-  height: 30px;
+ width: 35px;
+  height: 35px;
   position:relative;
-  top:2px;
-  right:5px;
+  padding:2px 0;
 }

@@ -57,8 +57,6 @@ Page({
       var selfMeetingData = resp1.data.data;
       this.getInvitedMeetingsByDate(y, mon).then(resp2 => {
         var invitedMeetingsData = resp2.data.data;
-        console.log("print invited");
-        console.log(invitedMeetingsData);
         for (var i = 0; i < invitedMeetingsData.length; i++) {
           invitedMeetingsData[i].type = 'invited';
         }
@@ -73,8 +71,10 @@ Page({
         });
         this.getDateList(y, mon - 1);
         this.mergeResult();
-        console.log(invitedMeetingsData)
-        console.log(selfMeetingData)
+        // console.log("print invited");
+        // console.log(invitedMeetingsData)
+        // console.log("print selfMeeting");
+        // console.log(selfMeetingData)
       });
     });
   },

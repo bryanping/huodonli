@@ -5,37 +5,63 @@
 
 
 <view class="title">
-  好友发起
+
+
+  <!--顶部导航栏-->
+  <view class="swiper-tab {{currentTab==0 ? 'color-1' : ''}} {{currentTab==1 ? 'color-2' : ''}} {{currentTab==2 ? 'color-3' : ''}}">
+
+    <view class="tab-item {{currentTab==0 ? 'one' : ''}} " data-current="0" bindtap="swichNav">
+      朋友圈</view>
+
+    <!-- <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
+          社群</view> -->
+        <!-- <view class="tab-item {{currentTab==2 ? 'three' : ''}}" data-current="2" bindtap="swichNav">
+          附近活动</view> -->
+  </view>
 </view>
-<view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'>  可关注朋友的活动获取资讯 </view>
+<!--内容主体-->
+<swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
+  <swiper-item>
+    <scroll-view scroll-y="true" class="scoll-h">
+      <view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'> 可关注朋友的活动获取资讯 </view>
 
-<view style='{{loader === true ? "display:none" : "display:block"}}' class="wrapper">
-  <block wx:for="{{resultArr}}" wx:key="key" wx:for-item="dateArr">
-    <view class='year'>
-      {{index}}
-    </view>
-
-    <block wx:for="{{dateArr}}" wx:key="key" wx:for-item="dateObj">
-      <view class="request__date">
-        {{index}} ({{weekArr[dateObj[0].date.W]}})
-      </view>
-
-      <view class="request__hr"></view>
-
-      <block class="wrapper" wx:for="{{dateObj}}" wx:key="key" wx:for-item="item">
-        <view class="request__container">
-          <view class="request__time">
-            {{item.start_time}}
+      <view style='{{loader === true ? "display:none" : "display:block"}}' class="wrapper">
+        <block wx:for="{{resultArr}}" wx:key="key" wx:for-item="dateArr">
+          <view class='year'>
+            {{index}}
           </view>
-          <!--<view class="request__content">-->
-          <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="request__content">
-            {{ item.title }}
-            <!-- </view>-->
-          </navigator>
-        </view>
-        <!--<view class="title2">社团活动</view>
+
+          <block wx:for="{{dateArr}}" wx:key="key" wx:for-item="dateObj">
+            <view class="request__date">
+              {{index}} ({{weekArr[dateObj[0].date.W]}})
+            </view>
+
+            <view class="request__hr"></view>
+
+            <block class="wrapper" wx:for="{{dateObj}}" wx:key="key" wx:for-item="item">
+              <view class="request__container">
+                <view class="request__time">
+                  {{item.start_time}}
+                </view>
+                <!--<view class="request__content">-->
+                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="request__content">
+                  {{ item.title }}
+                  <!-- </view>-->
+                </navigator>
+              </view>
+              <!--<view class="title2">社团活动</view>
   <view class="title3">附近活动</view>-->
-      </block>
-    </block>
-  </block>
-</view>
+            </block>
+          </block>
+        </block>
+      </view>
+    </scroll-view>
+  </swiper-item>
+   <!-- <swiper-item>
+          <view class="swiper-item">开发中敬请期待</view>
+        </swiper-item> -->
+        <!-- <swiper-item>
+          <view class="swiper-item">开发中敬请期待</view>
+        </swiper-item> -->
+</swiper>
+<official-account class="official"></official-account>

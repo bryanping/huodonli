@@ -1,4 +1,10 @@
 /* pages/meeting/meeting.wxss */
+.overlay {
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+}
+
 .selected_date {
   text-align: center;
   padding-top: 0px;
@@ -24,6 +30,14 @@
 .wrapper {
   padding: 0 30rpx;
 }
+
+.meeting__date {
+  font-size: 12px;
+  padding:10rpx 0;
+  margin-top:8px;
+  color: #333;
+}
+
 .meeting__container {
   margin: 15rpx 0;
   display: flex;
@@ -48,12 +62,7 @@
   text-align: center;
   color: #717175;
 }
-.meeting__date {
-  font-size: 12px;
-  padding:10rpx 0;
-  margin-top:8px;
-  color: #333;
-}
+
 
 .meeting__time {
   padding:3px 20rpx 0px 0px;
@@ -76,11 +85,7 @@
   color: white;
 }
 
-.overlay {
-  background-color: white;
-  width: 100%;
-  height: 100vh;
-}
+
 
 .spinner {
   padding-top: 200rpx;

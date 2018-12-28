@@ -1,18 +1,16 @@
 /**index.wxss**/
 
 .title {
-  color: white;
-  background-color: #4cd964;
   width: 100%;
-  padding: 2px 0 2px;
   text-align: center;
   font-size: 18px;
   font-weight: bold;
+   position:fixed;
 }
 
 .title2 {
   color: white;
-  background-color: rgb(0, 17, 255);
+  background-color: #4098ff;
   width: 100%;
   padding: 0px;
   text-align: center;
@@ -22,7 +20,7 @@
 
 .title3 {
   color: white;
-  background-color: rgb(255, 145, 19);
+  background-color: #ffad40;
   width: 100%;
   padding: 0px;
   text-align: center;
@@ -106,12 +104,6 @@
   display: inline-block;
 }
 
-.select_icon {
-  width: 30px;
-  height: 30px;
-  position: relative;
-  top: 6px;
-}
 
 .overlay {
   background-color: white;
@@ -126,4 +118,84 @@
   max-width: 100%;
   width: 200rpx;
   height: 200rpx;
+}
+
+.devent {
+  color: #aaa;
+}
+.scoll-h {
+  height: 100%;
+  }
+.spinner {
+  padding-top: 200rpx;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.swiper-tab {
+  display: flex;
+  flex-direction: row;
+  line-height: 40rpx;
+}
+.color-1{
+  border-bottom:3px solid #4cd964;
+}
+.color-2{
+  border-bottom:3px solid #4098ff;
+}
+.color-3{
+  border-bottom:3px solid #ffad40;
+}
+
+.tab-item {
+  width: 25%;
+  color: rgb(161, 161, 161);
+  text-align: center;
+  font-size: 17px;
+}
+
+.one {
+  color: rgb(75, 75, 75);
+  border-bottom: 10rpx solid #4cd964;
+}
+
+.two {
+  color: rgb(75, 75, 75);
+  font-weight:bold;
+  border-bottom: 10rpx solid #4098ff;
+}
+.three {
+  color: rgb(75, 75, 75);
+  font-weight:bold;
+  border-bottom: 10rpx solid #ffad40;
+}
+
+.swiper {
+  height: 80vh;
+  width: 100%;
+  color: white;
+  padding-top:56rpx;
+
+}
+
+.swiper-item {
+  background: #008cff;
+  text-align: center;
+  height: 17vh;
+  padding: 10vh 0 0;
+}
+
+.block {
+  flex: 2 2;
+  line-height: 10vh;
+}
+
+.official {
+  height:84px;
+  width:100%;
+  bottom:0rpx;
+  position:fixed;
 }

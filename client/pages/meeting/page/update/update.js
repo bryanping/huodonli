@@ -110,8 +110,8 @@ Page({
   onShareAppMessage: function(res) {
 
     return {
-      title: '分享 ' + this.data.title,
-      path: 'pages/share/share?id=' + this.data.id,
+      title: this.data.title,
+      path: 'pages/meeting/page/view/view?id=' + this.data.id,
       success: function(res) {
         // Forwarding successful
         console.log("分享成功");
