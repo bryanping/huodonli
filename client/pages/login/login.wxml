@@ -1,4 +1,18 @@
-
-<view class="container" >
+<!-- <view class="container" >
     <button bindtap='getUserInfo' class='btn-success' open-type="getUserInfo" bindgetuserinfo="getUserInfo">一款・串联朋友的行事历</button>
+</view> -->
+
+<view class="container">
+  <image class='logo' src='../../img/logo.png' />
+  <text>活动历</text>
+  <text class="title">一款串联朋友的行事历</text>
+  <text class="title">v1.2.0</text>
+<view class="page-head-line"></view>
+  <text class='chackin'>登入後該開發者將獲得以下權限</text>
+  <text class='info'>・取得你的公开资讯（昵称、大头照、地区及性别）</text>
+  <button bindtap='getUserInfo' class='button' open-type="getUserInfo" bindgetuserinfo="getUserInfo">允许</button>
+  <view class='foot'>
+ <text class='firm'>上海活动历创意服务有限公司</text>
+  <view class="bottom-line" />
+  </view>
 </view>

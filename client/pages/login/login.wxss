@@ -1,19 +1,68 @@
 /* pages/scope/scope.wxss */
+
 page {
   height: 100%;
 }
 
-.btn-success {
-background:linear-gradient(180deg, rgb(24, 179, 24), rgb(16, 211, 48));
-height:100vh;
-color:white;
-padding: 0vh 47vw 0 44vw;
-font-weight:bold;
-font-size:23px;
-border-radius:0px;
-letter-spacing:15px;
-writing-mode:vertical-lr;
+.button {
+  margin: 8vh;
+  color: white;
+  width:72vw;
+  background: linear-gradient(180deg, rgb(24, 179, 24), rgb(16, 211, 48));
 }
 
+.logo {
+  width: 200rpx;
+  height: 200rpx;
+  margin-top:5vh;
+}
 
+.title {
+  font-size: 15px;
+  color: rgb(161, 161, 161);
+}
+.page-head-line{
+  margin: 5vh;
+  width: 80vw;
+  height: 2rpx;
+  background-color: #D8D8D8;
+}
+.bottom-line{
+  margin: 10px;
+  width: 25vw;
+  height: 2rpx;
+  background-color: #D8D8D8;
+}
 
+.firm {
+  color: rgb(161, 161, 161);
+  font-size: 10px;
+}
+
+.chackin {
+  font-size: 18px;
+}
+
+.info {
+  color: rgb(161, 161, 161);
+  font-size: 12px;
+}
+
+.btn-success {
+  background: rgb(16, 211, 48);
+  height: 100vh;
+  color: white;
+  padding: 0vh 47vw 0 44vw;
+  font-weight: bold;
+  font-size: 23px;
+  border-radius: 0px;
+  letter-spacing: 15px;
+  writing-mode: vertical-lr;
+}
+
+.foot {
+  color: #1aad19;
+  font-size: 0;
+  position:fixed;
+  bottom: 2vh;
+}
