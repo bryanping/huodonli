@@ -5,6 +5,13 @@
   width: 100%;
 }
 
+.official {
+  height:84px;
+  width:100%;
+  bottom:0rpx;
+  position:fixed;
+}
+
 .avatar {
   width: 100rpx;
   height: 100rpx;
