@@ -27,7 +27,7 @@
       <view class="section">
         <view class="section--text">地点：</view>
         <view class='section--elem' bindtouchstart="bindMaptop">{{destination}}</view>
-          <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
+        <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
       </view>
 
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
@@ -35,23 +35,41 @@
       </view>
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-        <text class='section--text'>参与状态：{{AllMembers.length}}人参与</text>
+        <text class='section--text'>参与状态：{{AllMembers.length-1}}人参与</text>
         <text class='section--text'> </text>
       </view>
+<!-- 查看成員button -->
+      <!-- <view class="section">
+        <view class="section--who">
+        <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
+          <navigator url="/pages/meeting/page/join/join?id={{item.id}}" class="who">
+            查看參與成員
+          </navigator>
+          </block>
+        </view>
+      </view> -->
+
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
         <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
-          <navigator class='user' url="/pages/user/page/view/view?id={{item.id}}" >
+          <navigator class='user' url="/pages/user/page/view/view?id={{item.id}}">
             <image class='user--image' src='{{ item.avatarUrl || "../../../../img/avatar.png" }}'></image>
             <text class='user--name'>{{item.nickName}}</text>
           </navigator>
         </block>
       </view>
-      <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
-    </view>
-    
 
-    <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share' open-type="share" type="primary">分享好友</button>
-    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share'>参与行程</button>
+      <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
+
+    </view>
+
+    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class="button join">参与行程</button>
+
+    <image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></image>
+
+    <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' open-type="share " type="primary" class='button share'>分享好友</button>
+
+    <!-- <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='quit' src="/img/quit.png"></image> -->
+
 
     <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share' bindtap="actionSheetTap">关注活动</button>
   <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->

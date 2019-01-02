@@ -57,17 +57,34 @@ form {
   min-height: 87vh;
   box-sizing: border-box;
 }
+.aaaa {
+  height: 10vh;
+  box-sizing: border-box;
+}
 
-.share {
+.button{
   height:100rpx;
-  width:60%;
   font-size:40rpx;
   color:white;
   border-radius:100rpx;
   background:-webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
-  left:36%;
+  right:3%;
   bottom:50rpx;
   position:fixed;
+}
+.share {
+  width:79%;
+}
+.join {
+  width:94%;
+}
+
+.quit {
+  height: 35px;
+  width: 35px;
+  position:fixed;
+  bottom:32px;
+  left:5%;
 }
 
 .map_container {
@@ -133,4 +150,15 @@ form {
   height: 35px;
   position:relative;
   padding:2px 0;
+}
+
+.who {
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+  color: #8e8e93;
+}
+.section--who {
+  margin: 10rpx 0;
+  width:100%;
 }

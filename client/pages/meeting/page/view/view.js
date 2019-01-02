@@ -2,21 +2,24 @@ import Meeting from '../../../../models/Meeting.js';
 import Config from '../../../../config.js';
 import Util from '../../../../utils/util.js';
 
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: '',
-    title: '',
-    date: '',
-    start_time: '',
-    end_time: '',
-    how_long: '',
-    destination: '',
     color: '',
+    date: '',
+    destination: '',
+    end_time: '',
+    id: '',
     mapObj: undefined,
+    members: [],
+    start_time: '',
+    title: '',
+    how_long: '',
     submit_text: '',
     selectedDate: '',
     selectedWeek: '',
@@ -24,14 +27,15 @@ Page({
     curMonth: '',
     curDate: '',
     weekArr: ['日', '一', '二', '三', '四', '五', '六'],
-    members: [],
     AllMembers: [],
     showAllMembers: false,
     showAllText: 'Show all',
     showSubmit: false,
     loader: true,
     information: '',
+    resultArr: [],
     request: false
+    
   },
 
   /**
@@ -116,9 +120,8 @@ Page({
         mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
         loader: false,
         AllMembers: obj.members,
-        members: members
+        members: obj.members
       });
-      console.log(obj);
       
     });
   },
@@ -153,6 +156,7 @@ Page({
         
         loader: false
       });
+
  
   },
 
@@ -290,6 +294,33 @@ Page({
     wx.request(options);
   },
 
+  mergeResult: function () {
+    let meeting = this.data.meeting;
+    let dateList = this.data.dateList;
+    let nowDate = new Date().getTime();
+    let resultArr = {};
+    this.setData({
+      empty: meeting.length === 0
+    });
+    //控制顯示內容
+    for (let i = 0; i < meeting.length; i++) {
+      // If event is outdated
+      meeting[i].color = '5eda74';
+      meeting[i].date = Util.shatterDate(meeting[i].date);
+      let Y = meeting[i].date.Y;
+      let monthDay = meeting[i].date.M + '.' + meeting[i].date.D;
+      if (!resultArr[Y]) {
+        resultArr[Y] = {};
+      }
+      if (!resultArr[Y][monthDay]) {
+        resultArr[Y][monthDay] = [];
+      }
+      resultArr[Y][monthDay].push(meeting[i]);
+    }
+    this.setData({
+      resultArr: resultArr
+    });
+  },
 
   viewAllMembers: function (e){
     let showAllMembers = !this.data.showAllMembers;
