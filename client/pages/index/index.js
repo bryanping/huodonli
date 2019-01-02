@@ -105,7 +105,7 @@ Page({
     //控制顯示內容
     for (let i = 0; i < meeting.length; i++) {
       // If event is outdated
-      meeting[i].color = '5eda74';
+      meeting[i].color = '5eda74'; //綠色
       meeting[i].date = Util.shatterDate(meeting[i].date);
       let Y = meeting[i].date.Y;
       let monthDay = meeting[i].date.M + '.' + meeting[i].date.D;

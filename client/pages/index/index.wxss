@@ -174,7 +174,7 @@
 }
 
 .swiper {
-  height: 80vh;
+  height:95vh;
   width: 100%;
   color: white;
   padding-top:56rpx;
@@ -193,9 +193,4 @@
   line-height: 10vh;
 }
 
-.official {
-  height:84px;
-  width:100%;
-  bottom:0rpx;
-  position:fixed;
-}
+

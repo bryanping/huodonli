@@ -37,7 +37,6 @@ Page({
   onLoad: function(options) {
     let obj = Meeting.findById(options.id).then(resp => {
       let obj = resp.data.data;
-
       let members = [];
       if (obj.members.length > 7) {
         for (let i = 0; i < 7; i++) {
@@ -46,9 +45,7 @@ Page({
       } else {
         members = obj.members;
       }
-
       let how_long = Util.calculateHowLong(obj.start_time, obj.end_time);
-
       this.setData({
         id: obj.id,
         title: obj.title,
@@ -61,7 +58,7 @@ Page({
         mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
         loader: false,
         members: members,
-        AllMembers: obj.members
+        AllMembers: obj.members,
       });
     });
   },
@@ -136,7 +133,6 @@ Page({
 
   bindKeyInput: function(e) {
     let str = e.detail.value;
-
     this.setData({
       title: str
     });
@@ -148,19 +144,12 @@ Page({
     })
   },
 
-  changecolor: function(e) {
-    let color = e.currentTarget.dataset.color;
-    this.setData({
-      color: color
-    })
-  },
   
   formSubmit: function(e) {
     console.log('formSubmit', e.detail.value)
     if (this.data.loadingUpdate || this.data.loadingDelete) {
       return false;
     }
-
     let title = this.data.title;
     let color = this.data.color;
     let date = this.data.date;
@@ -169,7 +158,8 @@ Page({
     let mapObj = this.data.mapObj;
     let destination = this.data.destination;
     let id = this.data.id;
-
+let members = this.data.members;
+   
     let obj = {
       id: id,
       title: title,
@@ -183,12 +173,11 @@ Page({
 
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
-
     if (errors.length > 0) {
       wx.showToast({
         title: errors[0],
         icon: 'none',
-        duration: 1200
+        duration: 1200,
       });
       return;
     }
@@ -206,25 +195,23 @@ Page({
   },
 
   bindTime: function(e) {
-
     let time = new Date(this.data.date + ' ' + e.detail.value);
     time.setMinutes(time.getMinutes() + parseInt(this.data.how_long.split(':')[1]));
     time.setHours(time.getHours() + parseInt(this.data.how_long.split(':')[0]));
-
     this.setData({
       start_time: e.detail.value,
       end_time: Util.checkTime(time.getHours()) + ':' + Util.checkTime(time.getMinutes())
     });
-
   },
+
   bindEndTime: function(e) {
     let how_long = Util.calculateHowLong(this.data.start_time, e.detail.value);
-
     this.setData({
       end_time: e.detail.value,
       how_long: how_long
     });
   },
+
   bindHowLong: function(e) {
     let time = new Date(this.data.date + ' ' + this.data.start_time);
     time.setMinutes(time.getMinutes() + parseInt(e.detail.value.split(':')[1]));
@@ -234,27 +221,7 @@ Page({
       end_time: Util.checkTime(time.getHours()) + ':' + Util.checkTime(time.getMinutes())
     });
   },
-  bindDestinationInput: function(e) {
-    let that = this;
-    let keywords = e.detail.value;
-    let myAmapFun = new amapFile.AMapWX({
-      key: Config.key.AMapWX
-    });
-
-    myAmapFun.getInputtips({
-      keywords: keywords,
-      location: '',
-      success: function(data) {
-        if (data && data.tips) {
-          let tips = data.tips;
-          that.setData({
-            tips: tips.filter(tip => tip.location.length > 0)
-          });
-        }
-
-      }
-    })
-  },
+  
 
   bindMapSelection: function (e) {
     console.log('hello world');
@@ -267,11 +234,11 @@ Page({
         mapObj.latitude = res.latitude;
         mapObj.markers = [];
         let marker = {
-          iconPath: "../../../../img/marker.png",
+          iconPath: "../../../../img/UI-3i@3x.png",
           longitude: res.longitude,
           latitude: res.latitude,
-          width: 20,
-          height: 30
+          width: 25,
+          height: 25,
         };
         mapObj.markers.push(marker);
 
@@ -284,6 +251,7 @@ Page({
       }
     })
   },
+
   bindMaptop: function () {
     // console.log({
     //   longitude: this.data.mapObj.longitude,
@@ -298,6 +266,7 @@ Page({
       address: this.data.mapObj.address
     })
   },
+
   bindSearch: function(e) {
     let id = e.target.dataset.id;
     let elem = this.data.tips.find(s => s.id === id);
@@ -307,12 +276,11 @@ Page({
     mapObj.latitude = buff[1];
     mapObj.markers = [];
     let marker = {
-      
-      iconPath: "../../../../img/marker.png",
+      iconPath: "../../../../img/UI-3i@3x.png",
       longitude: buff[0],
       latitude: buff[1],
-      width: 20,
-      height: 28
+      width: 25,
+      height: 25,
     };
     mapObj.markers.push(marker);
     if (elem && elem.name) {
@@ -322,8 +290,8 @@ Page({
         mapObj: mapObj,
       });
     }
-
   },
+
   getDateList: function(y, mon) {
     var vm = this;
     //如果是否闰年，则2月是29日
@@ -353,6 +321,7 @@ Page({
       dateList: dateList
     });
   },
+
   onDelete: function() {
     if (this.data.loadingUpdate || this.data.loadingDelete) {
       return false;

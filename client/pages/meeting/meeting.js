@@ -162,17 +162,17 @@ Page({
     });
     var mettings = []
     this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
-      mettings.push(...resp.data.data)
+      mettings.push(...resp.data.data);
       return this.getInvitedMeetingsByDate(curYear, curMonth)
     }).then((resp) => {
-      mettings.push(...resp.data.data)
+      mettings.push(...resp.data.data);
       this.setData({
         meeting: mettings,
-        loader: false
+        loader: false,
       });
-
-      this.getDateList(curYear, curMonth - 1);
       this.mergeResult();
+      this.getDateList(curYear, curMonth - 1);
+      
     })
   },
 
@@ -180,7 +180,6 @@ Page({
     if (this.data.loader) {
       return false;
     }
-
     var vm = this;
     var curYear = vm.data.curYear;
     var curMonth = Util.checkTime(vm.data.curMonth, true);
@@ -194,12 +193,12 @@ Page({
       curYear: curYear,
       curMonth: curMonth,
     });
-    var mettings = []
+    var mettings = [];
     this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
-      mettings.push(...resp.data.data)
+      mettings.push(...resp.data.data);
       return this.getInvitedMeetingsByDate(curYear, curMonth)
     }).then((resp) => {
-      mettings.push(...resp.data.data)
+      mettings.push(...resp.data.data);
       this.setData({
         meeting: mettings,
         loader: false
@@ -208,6 +207,7 @@ Page({
       this.mergeResult ();
     })
   },
+  
   getSelfMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
@@ -245,7 +245,6 @@ Page({
     let dateList = this.data.dateList;
     let nowDate = new Date();
     console.log("meeting length =" + meeting.length);
-
     for (let i = 0; i < meeting.length; i++) {
       console.log(meeting[i]);
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) { // overdued meeting

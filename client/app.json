@@ -8,7 +8,9 @@
     "pages/meeting/page/view/view",
     "pages/meeting/page/update/update",
     "pages/share/share",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/user/page/join/join",
+    "pages/meeting/page/join/join"
   ],
   "permission": {
     "scope.userLocation": {
@@ -43,19 +45,17 @@
         "selectedIconPath": "img/UI-5i@3x.png"
       },
       {
-        "pagePath": "pages/user/user",   
+        "pagePath": "pages/user/user",
         "text": "会员",
         "iconPath": "img/UI-2@3x.png",
         "selectedIconPath": "img/UI-2i@3x.png"
       }
-      
     ],
     "color": "#000000",
     "selectedColor": "#0022ff",
     "borderStyle": "white",
     "position": "bottom"
   },
-  
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 10000,
