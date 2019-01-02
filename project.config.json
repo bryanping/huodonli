@@ -1,8 +1,8 @@
 {
-	"client": "client/",
-	"svr": "server/",
-	"miniprogramRoot": "client/",
-	"qcloudRoot": "server/",
+	"client": "./client",
+	"svr": "./server",
+	"miniprogramRoot": "./client",
+	"qcloudRoot": "./server",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
@@ -13,7 +13,7 @@
 	},
 	"appid": "wx9814cfc5cf43159d",
 	"projectname": "0815001",
-	"libVersion": "1.2.4",
+	"libVersion": "1.6.4",
 	"compileType": "miniprogram",
 	"condition": {
 		"search": {
@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
