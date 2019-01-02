@@ -37,6 +37,7 @@ Page({
         fail(error) {
           console.log('request error');
           console.log(error);
+          
         }
       })
     });
