@@ -1,0 +1,29 @@
+<!--client/pages/user/page/join/join.wxml-->
+
+<view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+  <image class='spinner' src='../../../../img/loader.gif'></image>
+</view>
+
+<view style='{{loader === true ? "display:none" : "display:block"}}' class='container'>
+ 
+    <view class='wrapper'>
+   
+      
+      <!-- <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
+        <text class='section--text'>参与状态：{{AllMembers.length-1}}人参与</text>
+        <text class='section--text'> </text>
+      </view> -->
+
+
+      <view  class='section members'>
+        <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
+          <navigator class='user' url="/pages/user/page/view/view?id={{item.id}}" >
+            <image class='user--image' src='{{ item.avatarUrl || "../../../../img/avatar.png" }}'></image>
+            <text class='user--name'>{{item.nickName}}</text>
+          </navigator>
+        </block>
+      </view>
+    </view>
+
+</view>
+
