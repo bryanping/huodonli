@@ -31,10 +31,30 @@
         <view class="section--text">地点</view>
         <input class="section--elem input1" placeholder="请输入目的地" placeholder-style="color: #d3d3d4" value="{{destination}}" bindtouchstart="bindMapSelection" />
       </view>
-      <!-- <view class="search--box">
-        <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">
-          {{i.name}}
-        </view>
+      
+
+      <view class="section">
+        <switch bindchange="switch1Change" />
+        <view class="limit--text">公开活动</view>
+        <view class='limit--text'>｜ 人数</view>
+        <switch bindchange="switch1Change" />
+        <view class='limit--text'>不限制</view>
+      </view>
+
+      <view class="section">
+        <view class="section--text">举办方</view>
+        <view class="limit--text">"個人或群"</view>
+      </view>
+
+      <view class="section">
+        <view class="section--text">类别：</view>
+        <view class="limit--text">"選擇器"</view>
+      </view>
+
+      <!-- <view class="section">
+        <view class='section--text'>费用</view>
+        <switch bindchange="switch1Change" />
+        <view class='limit--text'>免费</view>
       </view> -->
 
       <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container">
@@ -50,6 +70,14 @@
       <image class='{{color=="5edd74"?"colorpointselected":"colorpoint"}}' data-color='5edd74' catchtap='changecolor' src='/img/colorpoint/5edd74.png' mode='aspectFit'></image>
       </view>
     </view> -->
+
+<!-- <view class="search--box">
+        <view bindtouchstart="bindSearch" data-id="{{i.id}}" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:key="{{i.id}}" wx:for-item="i">
+          {{i.name}}
+        </view>
+      </view> -->
+
+
       <!-- <view class="weui-cells">
         <view class="weui-cell">
           <view class="weui-cell__bd">

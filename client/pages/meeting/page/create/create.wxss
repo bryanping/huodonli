@@ -9,12 +9,15 @@ page {
   height: auto;
   position: relative;
 }
+
 switch{
-    zoom: .5;
+  zoom:.6;
+  padding:14px 10px;
 }
 
 form {
   width: 100%;
+  color: #333
 }
 
 
@@ -80,9 +83,13 @@ form {
 }
 
 .section--text {
-  color:  #333;
   font-size: 16px;
   padding: 7px 5px;
+}
+
+.limit--text {
+  font-size: 16px;
+  padding: 7px 0;
 }
 
 .section--elem {
@@ -111,23 +118,19 @@ form {
 } */
 
 .wrapper {
-  min-height: 100vh;
-  margin-bottom: -50px;
-  padding-bottom: 50px;
+  min-height: 92vh;
   box-sizing: border-box;
 }
 
 .submit {
   display: block;
-  height: 50px;
   width: 100%;
-  padding: 0;
   font-size: 20px;
   color: white;
-  border: 0;
   border-radius: 0;
   background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
-  padding-top: 0px;
+  bottom:0;
+  position:fixed;
 }
 
 .map_container {
