@@ -5,11 +5,16 @@
     <view class='wrapper'>
       <view class="section">
         <view class="section--text">創建社群</view>
-        <textarea auto-height bindlinechange="bindlinechange" placeholder=" 请输入行程资讯 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
+      </view>
+
+      <view class="section">
+        <view class="section--text">社群可供您给特定族群发送活动行程
+与个人行程做区隔</view>
       </view>
 
       <view class="section">
         <view class="section--text">社群群名</view>
+        <textarea placeholder="请输入群名稱" placeholder-style="color: #d3d3d4" class="section--text" name="title" bindinput="bindKeyInput" value="{{title}}" />
       </view>
 
       <view class="section">
@@ -19,7 +24,6 @@
       <view class="section border">
         <view class="section--text">地点範圍</view>
       </view>
-
 
       <view class="section">
         <view class="limit--text">關注權限</view>
@@ -34,13 +38,9 @@
 
       <view class="section">
         <view class="section--text">社群簡介</view>
-        <textarea auto-height bindlinechange="bindlinechange" placeholder=" 请输入行程资讯 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
+        <textarea auto-height bindlinechange="bindlinechange" placeholder=" 请输入社群簡介" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
       </view>
-      <!-- <view class="section">
-        <view class='section--text'>费用</view>
-        <switch bindchange="switch1Change" />
-        <view class='limit--text'>免费</view>
-      </view> -->
+
 
 
       <!-- <view class="weui-cells">

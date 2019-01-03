@@ -1,4 +1,4 @@
-/* client/pages/group/create.wxss */
+/* pages/meeting/page/create/create.wxss */
 
 page {
   background-color: #ffffff;

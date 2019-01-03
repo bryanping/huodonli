@@ -1,9 +1,5 @@
 // client/pages/group/create.js
 
-import Meeting from '../../../../models/Meeting';
-import Util from '../../../../utils/util.js';
-import Config from '../../../../config.js';
-
 var sourceType = [
   ['camera'],
   ['album'],
@@ -28,14 +24,13 @@ Page({
     how_long: '00:00',
     destination: '',
     color: 'ff6280',
-    
+
     tips: [],
     selectedWeek: '',
     curYear: '',
     curMonth: '',
     curDate: '',
-    weekArr: ['日', '一', '二', '三', '四', '五', '六'],
-    daysCountArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+
     loading: false,
     sourceTypeIndex: 2,
     sourceType: ['拍照', '相册', '拍照或相册'],
@@ -130,35 +125,6 @@ Page({
     })
   },
 
-  getDateList: function (y, mon) {
-    var vm = this;
-    //如果是否闰年，则2月是29日
-    var daysCountArr = this.data.daysCountArr;
-    if (y % 4 == 0 && y % 100 != 0) {
-      this.data.daysCountArr[1] = 29;
-      this.setData({
-        daysCountArr: daysCountArr
-      });
-    }
-    var dateList = [];
-    dateList[0] = [];
-    var weekIndex = 0; //第几个星期
-    for (var i = 0; i < vm.data.daysCountArr[mon]; i++) {
-      var week = new Date(y + '/' + (mon + 1) + '/' + (i + 1)).getDay();
-      dateList[weekIndex].push({
-        value: y + '/' + (mon + 1) + '/' + (i + 1),
-        date: i + 1,
-        week: week
-      });
-      if (week == 0) {
-        weekIndex++;
-        dateList[weekIndex] = [];
-      }
-    }
-    vm.setData({
-      dateList: dateList
-    });
-  },
 
   submit: function (e) {
     console.log(e.detail.formId);
