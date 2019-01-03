@@ -14,7 +14,7 @@ page {
 .logo {
   width: 200rpx;
   height: 200rpx;
-  margin-top:5vh;
+  margin-top:15vh;
 }
 
 .title {
