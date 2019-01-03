@@ -13,8 +13,8 @@
     <view class="tab-item {{currentTab==0 ? 'one' : ''}} " data-current="0" bindtap="swichNav">
       朋友圈</view>
 
-    <!-- <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
-          社群</view> -->
+    <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
+          社群</view>
         <!-- <view class="tab-item {{currentTab==2 ? 'three' : ''}}" data-current="2" bindtap="swichNav">
           附近活动</view> -->
   </view>
@@ -57,9 +57,9 @@
       </view>
     </scroll-view>
   </swiper-item>
-   <!-- <swiper-item>
+   <swiper-item>
           <view class="swiper-item">开发中敬请期待</view>
-        </swiper-item> -->
+        </swiper-item>
         <!-- <swiper-item>
           <view class="swiper-item">开发中敬请期待</view>
         </swiper-item> -->
