@@ -1,0 +1,73 @@
+<!--client/pages/group/create.wxml-->
+
+<view class='container'>
+  <form bindsubmit="formSubmit" report-submit='true'>
+    <view class='wrapper'>
+      <view class="section">
+        <view class="section--text">創建社群</view>
+        <textarea auto-height bindlinechange="bindlinechange" placeholder=" 请输入行程资讯 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
+      </view>
+
+      <view class="section">
+        <view class="section--text">社群群名</view>
+      </view>
+
+      <view class="section">
+        <view class='section--text'>社群分類</view>
+      </view>
+
+      <view class="section border">
+        <view class="section--text">地点範圍</view>
+      </view>
+
+
+      <view class="section">
+        <view class="limit--text">關注權限</view>
+        <radio-group name="radio">
+          <label>
+            <radio value="radio1" />自由關注</label>
+          <label>
+            <radio value="radio2" />需要審批</label>
+        </radio-group>
+      </view>
+
+
+      <view class="section">
+        <view class="section--text">社群簡介</view>
+        <textarea auto-height bindlinechange="bindlinechange" placeholder=" 请输入行程资讯 | 可支持多行输入" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
+      </view>
+      <!-- <view class="section">
+        <view class='section--text'>费用</view>
+        <switch bindchange="switch1Change" />
+        <view class='limit--text'>免费</view>
+      </view> -->
+
+
+      <!-- <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">点击可预览选好的图片</view>
+                <view class="weui-uploader__info">{{imageList.length}}/{{count[countIndex]}}</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                  <block wx:key='' wx:for="{{imageList}}" wx:for-item="image">
+                    <view class="weui-uploader__file">
+                      <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view> -->
+    </view>
+    <button formType="submit" loading="{{loading}}" class='submit'>保存</button>
+  </form>
+</view>
