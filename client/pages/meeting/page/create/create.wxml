@@ -34,10 +34,10 @@
       
 
       <view class="section">
-        <switch bindchange="switch1Change" />
+        <switch class='switch' bindchange="switch1Change" />
         <view class="limit--text">公开活动</view>
         <view class='limit--text'>｜ 人数</view>
-        <switch bindchange="switch1Change" />
+        <switch class='switch' bindchange="switch1Change" />
         <view class='limit--text'>不限制</view>
       </view>
 
@@ -53,7 +53,7 @@
 
       <!-- <view class="section">
         <view class='section--text'>费用</view>
-        <switch bindchange="switch1Change" />
+        <switch class='switch' bindchange="switch1Change" />
         <view class='limit--text'>免费</view>
       </view> -->
 

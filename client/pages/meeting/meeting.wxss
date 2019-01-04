@@ -7,24 +7,20 @@
 
 .selected_date {
   text-align: center;
-  padding-top: 0px;
 }
 
 .selected_date--text {
-  margin:5px 10px;
-  margin-bottom: 0px;
-  font-size:18px;
-  
+  margin:0 30rpx;
 }
 
 .selected_date>view {
   display: inline-block;
 }
 .select_icon {
-  width: 30px;
-  height: 30px;
+  width: 50rpx;
+  height: 50rpx;
   position:relative;
-  top:8px;
+  top:11rpx;
 }
 
 .wrapper {
@@ -32,7 +28,7 @@
 }
 
 .meeting__date {
-  font-size: 12px;
+  font-size:25rpx;
   padding:10rpx 0;
   margin-top:8px;
   color: #333;
@@ -65,27 +61,24 @@
 
 
 .meeting__time {
-  padding:3px 20rpx 0px 0px;
+  padding:10rpx 15rpx 0 0;
   flex:1;
   color:#c7c7cc;
-  font-size:30rpx;
+  font-size:16px;
 }
 
 .meeting__content {
-  flex: 7 0;
+  flex: 7;
   text-align: center;
   font-weight: bold;
   font-size:16px;
-  padding: 5px;
-  box-sizing: border-box;
+  padding: 10rpx;
   border-radius: 7px;
   text-overflow:ellipsis;
   white-space:nowrap;
   overflow:hidden;
   color: white;
 }
-
-
 
 .spinner {
   padding-top: 200rpx;

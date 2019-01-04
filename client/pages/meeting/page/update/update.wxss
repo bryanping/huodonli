@@ -69,7 +69,9 @@ form {
 .dest{
   flex:3 0;
   padding: 5rpx 10rpx;
-
+text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
 }
 
 .date{
@@ -213,6 +215,8 @@ form {
   height: 35px;
   position:relative;
   right:15rpx;
+  padding:0 0 0 15rpx;
+
 }
 
 .share {
