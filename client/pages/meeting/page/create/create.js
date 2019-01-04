@@ -64,7 +64,8 @@ Page({
       mapObj: false,
       how_long: '00:00',
       imageList: '',
-      tips: []
+      tips: [],
+      address: ''
     });
   },
 
@@ -257,6 +258,7 @@ Page({
     let mapObj = this.data.mapObj;
     let destination = this.data.destination;
     let imageList = this.data.imageList;
+    let address = this.data.address
     let obj = {
       title: title,
       color: color,
@@ -298,6 +300,7 @@ Page({
         imageList: [],
         loading: false,
         formId: '',
+        address: '',
       });
 
       wx.navigateTo({
@@ -371,6 +374,7 @@ Page({
           tips: [],
           hasLocation: true,
           destination: res.name + ' - ' + res.address,
+          address: res.address,
           mapObj: mapObj
         });
 
