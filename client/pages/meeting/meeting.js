@@ -144,6 +144,10 @@ Page({
     });
   },
 
+
+
+
+
   preMonth: function() {
     if (this.data.loader) {
       return false;
@@ -154,25 +158,24 @@ Page({
     curYear = curMonth - 1 ? curYear : curYear - 1;
     curMonth = curMonth - 1 ? curMonth - 1 : 12;
     curMonth = Util.checkTime(curMonth);
-
     this.setData({
       loader: true,
       curYear: curYear,
-      curMonth: curMonth
+      curMonth: curMonth,
+      
     });
     var mettings = []
     this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
-      mettings.push(...resp.data.data);
+      mettings.push(...resp.data.data)
       return this.getInvitedMeetingsByDate(curYear, curMonth)
     }).then((resp) => {
-      mettings.push(...resp.data.data);
+      mettings.push(...resp.data.data)
       this.setData({
         meeting: mettings,
-        loader: false,
+        loader: false
       });
-      this.mergeResult();
       this.getDateList(curYear, curMonth - 1);
-      
+      this.mergeResult();
     })
   },
 
@@ -183,11 +186,9 @@ Page({
     var vm = this;
     var curYear = vm.data.curYear;
     var curMonth = Util.checkTime(vm.data.curMonth, true);
-
     curYear = curMonth + 1 === 13 ? curYear + 1 : curYear;
     curMonth = curMonth + 1 === 13 ? 1 : curMonth + 1;
     curMonth = Util.checkTime(curMonth);
-
     this.setData({
       loader: true,
       curYear: curYear,
@@ -195,10 +196,10 @@ Page({
     });
     var mettings = [];
     this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
-      mettings.push(...resp.data.data);
+      mettings.push(...resp.data.data)
       return this.getInvitedMeetingsByDate(curYear, curMonth)
     }).then((resp) => {
-      mettings.push(...resp.data.data);
+      mettings.push(...resp.data.data)
       this.setData({
         meeting: mettings,
         loader: false
