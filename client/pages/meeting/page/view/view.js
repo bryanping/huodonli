@@ -34,8 +34,9 @@ Page({
     loader: true,
     information: '',
     resultArr: [],
-    request: false
-    
+    request: false,
+    isopen: true,
+    state: "关注",
   },
 
   /**
@@ -57,7 +58,7 @@ Page({
         });
       }
       let obj = resp.data.data;
-      
+
       let submit_text = '';
       switch (obj.user) {
         case Meeting.USER_CREATOR:
@@ -78,10 +79,10 @@ Page({
       // </DEBUG ONLY>
 
       let members = [];
-      if(obj.members.length > 7){
-          for(let i = 0;  i < 7; i++){
-            members.push(obj.members[i]);
-          }
+      if (obj.members.length > 7) {
+        for (let i = 0; i < 7; i++) {
+          members.push(obj.members[i]);
+        }
       } else {
         members = obj.members;
       }
@@ -122,7 +123,7 @@ Page({
         AllMembers: obj.members,
         members: obj.members
       });
-      
+
     });
   },
 
@@ -130,9 +131,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+
   },
-  
+
 
   /**
    * 生命周期函数--监听页面显示
@@ -146,46 +147,46 @@ Page({
     var mon = Util.checkTime(today.getMonth() + 1);
     var d = today.getDate();
     var i = today.getDay();
-    
-    this.setData({
-        curYear: y,
-        curMonth: mon,
-        curDate: d,
-        selectedDate: y + '/' + mon + '/' + d,
-        selectedWeek: this.data.weekArr[i],
-        
-        loader: false
-      });
 
- 
+    this.setData({
+      curYear: y,
+      curMonth: mon,
+      curDate: d,
+      selectedDate: y + '/' + mon + '/' + d,
+      selectedWeek: this.data.weekArr[i],
+
+      loader: false
+    });
+
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   // actionSheetTap: function () {
@@ -213,7 +214,7 @@ Page({
   //     }   
   //   })
   // },
-  
+
   /**
    * 用户点击右上角分享
    */
@@ -259,14 +260,32 @@ Page({
     })
   },
 
+  buttontap: function () {
+    if (this.data.isopen) {
+      this.setData({
+
+        state: "已关注"
+
+      })
+    } else {
+      this.setData({
+
+        state: "关注"
+
+      })
+    }
+    this.data.isopen = !this.data.isopen
+  },
+
+
   listenerActionSheet: function () {
     var self = this;
     self.setData({
       actionSheetHidden: !self.data.actionSheetHidden
-      
+
     })
   },
-  
+
   formSubmit: function (e) {
     let id = this.data.id;
     let token = getApp().globalData.token;
@@ -276,10 +295,10 @@ Page({
     let options = {
       url: Config.service.acceptInvite,
       method: "post",
-      data: { 
-        token: token, 
-        event_id: id 
-        },
+      data: {
+        token: token,
+        event_id: id
+      },
       login: true,
       success(result) {
         console.log('request success', result)
@@ -322,9 +341,9 @@ Page({
     });
   },
 
-  viewAllMembers: function (e){
+  viewAllMembers: function (e) {
     let showAllMembers = !this.data.showAllMembers;
-    if (showAllMembers){
+    if (showAllMembers) {
       this.setData({
         members: this.data.AllMembers,
         showAllText: '隐藏',

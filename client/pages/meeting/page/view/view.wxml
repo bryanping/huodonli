@@ -8,6 +8,12 @@
       <view class="section">
         <view class="section--text">资讯：</view>
         <text auto-height class='section--elem'>{{title}}</text>
+
+      </view>
+
+      <view class="section">
+        <view class="detail">關注數: XXX 人</view>
+        <view class="detail">类别：</view>
       </view>
 
       <view class="section">
@@ -30,24 +36,29 @@
         <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
       </view>
 
+      <!-- 公開狀態、參與人數 -->
+      <view class="section">
+        <view class="limit--text">{公开活动}</view>
+        <view class='limit--text'>
+          ｜ 人數：{{AllMembers.length-1}}人参与/∞
+        </view>
+
+        <!-- 查看成員text -->
+
+        <navigator class="showmenber" url="/pages/user/page/join/join?id={{item.id}}">
+          show all
+        </navigator>
+      </view>
+
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
         <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="16" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
       </view>
-
-      <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-        <text class='section--text'>参与状态：{{AllMembers.length-1}}人参与</text>
-        <text class='section--text'> </text>
+      <!-- 參與人不再直接顯示在畫面上，要到上面的show all 裡面點開查看 -->
+      <!-- <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
+        <text class='section--text'>
+        参与状态：{{AllMembers.length-1}}人参与
+        </text>
       </view>
-<!-- 查看成員button -->
-      <!-- <view class="section">
-        <view class="section--who">
-        <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
-          <navigator url="/pages/meeting/page/join/join?id={{item.id}}" class="who">
-            查看參與成員
-          </navigator>
-          </block>
-        </view>
-      </view> -->
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
         <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
@@ -57,10 +68,20 @@
           </navigator>
         </block>
       </view>
-
-      <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
-
+      
+      <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button> -->
+   
     </view>
+
+<!-- 如果是社群即顯示社群頭像和名稱 -->
+    <view class="organizer">
+      <image class="organizer--image" src="/img/logo.png" />
+      <text class="organizer--name">举办方暱稱</text>
+
+      <button open-type='' class="follow"  bindtap="buttontap">{{state}}</button>
+    </view>
+
+
 
     <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class="button join">参与行程</button>
 
@@ -68,8 +89,13 @@
 
     <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' open-type="share " type="primary" class='button share'>分享好友</button>
 
-    <!-- <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='quit' src="/img/quit.png"></image> -->
 
+    <!-- 退出行程功能 -->
+    <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='quit' src="/img/quit.png"></image>
+
+
+    <!-- 未來的功能-->
+    <!--可生成照片傳送到朋友圈 -->
 
     <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share' bindtap="actionSheetTap">关注活动</button>
   <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
