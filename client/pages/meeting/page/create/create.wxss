@@ -1,6 +1,7 @@
 /* pages/meeting/page/create/create.wxss */
 
 page {
+  color: #333;
   background-color: white;
   font-family: "黑体";
   font-size: 35rpx;
@@ -18,7 +19,6 @@ switch {
 
 form {
   width: 100%;
-  color: #333;
 }
 
 .input1 {
@@ -26,12 +26,10 @@ form {
   text-align: left;
   min-height: 25rpx;
   height: 40rpx;
-  color: #333;
   padding:15rpx 10rpx;
 }
 
 .input {
-  color: #333;
   line-height: 20rpx;
   /* height: 150rpx; */
   padding:15rpx 10rpx;
