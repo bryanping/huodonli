@@ -10,7 +10,6 @@
     "pages/share/share",
     "pages/login/login",
     "pages/user/page/join/join",
-    "pages/meeting/page/join/join",
     "pages/group/create"
   ],
   "permission": {
