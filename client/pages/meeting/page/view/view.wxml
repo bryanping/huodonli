@@ -51,7 +51,7 @@
       </view>
 
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
-        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="16" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
+        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
       </view>
       <!-- 參與人不再直接顯示在畫面上，要到上面的show all 裡面點開查看 -->
       <!-- <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>

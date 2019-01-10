@@ -365,8 +365,8 @@ Page({
           iconPath: "../../../../img/UI-3i@3x.png",
           longitude: res.longitude,
           latitude: res.latitude,
-          width: 40,
-          height: 40,
+          width: 25,
+          height: 25,
         };
         mapObj.markers.push(marker);
         console.log(mapObj);
@@ -395,11 +395,11 @@ Page({
     mapObj.latitude = buff[1];
     mapObj.markers = [];
     let marker = {
-      iconPath: "../../../../img/marker.png",
+      iconPath: "../../../../img/UI-3i@3x.png",
       longitude: buff[0],
       latitude: buff[1],
-      width: 20,
-      height: 30
+      width: 25,
+      height: 25
     };
     mapObj.markers.push(marker);
     if (elem && elem.name) {

@@ -173,6 +173,44 @@ Page({
     }
   },
 
+  openActionSheet(e) {
+    var self = this;
+    self.setData({
+      actionSheetHidden: !self.data.actionSheetHidden
+    });
+
+  },
+
+  bindMaptop: function () {
+    wx.openLocation({
+      longitude: Number(this.data.mapObj.longitude),
+      latitude: Number(this.data.mapObj.latitude),
+      name: this.data.destination,
+      address: this.data.mapObj.address
+    })
+  },
+
+  buttontap: function () {
+    if (this.data.isopen) {
+      this.setData({
+        state: "已关注"
+      })
+    } else {
+      this.setData({
+        state: "关注"
+      })
+    }
+    this.data.isopen = !this.data.isopen
+  },
+
+  listenerActionSheet: function () {
+    var self = this;
+    self.setData({
+      actionSheetHidden: !self.data.actionSheetHidden
+
+    })
+  },
+
   formSubmit: function (e) {
     let id = this.data.id;
     let token = getApp().globalData.token;
@@ -199,6 +237,7 @@ Page({
     }
     wx.request(options);
   },
+  
   viewAllMembers: function (e) {
     let showAllMembers = !this.data.showAllMembers;
     if (showAllMembers) {
@@ -219,12 +258,5 @@ Page({
       });
     }
   },
-  bindMaptop: function () {
-    wx.openLocation({
-      longitude: Number(this.data.mapObj.longitude),
-      latitude: Number(this.data.mapObj.latitude),
-      name: this.data.destination,
-      address: this.data.mapObj.address
-    })
-  },
+
 })

@@ -147,7 +147,6 @@ Page({
     var mon = Util.checkTime(today.getMonth() + 1);
     var d = today.getDate();
     var i = today.getDay();
-
     this.setData({
       curYear: y,
       curMonth: mon,
@@ -157,8 +156,6 @@ Page({
 
       loader: false
     });
-
-
   },
 
   /**
@@ -222,7 +219,7 @@ Page({
 
     return {
       title: this.data.title,
-      path: 'pages/meeting/page/view/view?id=' + this.data.id,
+      path: 'pages/share/share?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful
         console.log("Share successfull");
@@ -234,7 +231,7 @@ Page({
         console.log(res);
       }
     }
-    console.log('pages/meeting/page/view/view?id=' + this.data.id)
+    console.log('pages/share/share?id=' + this.data.id)
   },
 
   openActionSheet(e) {

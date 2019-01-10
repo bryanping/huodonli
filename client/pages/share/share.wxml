@@ -28,7 +28,7 @@
       </view>
 
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
-        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="14" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
+        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
       </view>
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
