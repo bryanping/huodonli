@@ -1,15 +1,5 @@
 // client/pages/group/create.js
 
-var sourceType = [
-  ['camera'],
-  ['album'],
-  ['camera', 'album']
-]
-var sizeType = [
-  ['compressed'],
-  ['original'],
-  ['compressed', 'original']
-]
 Page({
 
   /**
@@ -24,13 +14,12 @@ Page({
     how_long: '00:00',
     destination: '',
     color: 'ff6280',
-
+    
     tips: [],
     selectedWeek: '',
     curYear: '',
     curMonth: '',
     curDate: '',
-
     loading: false,
     sourceTypeIndex: 2,
     sourceType: ['拍照', '相册', '拍照或相册'],
@@ -39,6 +28,7 @@ Page({
     countIndex: 2,
     count: [1, 2, 3,],
     options: null,
+    value: 'radio1',
     imageList: [],
     // formId: '',
   },
@@ -56,9 +46,7 @@ Page({
       date: date.getFullYear() + '-' + Util.checkTime(date.getMonth() + 1) + '-' + Util.checkTime(date.getDate()),
       destination: '',
       color: 'ff6280',
-      
-      how_long: '00:00',
-      imageList: '',
+      value: 'radio1',
       tips: []
     });
   },
@@ -304,6 +292,10 @@ Page({
       current: current,
       urls: this.data.imageList
     })
+  },
+
+  bindTextAreaBlur: function (e) {
+    console.log(e.detail.value)
   },
   
 })

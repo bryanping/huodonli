@@ -4,41 +4,42 @@
   <form bindsubmit="formSubmit" report-submit='true'>
     <view class='wrapper'>
       <view class="section">
-        <view class="section--text">創建社群</view>
+        <view class="title">创建社群</view>
       </view>
 
       <view class="section">
-        <view class="section--text">社群可供您给特定族群发送活动行程
-与个人行程做区隔</view>
+        <view class="info">社群可供您给特定族群发送活动行程 与个人行程做区隔
+        </view>
       </view>
 
       <view class="section">
-        <view class="section--text">社群群名</view>
-        <textarea placeholder="请输入群名稱" placeholder-style="color: #d3d3d4" class="section--text" name="title" bindinput="bindKeyInput" value="{{title}}" />
+        <view class='section--text'>社群群名</view>
+        <textarea placeholder="请输入群名稱" placeholder-style="color: #d3d3d4" class="group-name" name="title" bindinput="bindKeyInput" value="{{title}}" />
       </view>
 
       <view class="section">
-        <view class='section--text'>社群分類</view>
+        <view class='section--text'>社群分类</view>
       </view>
 
-      <view class="section border">
+      <view class="section">
         <view class="section--text">地点範圍</view>
       </view>
 
       <view class="section">
         <view class="limit--text">關注權限</view>
-        <radio-group name="radio">
+        <radio-group class='limit' name="radio"  >
           <label>
-            <radio value="radio1" />自由關注</label>
+            <radio class='radio1' value="radio1" />自由關注</label>
           <label>
-            <radio value="radio2" />需要審批</label>
+            <radio class='radio2' value="radio2" />需要審批</label>
         </radio-group>
       </view>
 
 
       <view class="section">
-        <view class="section--text">社群簡介</view>
-        <textarea auto-height bindlinechange="bindlinechange" placeholder=" 请输入社群簡介" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" value="{{title}}" />
+        <view class="section--text">社群簡介
+        <textarea placeholder="请输入社群簡介" placeholder-style="color: #d3d3d4" class="textarea" name="title" bindinput="bindKeyInput" value="{{title}}" />
+        </view>
       </view>
 
 
@@ -67,6 +68,7 @@
           </view>
         </view>
       </view> -->
+       <view class="legal">点击完成，即表示已阅读并同意《法律条款与隐私政策》</view>
     </view>
     <button formType="submit" loading="{{loading}}" class='submit'>保存</button>
   </form>
