@@ -18,8 +18,22 @@ Page({
     loader: true,
     options: null,
     currentTab: 0,
+    viewshow: 'none',
   },
 
+  onReady: function () {
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        viewshow: 'block'
+      })
+    }, 200)
+    for (var i = 1; i < 101; i++) {
+      that.setData({
+        percent: i
+      })
+    }
+  },
   
   onShow: function () {
     const {

@@ -1,7 +1,7 @@
 <!-- <view class="container" >
     <button bindtap='getUserInfo' class='btn-success' open-type="getUserInfo" bindgetuserinfo="getUserInfo">一款・串联朋友的行事历</button>
 </view> -->
-
+<progress stroke-width='2' percent="{{percent}}" />
 <view class="container">
   <image class='logo' src='../../img/logo.png' />
   <text>活动历</text>

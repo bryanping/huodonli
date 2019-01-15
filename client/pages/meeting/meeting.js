@@ -22,7 +22,8 @@ Page({
     resultArr: [],
     loader: true,
     options: null,
-    tipe: ''
+    tipe: '',
+    viewshow: 'none'
   },
 
   /**
@@ -37,8 +38,18 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
+  onReady: function () {
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        viewshow: 'block'
+      })
+    }, 200)
+    for (var i = 1; i < 101; i++) {
+      that.setData({
+        percent: i
+      })
+    }
   },
 
   /**

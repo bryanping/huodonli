@@ -1,4 +1,5 @@
 <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+  <progress stroke-width='3' percent="{{percent}}" />
   <image class='spinner' src='../../../../img/loader.gif'></image>
 </view>
 

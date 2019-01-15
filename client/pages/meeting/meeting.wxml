@@ -1,4 +1,5 @@
 <!--pages/meeting/meeting.wxml-->
+
 <view style='{{selectedDate === "" ? "display:none" : "display:block"}}' class="selected_date">
 
   <image bindtap="preMonth" class="select_icon" src="/img/left.png"></image>
@@ -9,6 +10,7 @@
 </view>
 
 <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+  <progress stroke-width='3' percent="{{percent}}" />
   <image class='spinner' src='../../img/loader.gif'></image>
 </view>
 
