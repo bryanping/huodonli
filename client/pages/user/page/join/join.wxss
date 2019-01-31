@@ -21,10 +21,10 @@ form {
   display:flex;
   background-color: white;
   padding: 5rpx;
-  border-bottom: 2rpx solid #e3e3e2;
+  border-bottom: 2rpx solid #eeeeee;
 }
 .section:first-child {
-  border-bottom: 16rpx solid #e3e3e2;
+  border-bottom: 16rpx solid #eeeeee;
 }
 
 .section--text {

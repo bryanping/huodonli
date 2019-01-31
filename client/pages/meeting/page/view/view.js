@@ -2,8 +2,6 @@ import Meeting from '../../../../models/Meeting.js';
 import Config from '../../../../config.js';
 import Util from '../../../../utils/util.js';
 
-
-
 Page({
 
   /**
@@ -37,6 +35,7 @@ Page({
     request: false,
     isopen: true,
     state: "关注",
+    viewshow: 'none',
   },
 
   /**
@@ -131,7 +130,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        viewshow: 'block'
+      })
+    }, 400)
+    for (var i = 1; i < 101; i++) {
+      that.setData({
+        percent: i
+      })
+    }
   },
 
 
@@ -153,8 +162,6 @@ Page({
       curDate: d,
       selectedDate: y + '/' + mon + '/' + d,
       selectedWeek: this.data.weekArr[i],
-
-      loader: false
     });
   },
 
@@ -260,15 +267,11 @@ Page({
   buttontap: function () {
     if (this.data.isopen) {
       this.setData({
-
         state: "已关注"
-
       })
     } else {
       this.setData({
-
         state: "关注"
-
       })
     }
     this.data.isopen = !this.data.isopen

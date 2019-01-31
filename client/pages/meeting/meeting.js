@@ -44,7 +44,7 @@ Page({
       that.setData({
         viewshow: 'block'
       })
-    }, 200)
+    }, 400)
     for (var i = 1; i < 101; i++) {
       that.setData({
         percent: i
@@ -156,9 +156,6 @@ Page({
   },
 
 
-
-
-
   preMonth: function() {
     if (this.data.loader) {
       return false;
@@ -235,6 +232,7 @@ Page({
       });
     });
   },
+  
   getInvitedMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {

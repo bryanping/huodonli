@@ -1,14 +1,16 @@
 <view class='container'>
 
   <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+    <progress stroke-width='3' percent="{{percent}}" />
     <image class='spinner' src='../../../../img/loader.gif'></image>
   </view>
 
   <form style='{{loader === true ? "display:none" : "display:block"}}' bindsubmit="formSubmit">
+  
     <view class='wrapper'>
       <view class="section">
         <view class="section--text">资讯：</view>
-        <textarea bindlinechange="bindlinechange" fixed="true" value="{{title}}" placeholder="请输入活动内容 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
+        <textarea bindlinechange="bindlinechange" fixed="true" value="{{title}}" placeholder="前24个字元将纳入标题使用 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
       </view>
 
       <view class="section">

@@ -18,7 +18,7 @@ form {
 .section {
   display: flex;
   padding: 5rpx;
-  border-bottom: 12rpx solid #e3e3e2;
+  border-bottom: 12rpx solid #eeeeee;
 }
 
 .section:first-child {
@@ -70,7 +70,7 @@ form {
   bottom:190rpx;
   position: fixed;
   background-color: white;
-  border-top: 12rpx solid #e3e3e2;
+  border-top: 12rpx solid #eeeeee;
   padding:35rpx 0 8rpx 0;
 }
 .organizer--image {

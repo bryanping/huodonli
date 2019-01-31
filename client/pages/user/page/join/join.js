@@ -28,7 +28,6 @@ Page({
     start_time: '',
     title: '',
     how_long: '',
-  
     selectedDate: '',
     selectedWeek: '',
     curYear: '',
@@ -59,12 +58,9 @@ Page({
       }
       let obj = resp.data.data;
       let members = [];
-    
-
       this.setData({
         id: obj.id,
         title: obj.title,
-      
         mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
         loader: false,
         AllMembers: obj.members,

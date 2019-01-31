@@ -29,6 +29,7 @@ Page({
     weekArr: ['日', '一', '二', '三', '四', '五', '六'],
     showAllText: 'Show all',
     information: '',
+    viewshow: 'none',
   },
 
   /**
@@ -66,8 +67,18 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
+  onReady: function () {
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        viewshow: 'block'
+      })
+    }, 400)
+    for (var i = 1; i < 101; i++) {
+      that.setData({
+        percent: i
+      })
+    }
   },
 
   /**

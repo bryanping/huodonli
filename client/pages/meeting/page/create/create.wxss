@@ -23,10 +23,10 @@ form {
 
 .input1 {
   width: 100%;
-  text-align: left;
+  text-align: right;
   min-height: 25rpx;
   height: 40rpx;
-  padding:15rpx 10rpx;
+  padding:15rpx 15rpx;
 }
 
 .input {
@@ -62,15 +62,15 @@ form {
 .section {
   display: flex;
   padding: 10rpx;
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .border {
-  border-bottom: 18rpx solid #e3e3e2;
+  border-bottom: 38rpx solid #eeeeee;
 }
 
 .section:first-child {
-  border-bottom: 18rpx solid #e3e3e2;
+  border-bottom: 38rpx solid #eeeeee;
 }
 
 .section--text {
@@ -83,22 +83,29 @@ form {
 
 .section--elem {
   flex: 1 0;
-  
+  text-align:right;
+  padding:18rpx 10rpx;
 }
 
+
+
 .start {
-  padding:15rpx 10rpx;
+  padding:15rpx;
+  text-align:right;
+  width:17%;
 }
 
 .end {
-  flex: 1 0;
-  padding:15rpx 10rpx;
-  /*switch- margin-right:3%; */
+  padding:15rpx;
+  text-align:right;
+  width:72%;
 }
 
 .date {
-  padding: 15rpx 0 0 20vw;
-  color: #f76260;
+  padding:15rpx 0 0 0;
+  color:#f76260;
+  text-align:right;
+  width:55%;
 }
 
 /* 
