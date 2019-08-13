@@ -120,7 +120,7 @@ Page({
         mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
         loader: false,
         AllMembers: obj.members,
-        members: obj.members
+        members: obj.members,
       });
 
     });

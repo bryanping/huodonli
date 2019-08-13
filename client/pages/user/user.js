@@ -15,6 +15,7 @@ Page({
   onLoad: function(options) {
 
   },
+  
   onShow: function() {
     let that = this;
     getApp().getToken().then(token => {

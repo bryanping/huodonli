@@ -1,9 +1,6 @@
 // pages/scope/scope.js
 Page({
 
-
-
-
   /**
    * 页面的初始数据
    */
@@ -11,6 +8,14 @@ Page({
     viewshow: 'none',
   },
 
+  getUserInfo: function (e) {
+    if (e.detail && e.detail.rawData && e.detail.userInfo) {
+      getApp().loadUserData();
+      wx.reLaunch({
+        url: '/pages/meeting/meeting',
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -77,12 +82,5 @@ Page({
 
   },
 
-  getUserInfo: function (e) {
-    if (e.detail && e.detail.rawData && e.detail.userInfo) {
-      getApp().loadUserData();
-      wx.reLaunch({
-        url: '/pages/meeting/meeting',
-      })
-    }
-  }
+  
 })

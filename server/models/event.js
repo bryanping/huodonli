@@ -15,7 +15,6 @@ class Event {
     this.color = color || '';
     this.creator_openid = creator_openid || '';
     this.mapObj = mapObj || '';
-    this.productInfo = productInfo || '';
   }
 
   validate() {

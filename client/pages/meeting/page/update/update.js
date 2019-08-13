@@ -30,6 +30,8 @@ Page({
     showAllText: 'Show all',
     information: '',
     viewshow: 'none',
+    height: 20,
+    focus: false,
   },
 
   /**
@@ -142,6 +144,12 @@ Page({
     })
   },
 
+  bindTextAreaBlur: function (e) {
+    this.setData({
+      title: e.detail.value
+    }) 
+  },
+
   bindKeyInput: function(e) {
     let str = e.detail.value;
     this.setData({
@@ -168,6 +176,7 @@ Page({
     let end_time = this.data.end_time;
     let mapObj = this.data.mapObj;
     let destination = this.data.destination;
+    let address = this.data.address;
     let id = this.data.id;
 let members = this.data.members;
    
@@ -256,6 +265,7 @@ let members = this.data.members;
         this.setData({
           tips: [],
           destination: res.name,
+          address: res.address,
           mapObj: mapObj
         });
 

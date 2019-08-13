@@ -254,14 +254,16 @@ Page({
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
-    console.log("meeting length =" + meeting.length);
     for (let i = 0; i < meeting.length; i++) {
       console.log(meeting[i]);
+
       if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) { // overdued meeting
         meeting[i].color = 'e6e6e5';
       } else if (meeting[i].type == 'invited') {
+       
         console.log(" case 2: non-expired self: ");
-        console.log(meeting[i]);
+        console.log(meeting[i]); // 列印被邀請活動
+
         meeting[i].color = '5eda74' // <<= 改成你要的顏色
       }
     }

@@ -1,20 +1,32 @@
 {
-	"client": "./client",
-	"svr": "./server",
-	"miniprogramRoot": "./client",
-	"qcloudRoot": "./server",
+	"client": "client/",
+	"svr": "server/",
+	"miniprogramRoot": "client/",
+	"qcloudRoot": "server/",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true,
-		"nodeModules": true
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
-	"appid": "wx9814cfc5cf43159d",
-	"projectname": "0815001",
-	"libVersion": "1.6.4",
+	"appid": "wxac1f33bcb2f4e746",
+	"projectname": "LC1.0.0",
+	"libVersion": "2.6.2",
 	"compileType": "miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -33,29 +45,7 @@
 		},
 		"miniprogram": {
 			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "掃描小程序",
-					"pathName": "pages/meeting/meeting",
-					"query": "",
-					"scene": "1047"
-				},
-				{
-					"id": -1,
-					"name": "小程序消息卡片",
-					"pathName": "pages/meeting/page/view/view",
-					"query": "",
-					"scene": "1008"
-				},
-				{
-					"id": 2,
-					"name": "sherry",
-					"pathName": "pages/share/share",
-					"query": "",
-					"scene": "1008"
-				}
-			]
+			"list": []
 		}
 	}
 }

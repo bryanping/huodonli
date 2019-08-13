@@ -1,58 +1,104 @@
-<view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
-  <progress stroke-width='3' percent="{{percent}}" />
-  <image class='spinner' src='../../../../img/loader.gif'></image>
-</view>
+<view class='container'>
 
-<view style='{{loader === true ? "display:none" : "display:block"}}' class='container'>
-  <form bindsubmit="formSubmit">
+  <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
+    <progress stroke-width='3' percent="{{percent}}" />
+    <image class='spinner' src='../../../../img/loader.gif'></image>
+  </view>
+
+  <form style='{{loader === true ? "display:none" : "display:block"}}' bindsubmit="formSubmit">
+
     <view class='wrapper'>
       <view class="section">
         <view class="section--text">资讯：</view>
-        <text auto-height class='section--elem input'>{{title}}</text>
+        <text auto-height="{{true}}" maxlength="-1" class='section--elem' selectable="true">{{title}}</text>
+      </view>
+
+      <view class="section">
+        <view class="detail">關注數: </view>
+        <view class="detail">类别：</view>
       </view>
 
       <view class="section">
         <view class="section--text">时间：</view>
-        <view class="section--elem1 input">
+        <view class="date">
           {{date}}
         </view>
-        <view class="section--elem2 input">
+        <view class="time">
           {{start_time}}-{{end_time}}
+        </view>
+        <view class="howlong">
+          ({{how_long}})
         </view>
       </view>
 
 
       <view class="section">
         <view class="section--text">地点：</view>
-        <view class='section--elem input' bindtouchstart="bindMaptop">{{destination}}</view>
-          <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
+        <view class='section--elem' bindtouchstart="bindMaptop">{{destination}}</view>
+        <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
+      </view>
+
+      <!-- 公開狀態、參與人數 -->
+
+      <view class="section">
+        <!-- <view class="limit--text">{公开活动}</view> -->
+        <view class="section--text">人数：</view>
+        <view class='limit--text'>
+          {{AllMembers.length}} 人参与
+        </view>
+
+        <!-- 查看成員text -->
+
+        <!-- <navigator class="showmenber" url="/pages/user/page/join/join?id={{item.id}}">
+          show all
+        </navigator> -->
       </view>
 
       <view style='{{mapObj === undefined ? "display:none;" : "display:block;"}}' class="section--elem map_container">
-        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
+        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap" bindtouchstart="bindMaptop"></map>
       </view>
+      <!-- 參與人不再直接顯示在畫面上，要到上面的show all 裡面點開查看 -->
 
-      <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section'>
-        <text class='section--text'>参与状态：{{AllMembers.length}}人参与 ｜</text>
-        <text class='section--text'> (关注\总名额)开发中敬请期待</text>
-      </view>
+
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='section members'>
         <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
-          <navigator url="/pages/user/page/view/view?id={{item.id}}" class='user'>
+          <navigator class='user' url="/pages/user/page/view/view?id={{item.id}}">
             <image class='user--image' src='{{ item.avatarUrl || "../../../../img/avatar.png" }}'></image>
             <text class='user--name'>{{item.nickName}}</text>
           </navigator>
         </block>
       </view>
+
       <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
+
     </view>
 
+    <!-- 如果是社群即顯示社群頭像和名稱 -->
+    <!-- <view class="organizer">
+      <image class="organizer--image" src="/img/logo.png" />
+      <text class="organizer--name">举办方暱稱</text>
 
-    <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share' open-type="share" type="primary">分享好友</button>
-    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share'>参与行程</button>
+      <button open-type='' class="follow"  bindtap="buttontap">{{state}}</button>
+    </view> -->
 
-    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='submit' bindtap="actionSheetTap">关注活动</button>
-  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='submit'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
+
+
+    <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class="button join">参与行程</button>
+
+    <image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></image>
+
+    <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' open-type="share" type="primary" class='button share'>分享好友</button>
+
+
+    <!-- 退出行程功能 -->
+    <!-- <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}'  class='quit' src="/img/quit.png"></image> -->
+
+
+    <!-- 未來的功能-->
+    <!--可生成照片傳送到朋友圈 -->
+
+    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share' bindtap="actionSheetTap">关注活动</button>
+  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
 
     <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
    <action-sheet-item open-type="share">
@@ -61,5 +107,6 @@
    <action-sheet-item>生成分享卡片</action-sheet-item>
    <action-sheet-cancel>取消</action-sheet-cancel>
 </action-sheet> -->
+
   </form>
 </view>

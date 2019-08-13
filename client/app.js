@@ -4,8 +4,12 @@ var qcloud = require('./vendor/wafer2-client-sdk/index')
 var config = require('./config')
 
 App({
-  onLaunch: function() {
+  config: {
+    host: 'https://95278436.huodonli.cn' // 这个地方填写你的域名
+  },
+  onLaunch: function () {
     this.loadUserData();
+  
   },
 
   loadUserData: function(){

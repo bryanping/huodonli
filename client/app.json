@@ -18,7 +18,7 @@
     }
   },
   "window": {
-    "backgroundTextStyle": "bold",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "black",
     "navigationBarTitleText": "活动历",
     "navigationBarTextStyle": "black",
@@ -62,5 +62,6 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
-  "debug": false
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
 }

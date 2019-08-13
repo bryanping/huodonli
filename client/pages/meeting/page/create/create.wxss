@@ -8,8 +8,9 @@ page {
 }
 
 .container {
-  height: auto;
+  height: 85%;
   position: relative;
+  padding:0 0 15%;
 }
 
 switch {
@@ -21,18 +22,20 @@ form {
   width: 100%;
 }
 
-.input1 {
-  width: 100%;
-  text-align: right;
-  min-height: 25rpx;
-  height: 40rpx;
-  padding:15rpx 15rpx;
+
+
+.address{
+  flex: 2 0;
+  font-size: 12px;
+  color: rgb(150, 150, 150);
 }
 
 .input {
-  line-height: 20rpx;
+  text-align: left!important;
+  display: block;
+  margin: 0 auto 0 auto;
   /* height: 150rpx; */
-  padding:15rpx 10rpx;
+  padding: 5rpx 0 3vh!important;
 }
 
 .picker {
@@ -61,16 +64,16 @@ form {
 
 .section {
   display: flex;
-  padding: 10rpx;
-  border-bottom: 1px solid #eeeeee;
+  padding: 8rpx;
+  border-bottom: 15rpx solid #eeeeee;
 }
 
 .border {
-  border-bottom: 38rpx solid #eeeeee;
+  border-bottom: 15rpx solid #eeeeee;
 }
 
 .section:first-child {
-  border-bottom: 38rpx solid #eeeeee;
+  border-bottom: 15rpx solid #eeeeee;
 }
 
 .section--text {
@@ -84,10 +87,17 @@ form {
 .section--elem {
   flex: 1 0;
   text-align:right;
-  padding:18rpx 10rpx;
+  padding:15rpx 10rpx;
 }
 
+.destination {
+  padding: 0 30rpx 0;
+  text-overflow:ellipsis;
+}
 
+.address{
+  padding:0 30rpx 0;
+}
 
 .start {
   padding:15rpx;
@@ -127,6 +137,7 @@ form {
   background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
   bottom: 0;
   position: fixed;
+  height: 100rpx;
 }
 
 .map_container {

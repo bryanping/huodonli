@@ -6,12 +6,13 @@
   </view>
 
   <form style='{{loader === true ? "display:none" : "display:block"}}' bindsubmit="formSubmit">
-  
+
     <view class='wrapper'>
       <view class="section">
         <view class="section--text">资讯：</view>
-        <textarea bindlinechange="bindlinechange" fixed="true" value="{{title}}" placeholder="前24个字元将纳入标题使用 | 可支持多行" placeholder-style="color: #d3d3d4" class="section--elem input" name="title" bindinput="bindKeyInput" />
-      </view>
+        <textarea class="section--elem" name="title" maxlength="600" auto-height="{{true}}" value="{{title}}" placeholder="前24个字元将纳入标题使用 | 支持多行" placeholder-style="color: #d3d3d4" bindblur="bindTextAreaBlur" bindinput="bindKeyInput"></textarea>
+        
+        </view>
 
       <view class="section">
         <view class="section--text">时间：</view>
@@ -31,7 +32,10 @@
 
       <view class="section">
         <view class="section--text">地点：</view>
-        <input class="dest" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
+        <view class='section--elem'>
+        <input class="destination" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
+        <view class='address' style='{{mapObj ? "display:block" : "display:none"}}' >{{mapObj.address}}</view>
+        </view>
         <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
       </view>
       <!-- <view class="search--box">
@@ -40,8 +44,8 @@
         </view>
       </view> -->
 
-      <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container">
-        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
+      <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container" bindtouchstart="bindMaptop">
+        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap" bindtouchstart="bindMaptop"></map>
       </view>
 
       <!-- <view class='section color-pick'>

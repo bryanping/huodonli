@@ -44,7 +44,7 @@ Page({
           showCancel: false,
           success: function (res) {
             wx.reLaunch({
-              url: '/pages/index/index',
+              url: 'pages/meeting/page/view/view?id={{this.data.id}}',
             });
           }
         });

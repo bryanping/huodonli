@@ -11,7 +11,8 @@ let dateformat = function dateFtt(fmt, date) { //author: meizz
     "h+": date.getHours(),                   //小时   
     "m+": date.getMinutes(),                 //分   
     "s+": date.getSeconds(),                 //秒   
-    "q+": Math.floor((date.getMonth() + 3) / 3), //季度   
+    "q+": Math.floor((date.getMonth()+3)/3),  
+    //季度   
     "S": date.getMilliseconds()             //毫秒   
   };
   if (/(y+)/.test(fmt))

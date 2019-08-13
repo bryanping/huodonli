@@ -320,6 +320,10 @@ Page({
     })
   },
 
+  bindTextAreaBlur: function (e) {
+    console.log(e.detail.value)
+  },
+
   bindTime: function (e) {
     let time = new Date(this.data.date + ' ' + e.detail.value);
     time.setMinutes(time.getMinutes() + parseInt(this.data.how_long.split(':')[1]));
@@ -373,7 +377,7 @@ Page({
         that.setData({
           tips: [],
           hasLocation: true,
-          destination: res.name + ' - ' + res.address,
+          destination: res.name,
           address: res.address,
           mapObj: mapObj
         });

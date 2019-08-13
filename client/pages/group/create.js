@@ -14,7 +14,6 @@ Page({
     how_long: '00:00',
     destination: '',
     color: 'ff6280',
-    
     tips: [],
     selectedWeek: '',
     curYear: '',
