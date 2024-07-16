@@ -6,18 +6,16 @@
 
 
 <view class="title">
-
-
   <!--顶部导航栏-->
   <view class="swiper-tab {{currentTab==0 ? 'color-1' : ''}} {{currentTab==1 ? 'color-2' : ''}} {{currentTab==2 ? 'color-3' : ''}}">
 
     <view class="tab-item {{currentTab==0 ? 'one' : ''}} " data-current="0" bindtap="swichNav">
       朋友圈</view>
 
-    <!-- <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
-          社群</view> -->
-        <!-- <view class="tab-item {{currentTab==2 ? 'three' : ''}}" data-current="2" bindtap="swichNav">
-          附近活动</view> -->
+     <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
+          社群</view> 
+     <view class="tab-item {{currentTab==2 ? 'three' : ''}}" data-current="2" bindtap="swichNav">
+          附近活动</view> 
   </view>
 </view>
 <!--内容主体-->
@@ -45,22 +43,22 @@
                   {{item.start_time}}
                 </view>
                 <!--<view class="request__content">-->
-                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="request__content">
+                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: {{item.color}}" class="request__content">
                   {{ item.title }}
                   <!-- </view>-->
                 </navigator>
               </view>
-          
+
             </block>
           </block>
         </block>
       </view>
     </scroll-view>
   </swiper-item>
-   <swiper-item>
-          <view class="swiper-item">开发中敬请期待</view>
-        </swiper-item>
-        <!-- <swiper-item>
+  <!-- <swiper-item>
+    <view class="swiper-item">开发中敬请期待</view>
+  </swiper-item> -->
+  <!-- <swiper-item>
           <view class="swiper-item">开发中敬请期待</view>
         </swiper-item> -->
 </swiper>

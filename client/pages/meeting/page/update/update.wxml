@@ -8,11 +8,76 @@
   <form style='{{loader === true ? "display:none" : "display:block"}}' bindsubmit="formSubmit">
 
     <view class='wrapper'>
-      <view class="section">
-        <view class="section--text">资讯：</view>
-        <textarea class="section--elem" name="title" maxlength="600" auto-height="{{true}}" value="{{title}}" placeholder="前24个字元将纳入标题使用 | 支持多行" placeholder-style="color: #d3d3d4" bindblur="bindTextAreaBlur" bindinput="bindKeyInput"></textarea>
-        
-        </view>
+      <view class='section'>
+        <view class='section--text'>资讯：</view>
+
+        <!-- <view class="page-body">
+           -->
+            <!-- <view class='toolbar' bindtap="format">
+              <i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
+              <i class="iconfont icon-zitixieti {{formats.italic ? 'ql-active' : ''}}" data-name="italic"></i>
+              <i class="iconfont icon-zitixiahuaxian {{formats.underline ? 'ql-active' : ''}}" data-name="underline"></i>
+              <i class="iconfont icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}" data-name="strike"></i>
+              <i class="iconfont icon-zuoduiqi {{formats.align === 'left' ? 'ql-active' : ''}}" data-name="align" data-value="left"></i>
+              <i class="iconfont icon-juzhongduiqi {{formats.align === 'center' ? 'ql-active' : ''}}" data-name="align" data-value="center"></i>
+              <i class="iconfont icon-youduiqi {{formats.align === 'right' ? 'ql-active' : ''}}" data-name="align" data-value="right"></i>
+              <i class="iconfont icon-zuoyouduiqi {{formats.align === 'justify' ? 'ql-active' : ''}}" data-name="align" data-value="justify"></i>
+              <i class="iconfont icon-line-height {{formats.lineHeight ? 'ql-active' : ''}}" data-name="lineHeight" data-value="2"></i>
+              <i class="iconfont icon-Character-Spacing {{formats.letterSpacing ? 'ql-active' : ''}}" data-name="letterSpacing" data-value="2em"></i>
+              <i class="iconfont icon-722bianjiqi_duanqianju {{formats.marginTop ? 'ql-active' : ''}}" data-name="marginTop" data-value="20px"></i>
+              <i class="iconfont icon-723bianjiqi_duanhouju {{formats.micon-previewarginBottom ? 'ql-active' : ''}}" data-name="marginBottom" data-value="20px"></i>
+              <i class="iconfont icon-clearedformat" bindtap="removeFormat"></i>
+              <i class="iconfont icon-font {{formats.fontFamily ? 'ql-active' : ''}}" data-name="fontFamily" data-value="Pacifico"></i>
+              <i class="iconfont icon-fontsize {{formats.fontSize === '24px' ? 'ql-active' : ''}}" data-name="fontSize" data-value="24px"></i>
+
+              <i class="iconfont icon-text_color {{formats.color === '#0000ff' ? 'ql-active' : ''}}" data-name="color" data-value="#0000ff"></i>
+              <i class="iconfont icon-fontbgcolor {{formats.backgroundColor === '#00ff00' ? 'ql-active' : ''}}" data-name="backgroundColor" data-value="#00ff00"></i>
+
+              <i class="iconfont icon-date" bindtap="insertDate"></i>
+              <i class="iconfont icon--checklist" data-name="list" data-value="check"></i>
+              <i class="iconfont icon-youxupailie {{formats.list === 'ordered' ? 'ql-active' : ''}}" data-name="list" data-value="ordered"></i>
+              <i class="iconfont icon-wuxupailie {{formats.list === 'bullet' ? 'ql-active' : ''}}" data-name="list" data-value="bullet"></i>
+              <i class="iconfont icon-undo" bindtap="undo"></i>
+              <i class="iconfont icon-redo" bindtap="redo"></i>
+
+              <i class="iconfont icon-outdent" data-name="indent" data-value="-1"></i>
+              <i class="iconfont icon-indent" data-name="indent" data-value="+1"></i>
+              <i class="iconfont icon-fengexian" bindtap="insertDivider"></i>
+              <i class="iconfont icon-charutupian" bindtap="insertImage"></i>
+              <i class="iconfont icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}" data-name="header" data-value="{{1}}"></i>
+              <i class="iconfont icon-zitixiabiao {{formats.script === 'sub' ? 'ql-active' : ''}}" data-name="script" data-value="sub"></i>
+              <i class="iconfont icon-zitishangbiao {{formats.script === 'super' ? 'ql-active' : ''}}" data-name="script" data-value="super"></i>
+               <i class="iconfont icon-quanping"></i> 此行屏蔽
+              <i class="iconfont icon-shanchu" bindtap="clear"></i>
+              <i class="iconfont icon-direction-rtl {{formats.direction === 'rtl' ? 'ql-active' : ''}}" data-name="direction" data-value="rtl"></i>
+
+            </view>
+
+            <editor id="editor"  class="ql-container" placeholder="前24个字元将纳入标题使用 | 支持多行" showImgSize showImgToolbar showImgResize bindstatuschange="onStatusChange" read-only="{{readOnly}}" bindready="onEditorReady">
+            </editor>
+
+             <view>
+        <button bindtap="readOnlyChange">{{readOnly ? '可写':'只读'}}</button>
+      </view> -->
+          
+        <!-- </view>  -->
+
+<view class='section--elem'>
+        <textarea 
+        class="textarea"
+        value="{{title}}"
+        placeholder="前24个字元将纳入标题使用 | 支持多行"
+        placeholder-style="color: #d3d3d4"
+        maxlength="-1"
+        auto-height="true"
+        bindinput="bindKeyInput"
+        bindblur="bindTextAreaBlur"
+        bindlinechange="bindlinechange" 
+        >
+           <!-- <text class='botsum'>您已输入{{info}}字符</text>  -->
+        </textarea>
+ </view>
+      </view>
 
       <view class="section">
         <view class="section--text">时间：</view>
@@ -33,8 +98,8 @@
       <view class="section">
         <view class="section--text">地点：</view>
         <view class='section--elem'>
-        <input class="destination" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
-        <view class='address' style='{{mapObj ? "display:block" : "display:none"}}' >{{mapObj.address}}</view>
+          <input class="destination" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
+          <view class='address' style='{{mapObj ? "display:block" : "display:none"}}'>{{mapObj.address}}</view>
         </view>
         <image class="nav_icon" bindtouchstart="bindMaptop" src="/img/UI-nav@3x.png"></image>
       </view>
@@ -45,7 +110,7 @@
       </view> -->
 
       <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container" bindtouchstart="bindMaptop">
-        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap" bindtouchstart="bindMaptop"></map>
+        <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
       </view>
 
       <!-- <view class='section color-pick'>
@@ -81,5 +146,24 @@
     </view>
 
     <button open-type="share" class='share'>分享好友</button>
+
+
+    <!-- 退出行程功能 -->
+    <!-- <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}'  class='quit' src="/img/quit.png"></image> -->
+
+
+    <!-- 未來的功能-->
+    <!--可生成照片傳送到朋友圈 -->
+
+    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share' bindtap="actionSheetTap">关注活动</button>
+  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
+
+    <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+   <action-sheet-item open-type="share">
+         <button open-type="share">分享给好友</button>
+   </action-sheet-item>
+   <action-sheet-item>生成分享卡片</action-sheet-item>
+   <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet> -->
   </form>
 </view>

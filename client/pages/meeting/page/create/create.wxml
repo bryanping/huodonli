@@ -1,19 +1,21 @@
 <!--pages/meeting/page/create/create.wxml-->
+
 <view class='container'>
   <form bindsubmit="formSubmit" report-submit='true'>
-    <view class='wrapper'>
+    <view class='wrapper' style="width: auto; height: 1182rpx; display: block; box-sizing: border-box">
       <view class='section'>
         <view class="section--text">资讯</view>
-        <view class='section--elem'>
-          <textarea class="input" placeholder="前24字元纳入标题使用 | 支持多行输入" bindblur="bindTextAreaBlur" maxlength="-1" placeholder-style="color: #d3d3d4" auto-height='{{true}}' name="title" bindinput="bindKeyInput" value="{{title}}"></textarea>
-        </view>
+        <!-- <view class='section--elem'> -->
+          <textarea class="input" placeholder="活动标题" bindblur="bindTextAreaBlur" maxlength="-1" placeholder-style="color: #d3d3d4" auto-height='{{true}}' name="title" bindinput="bindKeyInput" value="{{title}}"></textarea>
+        <!-- </view> -->
       </view>
 
-      <view class="section">
+      <view class="section" style="width: 750rpx; height: 100rpx; display: flex; box-sizing: border-box">
         <view class="section--text">开始时间</view>
         <picker mode="date" class="date" value="{{date}}" bindchange="bindDateStart">
-          <view class="picker">{{date}}</view>
+          <view class="picker" style="width: 290rpx; height: 48rpx; display: block; box-sizing: border-box; position: relative; left: 0rpx; top: 0rpx">{{date}}</view>
         </picker>
+        <view>{{week}}</view>
         <picker mode="time" class="start" value="{{start_time}}" bindchange="bindTime">
           <view class="picker">{{start_time}}</view>
         </picker>
@@ -21,7 +23,7 @@
         <!-- <switch bindchange="switch1Change"/> -->
 
       </view>
-      <view class="section">
+      <view class="section" style="width: 750rpx; height: 100rpx; display: flex; box-sizing: border-box">
         <view class='section--text'>结束时间</view>
         <picker mode="time" class="end" value="{{end_time}}" bindchange="bindEndTime">
           <view class="picker">{{end_time}}</view>
@@ -40,8 +42,8 @@
         </view>
       </view>
 
-
-      <!-- <view class="section">
+<!-- 
+      <view class="section">
         <switch class='switch' bindchange="switch1Change" />
         <view class="limit--text">公开活动</view>
         <view class='limit--text'>｜ 人数</view>
@@ -112,6 +114,6 @@
         </view>
       </view> -->
     </view>
-    <button formType="submit" loading="{{loading}}" class='submit'>保存</button>
+    <button formType="submit" loading="{{loading}}" class='submit' >保存</button>
   </form>
 </view>

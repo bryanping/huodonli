@@ -23,16 +23,32 @@ Page({
     loader: true,
     options: null,
     tipe: '',
-    viewshow: 'none'
+    viewshow: 'none',
+    arrivaltime: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  // onLoad: function(options) {
+  //   this.setData({
+  //     options,
+  //   });
+  // },
+
+  onLoad: function (options) {
     this.setData({
       options,
     });
+    // 打开首页时判断options.id是否存在 用这个值来判断进入首页的来源是否为用户点击了分享的卡片
+    // 同时可以通过获取到的id的值跳转导航到对应的分享详情页
+    if (options.id) {
+      setTimeout(function () {
+        wx.navigateTo({
+          url: `../share/share?id=${options.id}`
+        })
+      }, 800)
+    }
   },
 
   /**
@@ -70,6 +86,7 @@ Page({
         var invitedMeetingsData = resp2.data.data;
         for (var i = 0; i < invitedMeetingsData.length; i++) {
           invitedMeetingsData[i].type = 'invited';
+          
         }
         this.setData({
           curYear: y,
@@ -78,14 +95,16 @@ Page({
           selectedDate: y + '/' + mon + '/' + d,
           selectedWeek: this.data.weekArr[i],
           meeting: selfMeetingData.concat(invitedMeetingsData),
-          loader: false
-        });
+          loader: false,
+        }); 
+
+        console.log("length" + invitedMeetingsData.length);
+        console.log("顯示this.data");
+        console.log(this.data);
         this.getDateList(y, mon - 1);
         this.mergeResult();
-        // console.log("print invited");
-        // console.log(invitedMeetingsData)
-        // console.log("print selfMeeting");
-        // console.log(selfMeetingData)
+        console.log('print this.data');
+        console.log(this.data);
       });
     });
   },
@@ -155,7 +174,7 @@ Page({
     });
   },
 
-
+// 上個月
   preMonth: function() {
     if (this.data.loader) {
       return false;
@@ -187,6 +206,7 @@ Page({
     })
   },
 
+// 下個月
   nextMonth: function() {
     if (this.data.loader) {
       return false;
@@ -217,6 +237,7 @@ Page({
     })
   },
   
+  // 顯示自己的行程
   getSelfMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
@@ -233,6 +254,7 @@ Page({
     });
   },
   
+  // 顯示邀請的行程
   getInvitedMeetingsByDate: function(year, month) {
     return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
@@ -248,6 +270,7 @@ Page({
       });
     });
   },
+
 
   mergeResult: function() {
     console.log("triggered mergeResult")
@@ -280,6 +303,8 @@ Page({
     }
     this.setData({
       resultArr: dateList
-    });
+    }); 
+    console.log("顯示dateList");
+    console.log(dateList);
   }
 });

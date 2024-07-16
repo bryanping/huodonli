@@ -21,6 +21,7 @@ Page({
     viewshow: 'none',
   },
 
+  // 页面首次渲染完毕时执行
   onReady: function () {
     var that = this
     setTimeout(function () {
@@ -34,7 +35,7 @@ Page({
       })
     }
   },
-  
+  // 页面出现在前台时执行
   onShow: function () {
     const {
       options
@@ -54,12 +55,28 @@ Page({
         meeting: meeting.data.data,
         loader: false
       });
+
+      // console.log("this.data.weekArr[i]");
+      // console.log(this.data.weekArr[i]);
       //this.getDateList(y, mon - 1);
       this.mergeResult();
     });
   },
 
+  // 页面被用户分享时执行
   onShareAppMessage: function () {
+  },
+
+  onLoad: function (options) {
+    // 打开首页时判断options.positionId是否存在 用这个值来判断进入首页的来源是否为用户点击了分享的卡片
+    // 同时可以通过获取到的positionId的值跳转导航到对应的分享详情页
+    if (options.id) {
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '../share/share?id=' + options.id
+        })
+      }, 800)
+    }
   },
 
   getDateList: function (y, mon) {
@@ -105,6 +122,23 @@ Page({
           }
         })
       });
+      console.log("pirit Config");
+    });
+  },
+
+  getLinsMeetingsByopneid: function (year, month) {
+    return new Promise((resolve, reject) => {
+      getApp().getToken().then(token => {
+        wx.request({
+          url: Config.service.getEventList + `?year=${year}&month=${month}&token=${token}`,
+          success(result) {
+            resolve(result.data)
+          },
+          fail(error) {
+            reject(error);
+          }
+        })
+      });
     });
   },
 
@@ -113,6 +147,10 @@ Page({
     let dateList = this.data.dateList;
     let nowDate = new Date().getTime();
     let resultArr = {};
+
+    //印出resultArr得到的東西
+    console.log(meeting);
+
     this.setData({
       empty: meeting.length === 0
     });
@@ -135,7 +173,7 @@ Page({
       resultArr: resultArr
     });
   },
-  
+
   swichNav: function (e) {
     console.log(e);
     var that = this;

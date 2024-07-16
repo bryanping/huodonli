@@ -169,7 +169,7 @@ Page({
   onShareAppMessage: function (res) {
 
     return {
-      title: this.data.title,
+      title: "你有一个行程邀请：" + this.data.title,
       path: 'pages/meeting/page/view/view?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful

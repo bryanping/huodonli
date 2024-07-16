@@ -57,7 +57,7 @@ Page({
     this.setData({
       title: '',
       start_time: time,
-      end_time: time,
+      end_time: Util.checkTime(date.getHours()+1) + ':' + Util.checkTime(date.getMinutes()),
       date: date.getFullYear() + '-' + Util.checkTime(date.getMonth() + 1) + '-' + Util.checkTime(date.getDate()),
       destination: '',
       color: 'ff6280',
@@ -73,7 +73,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**

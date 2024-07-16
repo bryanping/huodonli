@@ -1,4 +1,5 @@
 /**menber.wxss**/
+@import "../../libs/weui-wxss.wxss";
 
 .userinfo {
   display: flex;
@@ -19,24 +20,24 @@
   border-radius: 50%;
   float: left;
 }
+.title{
+flex-direction: column;
+height: 75rpx;
+}
 
 .nickname {
-  color: #aaa;
-  width: 40%;
+  color:#aaa;
+  height:40rpx;
+  display: flex;
+  padding: 6rpx 0;
 }
 
 .devent {
   color: #aaa;
+  font-size: 25rpx;
 }
 
-.spinner {
-  padding-top: 200rpx;
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  width: 200rpx;
-  height: 200rpx;
-}
+
 
 .swiper-tab {
   display: flex;
@@ -73,5 +74,5 @@
 
 .block {
   flex: 2 2;
-  line-height: 10vh;
+  line-height: 5vh;
 }

@@ -1,15 +1,17 @@
 <!--menber.wxml-->
 <view class="container">
   <cover-view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
-    <cover-image class='spinner' src='../../../../img/loader.gif'></cover-image>
+    <cover-image class='spinner' src='../../img/loader.gif'> </cover-image>
   </cover-view>
 
   <form class="userinfo" style='{{loader === true ? "display:none" : "display:block"}}'>
     <view class="block">
-      <image class="avatar" src='{{avatarUrl}}'></image>
-      <text class="nickname">{{ nickName }} </text>
-      <text class="devent"> 活动数: {{ created }}</text>
 
+      <image class="avatar" src='{{avatarUrl}}'></image>
+      <view class="title">
+        <text class="nickname">{{ nickName }} </text>
+        <text class="devent"> 活动发起数: {{ created }}</text>
+      </view>
     </view>
 
     <!-- <open-data type="userGender" lang="zh_CN"></open-data> -->
@@ -18,12 +20,12 @@
       {{ country + ' ' + province + ' ' + city }}
     </view> -->
 
-    
+
     <view>
       <!--顶部导航栏-->
       <!-- <view class="swiper-tab">
         <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
-          会员</view>
+          历史</view>
         <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
           成就</view>
         <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
@@ -31,8 +33,13 @@
       </view> -->
 
       <!--内容主体-->
-      <!-- <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200"  bindchange="swiperChange">
+      <!-- <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
         <swiper-item>
+
+
+
+
+
           <view class="swiper-item">开发中敬请期待</view>
         </swiper-item>
         <swiper-item>

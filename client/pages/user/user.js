@@ -1,4 +1,6 @@
 import Config from '../../config.js';
+
+
 Page({
   data: {
     avatarUrl: '',
@@ -13,7 +15,7 @@ Page({
     loader: true
   },
   onLoad: function(options) {
-
+    
   },
   
   onShow: function() {
@@ -32,12 +34,12 @@ Page({
 
           that.setData({
             avatarUrl: avatarUrl,
-            city: user.city,
-            country: user.country,
+            //city: user.city,
+            //country: user.country,
             created: user.created,
-            gender: gender,
+            //gender: gender,
             nickName: user.nickName,
-            province: user.province,
+            //province: user.province,
             loader: false
           });
         },

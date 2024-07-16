@@ -121,7 +121,7 @@ Page({
   onShareAppMessage: function (res) {
 
     return {
-      title: this.data.title,
+      title: "你有一个行程邀请：" + this.data.title,
       path: 'pages/user/page/join/join?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful

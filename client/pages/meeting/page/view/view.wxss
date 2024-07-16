@@ -1,14 +1,24 @@
+
+@import "../../../../libs/weui-wxss.wxss";
+
 page {
   color: #333;
   background-color: white;
   font-family: "黑体";
-  font-size: 35rpx;
+  font-size:16px;
 }
 
 .container {
   height: 80%;
   position: relative;
-  padding:0 0 25%;
+  padding: 0 0 25%;
+}
+
+button::after {
+  border: none;
+}
+button {
+  background-color: #fff;
 }
 
 form {
@@ -18,7 +28,7 @@ form {
 .section {
   display: flex;
   padding: 5rpx;
-  border-bottom: 12rpx solid #eeeeee;
+  border-bottom: 12rpx solid #eee;
 }
 
 .section:first-child {
@@ -33,6 +43,11 @@ form {
   padding: 4rpx 10rpx;
   font-size: 20rpx;
   color: #8e8e93;
+}
+
+.wrapper {
+  min-height: 87vh;
+  box-sizing: border-box;
 }
 
 .section--elem {
@@ -56,10 +71,7 @@ form {
   padding: 20rpx 0 0 20rpx;
 }
 
-.wrapper {
-  min-height: 87vh;
-  box-sizing: border-box;
-}
+
 
 .limit--text {
   padding: 15rpx 10rpx;
@@ -67,39 +79,42 @@ form {
 
 .organizer {
   width: 100%;
-  bottom:190rpx;
+  bottom: 190rpx;
   position: fixed;
   background-color: white;
-  border-top: 12rpx solid #eeeeee;
-  padding:35rpx 0 8rpx 0;
+  border-top: 12rpx solid #eee;
+  padding: 35rpx 0 8rpx 0;
 }
+
 .organizer--image {
   width: 120rpx;
   height: 120rpx;
   padding: 0 0 0 25rpx;
-  position:fixed;
-  bottom:11vh;
+  position: fixed;
+  bottom: 11vh;
   border-radius: 50%;
 }
+
 .organizer--name {
   padding: 0 0 0 20vw;
 }
+
 .follow {
   width: 85px;
   height: 45px;
-  position:fixed;
-  right:3vw;
-  bottom:12vh;
+  position: fixed;
+  right: 3vw;
+  bottom: 12vh;
 }
 
-.destination{
-  text-overflow:ellipsis;
+.destination {
+  text-overflow: ellipsis;
 }
 
-.address{
+.address {
   flex: 2 0;
   font-size: 12px;
-   color: rgb(150, 150, 150);
+  color: rgb(150, 150, 150);
 }
 
 .button {
@@ -138,23 +153,13 @@ form {
   height: 20vh;
 }
 
-.search--box {
-  text-align: center;
-}
 
 .overlay {
   width: 100%;
   height: 100vh;
 }
 
-.spinner {
-  padding-top: 200rpx;
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  width: 200rpx;
-  height: 200rpx;
-}
+
 
 .user {
   display: flex;
@@ -195,5 +200,3 @@ form {
   position: relative;
   padding: 22rpx 27rpx 0 10rpx;
 }
-
-

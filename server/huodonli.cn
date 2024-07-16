@@ -1,0 +1,33 @@
+server {
+    listen 80;
+    server_name huodonli.cn www.huodonli.cn;
+
+    root /var/www/huodonli.cn;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # SSL configuration
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/nginx/ssl/huodonli.cn.crt;
+    ssl_certificate_key /etc/nginx/ssl/huodonli.cn.key;
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+    if ($host = www.huodonli.cn) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    if ($host = huodonli.cn) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    listen 80;
+    server_name huodonli.cn www.huodonli.cn;
+    return 404; # managed by Certbot
+}
+

@@ -4,5 +4,12 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  
 } 
+
+.page-section-title{
+    font-size: 28rpx;
+    color: #999999;
+    margin-bottom: 10rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+  }

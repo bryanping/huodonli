@@ -9,8 +9,7 @@
     "pages/meeting/page/update/update",
     "pages/share/share",
     "pages/login/login",
-    "pages/user/page/join/join",
-    "pages/group/create"
+    "pages/user/page/join/join"
   ],
   "permission": {
     "scope.userLocation": {
@@ -19,11 +18,12 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "black",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "活动历",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
   },
+  "lazyCodeLoading": "requiredComponents",
   "tabBar": {
     "list": [
       {
@@ -63,5 +63,6 @@
     "downloadFile": 10000
   },
   "debug": false,
+  
   "sitemapLocation": "sitemap.json"
 }

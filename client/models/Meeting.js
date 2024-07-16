@@ -26,17 +26,17 @@ class Meeting extends Model {
 
   static findById(id){
     return new Promise((resolve, reject) => {
-      getApp().getToken().then(token => {
-      wx.request({
-        url: Config.service.getEventById + `?id=${id}&token=${token}`,
-        success(result) {
-          resolve(result.data)
-        },
-        fail(error) {
-          reject(error);
-        }
-      })
-      });
+        getApp().getToken().then(token => {
+            wx.request({
+                url: Config.service.getEventById + `?id=${id}&token=${token}`,
+                success(result) {
+                resolve(result.data)
+                },
+                fail(error) {
+                reject(error);
+                }
+            })
+        });
     });
    return meeting;
   }

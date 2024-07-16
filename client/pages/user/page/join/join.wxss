@@ -1,4 +1,5 @@
 /* client/pages/user/page/join/join.wxss */
+@import "../../../../libs/weui-wxss.wxss";
 
 page {
   background-color: white;
@@ -94,11 +95,6 @@ form {
   height:20vh;
 }
 
-.search--box {
-  text-align:center;
-  background-color:white;
-
-}
 
 .overlay {
   background-color: white;
@@ -106,14 +102,6 @@ form {
   height: 100vh;
 }
 
-.spinner {
-  padding-top: 200rpx;
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  width: 200rpx;
-  height: 200rpx;
-}
 
 .user {
   display: flex;

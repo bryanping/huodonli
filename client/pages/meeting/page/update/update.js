@@ -1,8 +1,7 @@
-import amapFile from '../../../../libs/amap-wx.js';
-
 import Meeting from '../../../../models/Meeting';
 import Util from '../../../../utils/util.js';
 import Config from '../../../../config.js';
+import amapFile from '../../../../libs/amap-wx.js';
 
 Page({
 
@@ -32,6 +31,12 @@ Page({
     viewshow: 'none',
     height: 20,
     focus: false,
+    selectedWeek: '', 
+    polyline: [],
+    _focus: false,
+    formats: {},
+    bottom: 0,
+    readOnly: false,
   },
 
   /**
@@ -41,6 +46,7 @@ Page({
     let obj = Meeting.findById(options.id).then(resp => {
       let obj = resp.data.data;
       let members = [];
+      
       if (obj.members.length > 7) {
         for (let i = 0; i < 7; i++) {
           members.push(obj.members[i]);
@@ -62,8 +68,16 @@ Page({
         loader: false,
         members: members,
         AllMembers: obj.members,
-      });
+      }); 
+    
+      console.log('print resp.data.data');
+      console.log(resp.data.data);
+
     });
+   
+
+
+
   },
 
   /**
@@ -120,8 +134,8 @@ Page({
   onShareAppMessage: function(res) {
 
     return {
-      title: this.data.title,
-      path: 'pages/share/share?id=' + this.data.id,
+      title: "你有一个行程邀请：" + this.data.title,
+      path: `pages/meeting/meeting?id=${this.data.id}`,
       success: function(res) {
         // Forwarding successful
         console.log("分享成功");
@@ -151,12 +165,17 @@ Page({
   },
 
   bindKeyInput: function(e) {
-    let str = e.detail.value;
+    var content = e.detail.value;
+    var cnt = parseInt(content.length);
     this.setData({
-      title: str
+      info: cnt
     });
+    // let str = e.detail.value;
+    // this.setData({
+    //   title: str
+    // });
   },
-
+  
   bindDateStart: function(e) {
     this.setData({
       date: e.detail.value
@@ -178,7 +197,7 @@ Page({
     let destination = this.data.destination;
     let address = this.data.address;
     let id = this.data.id;
-let members = this.data.members;
+    let members = this.data.members;
    
     let obj = {
       id: id,
@@ -190,7 +209,7 @@ let members = this.data.members;
       destination: destination,
       mapObj: mapObj
     }
-
+    
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
     if (errors.length > 0) {
@@ -207,7 +226,7 @@ let members = this.data.members;
     let eventDate = new Date(`${date} ${start_time}`);
     Meeting.update(obj).then(x => {
       wx.reLaunch({
-        url: `/pages/meeting/meeting`,
+        url: `/pages/meeting/meeting?id=${this.data.id}`,
         // ?y=${ eventDate.getFullYear() } & mon=${ eventDate.getMonth() + 1 }
       })
     });
@@ -272,6 +291,8 @@ let members = this.data.members;
       }
     })
   },
+
+  //地圖導航
 
   bindMaptop: function () {
     // console.log({
@@ -341,6 +362,8 @@ let members = this.data.members;
     vm.setData({
       dateList: dateList
     });
+    console.log("顯示dateList")
+    console.log(dateList)
   },
 
   onDelete: function() {
@@ -389,6 +412,8 @@ let members = this.data.members;
       }
     });
   },
+
+  // 看所有人員
   viewAllMembers: function(e) {
     let showAllMembers = !this.data.showAllMembers;
     if (showAllMembers) {
@@ -408,5 +433,111 @@ let members = this.data.members;
         members: members
       });
     }
-  }
+  },
+
+
+  //富文編輯
+  getEditorValue(e) {
+    this.setData({
+      title : e.detail.html
+    })
+  },
+  // 加载内容
+  onEditorReady() {
+      const that = this
+      wx.createSelectorQuery().select('#editor').context(function (res) {
+        that.editorCtx = res.context;
+        wx.showLoading({
+          title: '加载内容中...',
+        })
+        setTimeout(function(){
+          let data = that.data;
+          wx.hideLoading();
+          that.editorCtx.setContents({
+            html: data.pageData ? data.pageData.content:'',
+            success: (res) => {
+              console.log(res)
+            },
+            fail: (res) => {
+              console.log(res)
+            }
+          })
+        },1000)
+      }).exec()
+    },
+
+  clickLogText(e) {
+    that.editorCtx.gettitle({
+      success: function (res) {
+        console.log(res.html)
+        wx.setStorageSync("title", res.html); // 缓存本地
+        // < p > 备注说明：</p > <p>1、评分规则</p> <p>2、注意事项</p> <p>3、哈哈呵呵</p> <p><br></p><p><br></p>
+      }
+    })
+  },
+  readOnlyChange() {
+    this.setData({
+      readOnly: !this.data.readOnly
+    })
+  },
+ 
+  undo() {
+    this.editorCtx.undo()
+  },
+  redo() {
+    this.editorCtx.redo()
+  },
+  format(e) {
+    let { name, value } = e.target.dataset
+    if (!name) return
+    // console.log('format', name, value)
+    this.editorCtx.format(name, value)
+
+  },
+  onStatusChange(e) {
+    const formats = e.detail
+    this.setData({ formats })
+  },
+  insertDivider() {
+    this.editorCtx.insertDivider({
+      success: function () {
+        console.log('insert divider success')
+      }
+    })
+  },
+  clear() {
+    this.editorCtx.clear({
+      success: function (res) {
+        console.log("clear success")
+      }
+    })
+  },
+  removeFormat() {
+    this.editorCtx.removeFormat()
+  },
+  insertDate() {
+    const date = new Date()
+    const formatDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+    this.editorCtx.insertText({
+      text: formatDate
+    })
+  },
+  insertImage() {
+    const that = this
+    wx.chooseImage({
+      count: 1,
+      success: function () {
+        that.editorCtx.insertImage({
+          src: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543767268337&di=5a3bbfaeb30149b2afd33a3c7aaa4ead&imgtype=0&src=http%3A%2F%2Fimg02.tooopen.com%2Fimages%2F20151031%2Ftooopen_sy_147004931368.jpg',
+          data: {
+            id: 'abcd',
+            role: 'god'
+          },
+          success: function () {
+            console.log('insert image success')
+          }
+        })
+      }
+    })
+  },
 })

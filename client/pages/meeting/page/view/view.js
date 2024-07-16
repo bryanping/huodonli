@@ -1,6 +1,7 @@
 import Meeting from '../../../../models/Meeting.js';
 import Config from '../../../../config.js';
 import Util from '../../../../utils/util.js';
+let QRCode = require('../../../../utils/qrCode.js')
 
 Page({
 
@@ -36,12 +37,19 @@ Page({
     isopen: true,
     state: "关注",
     viewshow: 'none',
+    actionSheetHidden: true,
+    qrCode: '',
+    text: '',
+    colorTypeSel: 'colorLight',
+    cp_cus: ['#000', '#fff', '#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'],
+    cp_color: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     let obj = Meeting.findById(options.id).then(resp => {
       if (!resp.data || !resp.data.data) {
         wx.showModal({
@@ -57,7 +65,6 @@ Page({
         });
       }
       let obj = resp.data.data;
-
       let submit_text = '';
       switch (obj.user) {
         case Meeting.USER_CREATOR:
@@ -122,7 +129,6 @@ Page({
         AllMembers: obj.members,
         members: obj.members,
       });
-
     });
   },
 
@@ -151,6 +157,7 @@ Page({
     const {
       options
     } = this.data;
+    var text = 'pages/share/share?id=' + this.data.id ;
     var today = new Date();
     var y = today.getFullYear();
     var mon = Util.checkTime(today.getMonth() + 1);
@@ -163,6 +170,7 @@ Page({
       selectedDate: y + '/' + mon + '/' + d,
       selectedWeek: this.data.weekArr[i],
     });
+    console.log(text)
   },
 
   /**
@@ -193,39 +201,58 @@ Page({
 
   },
 
-  // actionSheetTap: function () {
-  //   wx.showActionSheet({
-  //     itemList: ['分享給好友', '保存圖片分享朋友圈'],
-  //     success: function (e) {
-  //       if (tapIndex == 0) {
-  //       console.log('Share');
-  //       console.log(res);
-  //       }
-  //       if (tapIndex == 1) {
-  //         wx.saveImageToPhotosAlbum({
-  //           filePath: res.tempFilePath,
-  //         })
-  //         wx.showToast({
-  //           title: '保存成功',
-  //           icon: 'success',
-  //           duration: 1500
-  //         });
-  //       }	
+  actionSheetTap: function () {
+    this.setData({
+      actionSheetHidden: false
+    })
+    // wx.showActionSheet({
+    //   itemList: ['分享給好友', '生成分享卡片'],
+    //   success: function (e) {
+    //     if (tapIndex == 0) {
 
-  //     },
-  //      fail: function (res) {
-  //       console.log(res.errMsg)
-  //     }   
-  //   })
-  // },
+    //     console.log('Share');
+    //     }
 
+    //     if (tapIndex == 1) {
+    //       wx.saveImageToPhotosAlbum({
+    //         filePath: res.tempFilePath,
+    //       })
+    //       wx.showToast({
+    //         title: '保存成功',
+    //         icon: 'success',
+    //         duration: 1500
+    //       });
+    //     }	
+    //   },
+    //    fail: function (res) {
+    //     console.log(res.errMsg)
+    //   }   
+    // })
+  },
+  actionSheetbindchange: function () {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    })
+  },
+  openActionSheet(e) {
+    var self = this;
+    self.setData({
+      actionSheetHidden: !self.data.actionSheetHidden
+    });
+
+  },
+  listenerActionSheet: function () {
+    var self = this;
+    self.setData({
+      actionSheetHidden: !self.data.actionSheetHidden
+    })
+  },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-
     return {
-      title: this.data.title,
+      title: "你有一个行程邀请：" + this.data.title,
       path: 'pages/share/share?id=' + this.data.id,
       success: function (res) {
         // Forwarding successful
@@ -241,13 +268,7 @@ Page({
     console.log('pages/share/share?id=' + this.data.id)
   },
 
-  openActionSheet(e) {
-    var self = this;
-    self.setData({
-      actionSheetHidden: !self.data.actionSheetHidden
-    });
 
-  },
 
   bindMaptop: function () {
     // console.log({
@@ -278,14 +299,6 @@ Page({
   },
 
 
-  listenerActionSheet: function () {
-    var self = this;
-    self.setData({
-      actionSheetHidden: !self.data.actionSheetHidden
-
-    })
-  },
-
   formSubmit: function (e) {
     let id = this.data.id;
     let token = getApp().globalData.token;
@@ -312,6 +325,44 @@ Page({
     }
     wx.request(options);
   },
+
+  // code() {
+  //   let _this = this
+  //   _this.data.qrCode = new QRCode('canvas', {
+  //     text: url('pages/share/share?id=' + _this.data.id),
+  //     width: '200',
+  //     height: '200',
+  //     colorLight: _this.data.colorLight,
+  //     colorDark: _this.data.colorDark,
+  //     correctLevel: QRCode.CorrectLevel.H
+  //   })
+  //   console.log(text);
+  // },
+
+  download() {
+    this.data.qrCode.exportImage(function (res) {
+      wx.saveImageToPhotosAlbum({
+        filePath: this.data.qrCode,
+        success(ret) {
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000
+          });
+        },
+        fail() {
+          wx.showToast({
+            title: '保存失败',
+            duration: 2000
+          });
+        }
+      });
+      console.log(qrCode)
+    })
+  },
+
+
+  
 
   mergeResult: function () {
     let meeting = this.data.meeting;
