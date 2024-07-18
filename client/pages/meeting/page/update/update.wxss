@@ -2,25 +2,40 @@
 @import "../../../../libs/weui-wxss.wxss";
 
 page {
+  color: #333;
   background-color: white;
   font-family: "黑体";
-  color: #333;
   font-size:16px;
 }
 
 .container {
-  height: 80%;
-  position: relative;
-  padding: 0 0 25%;
-}
-form {
-  width: 100%;
-}
+    height: 80%;
+    position: relative;
+    padding: 0 0 25%;
+  }
+  
+.overlay {
+    background-color: white;
+    width: 100%;
+    height: 100vh;
+  }
 
 .wrapper {
-  min-height: 87vh;
-  box-sizing: border-box;
-}
+    min-height: 90vh;
+    box-sizing: border-box;
+  }
+
+  .section:first-child {
+    border-bottom: 12rpx solid #eeeeee;
+  }
+  
+  .section--text {
+    padding: 15rpx 15rpx
+  }
+
+  .section--elem {
+    padding:15rpx 15rpx;
+  }
 
 .picker {
   width: 100%;
@@ -40,26 +55,10 @@ form {
   border-radius: 50rpx;
 }
 
-.section {
-  display: flex;
-  width: 100%;
-  padding: 5rpx;
-  border-bottom: 12rpx solid #eeeeee;
-}
 
-.section:first-child {
-  border-bottom: 12rpx solid #eeeeee;
-}
 
-.section--text {
-  
-  padding: 15rpx 10rpx
-}
 
-.section--elem {
-  flex: 3 0;
-  padding:15rpx 10rpx;
-}
+
 
 /* 文字內容 */
 /* .textarea{
@@ -76,8 +75,6 @@ form {
  position: absolute;
  top: 130rpx;
 
- font-size: 25rpx;
-
 }
  
 /* 地址細節 */
@@ -93,10 +90,7 @@ form {
   padding: 0px !important;
 }
 
-.map {
-  width: 100%;
-  height: 20vh;
-}
+
 
 /* 時間內容 */
 .date{
@@ -110,11 +104,11 @@ form {
   padding: 12rpx 0rpx;
 }
 .howlong {
-  text-align: right;
-  font-size: 12px;
-  color: #8e8e93;
-  padding: 8px;
+    padding: 12rpx 0rpx;
+     text-align: right;
+    color: #b6b6b6;
 }
+
 
 
 
@@ -143,6 +137,7 @@ form {
   width: 50%;
   flex: 1 1 0px;
   color: #8e8e93;
+  font-size:16px;
 }
 
 .showmanber {
@@ -160,11 +155,6 @@ form {
   background-color: rgb(255, 255, 255);
 }
 
-.overlay {
-  background-color: white;
-  width: 100%;
-  height: 100vh;
-}
 
 
 
@@ -214,9 +204,8 @@ form {
 .share {
   height:100rpx;
   width:60%;
-  font-size:40rpx;
   color:white;
-  border-radius:100rpx;
+  border-radius:30rpx;
   background:-webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
   left:38%;
   bottom:50rpx;
@@ -237,7 +226,6 @@ form {
   width: 24px;
   height: 24px;
   cursor: pointer;
-  font-size: 20px;
 }
 
 .ql-container {
@@ -250,7 +238,6 @@ form {
   border-bottom: 1px solid #ccc; */
   background: #fff;
   margin-top: 20px;
-  font-size: 16px;
   line-height: 1.5;
 }
 
