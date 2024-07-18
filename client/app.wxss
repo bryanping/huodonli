@@ -13,3 +13,7 @@
     padding-left: 30rpx;
     padding-right: 30rpx;
   }
+  .page-section{
+    width: 100%;
+    margin-bottom: 60rpx;
+  }

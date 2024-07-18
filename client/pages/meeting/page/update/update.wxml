@@ -35,12 +35,16 @@
       </view>
 
       <view class="section">
-        <view class="section--text">时间</view>
+        <view class="section--text">日期</view>
         <picker mode="date" class="date" value="{{date}}" bindchange="bindDateStart">
           <view class="picker">{{date}}</view>
         </picker>
+       
+      </view>
+      <view class="section">
+        <view class="section--text">时间</view>
         <picker mode="time" class="time" value="{{start_time}}" bindchange="bindTime">
-          <view class="picker">{{start_time}}-</view>
+          <view class="picker">{{start_time}}    －</view>
         </picker>
         <picker mode="time" class="end_time" value="{{end_time}}" bindchange="bindEndTime">
           <view class="picker"> {{end_time}}</view>
@@ -48,7 +52,7 @@
         <view class="howlong">
           ({{how_long}})
         </view>
-      </view>
+    </view>
 
       <view class="section">
         <view class="section--text">地点</view>

@@ -26,15 +26,13 @@ page {
   }
 
   .section:first-child {
-    border-bottom: 12rpx solid #eeeeee;
-  }
-  
-  .section--text {
-    padding: 15rpx 15rpx
-  }
+    border-bottom: 1rpx solid #D9D9D9;
+  }  
 
   .section--elem {
-    padding:15rpx 15rpx;
+    padding:12rpx 10rpx;
+    flex: 5;
+    text-align: right;
   }
 
 .picker {
@@ -54,10 +52,6 @@ page {
   height: 50rpx;
   border-radius: 50rpx;
 }
-
-
-
-
 
 
 /* 文字內容 */
@@ -80,57 +74,42 @@ page {
 /* 地址細節 */
 .destination{
   text-overflow:ellipsis;
+  text-align: left;
+  padding-left: 10rpx;
 }
 .address{
   flex: 2 0;
   font-size: 12px;
   color: rgb(150, 150, 150);
+  text-align: left;
+  padding-left: 10rpx;
 }
+
 .map_container {
   padding: 0px !important;
 }
-
-
+.nav_icon {
+    width: 35px;
+    height: 35px;
+    position: relative;
+    padding: 15rpx 25rpx 15rpx 25rpx;
+  }
 
 /* 時間內容 */
 .date{
-  padding: 12rpx 10rpx;
+  padding: 10rpx 25rpx 0 20rpx;
+  text-align: left;
 }
 .time{
-  padding: 12rpx 0rpx;
-  margin-left:4.5%;
+
+    padding: 12rpx 10rpx 0 20rpx;
+
 }
 .end_time{
-  padding: 12rpx 0rpx;
+    padding:12rpx 12rpx 0 0;
+
+
 }
-.howlong {
-    padding: 12rpx 0rpx;
-     text-align: right;
-    color: #b6b6b6;
-}
-
-
-
-
-/* .color-picker {
-  text-align: center;
-} */
-
-/* .submit {
-  display: block;
-  height: 14vh;
-  width: 100%;
-  padding: 10px;
-  font-size: 42rpx;
-  color: white;
-  border: 0;
-  border-radius: 0;
-  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
-} */
-
-
-
-
 
 
 .control--button {
@@ -154,9 +133,6 @@ page {
 .delete {
   background-color: rgb(255, 255, 255);
 }
-
-
-
 
 .user {
   display: flex;
@@ -194,12 +170,7 @@ page {
   flex: 1 0;
   text-align-last: center;
 }
-.nav_icon {
-  width: 35px;
-  height: 35px;
-  position:relative;
-  padding:22rpx 27rpx 0 10rpx;
-}
+
 
 .share {
   height:100rpx;
@@ -244,3 +215,21 @@ page {
 .ql-active {
   color: #06c;
 }
+
+
+/* .color-picker {
+  text-align: center;
+} */
+
+/* .submit {
+  display: block;
+  height: 14vh;
+  width: 100%;
+  padding: 10px;
+  font-size: 42rpx;
+  color: white;
+  border: 0;
+  border-radius: 0;
+  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+} */
+

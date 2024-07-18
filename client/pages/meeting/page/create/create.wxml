@@ -2,7 +2,7 @@
 
 <view class='container'>
   <form bindsubmit="formSubmit" report-submit='true'>
-    <view class='wrapper' style="width: auto; height: 1182rpx; display: block; box-sizing: border-box">
+    <view class='wrapper'>
       <view class='section'>
         <view class="section--text">资讯</view>
         <!-- <view class='section--elem'> -->
@@ -10,26 +10,28 @@
         <!-- </view> -->
       </view>
 
-      <view class="section" style="width: 750rpx; height: 100rpx; display: flex; box-sizing: border-box">
-        <view class="section--text">开始时间</view>
+      <view class="section">
+        <view class="section--text">日期</view>
         <picker mode="date" class="date" value="{{date}}" bindchange="bindDateStart">
-          <view class="picker" style="width: 290rpx; height: 48rpx; display: block; box-sizing: border-box; position: relative; left: 0rpx; top: 0rpx">{{date}}</view>
+          <view class="picker">{{date}}</view>
         </picker>
         <view>{{week}}</view>
-        <picker mode="time" class="start" value="{{start_time}}" bindchange="bindTime">
-          <view class="picker">{{start_time}}</view>
+        
+        
+        <!-- <switch bindchange="switch1Change"/> -->
+      </view>
+
+      <view class="section">
+        <view class='section--text'>时间</view>
+        <picker class="start" mode="time"  value="{{start_time}}" bindchange="bindTime">
+          <view class="picker">{{start_time}}    －</view>
         </picker>
 
-        <!-- <switch bindchange="switch1Change"/> -->
-
-      </view>
-      <view class="section" style="width: 750rpx; height: 100rpx; display: flex; box-sizing: border-box">
-        <view class='section--text'>结束时间</view>
         <picker mode="time" class="end" value="{{end_time}}" bindchange="bindEndTime">
           <view class="picker">{{end_time}}</view>
         </picker>
         <!-- <switch bindchange="switch1Change"/> -->
-        <!-- <view class="howlong">({{how_long}}) </view> -->
+        <view class="howlong">({{how_long}}) </view>
       </view>
 
 

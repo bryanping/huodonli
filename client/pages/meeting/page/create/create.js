@@ -45,7 +45,7 @@ Page({
     count: [1, 2, 3,],
     options: null,
     imageList: [],
-    // formId: '',
+    formId: '',
   },
 
   /**
