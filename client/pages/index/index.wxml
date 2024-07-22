@@ -12,17 +12,17 @@
     <view class="tab-item {{currentTab==0 ? 'one' : ''}} " data-current="0" bindtap="swichNav">
       朋友圈</view>
 
-     <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
+     <!-- <view class="tab-item {{currentTab==1 ? 'two' : ''}}" data-current="1" bindtap="swichNav">
           社群</view> 
      <view class="tab-item {{currentTab==2 ? 'three' : ''}}" data-current="2" bindtap="swichNav">
-          附近活动</view> 
+          附近活动</view>  -->
   </view>
 </view>
 <!--内容主体-->
 <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
   <swiper-item>
     <scroll-view scroll-y="true" class="scoll-h">
-      <view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'> 可关注朋友的活动获取资讯 </view>
+      <view style='{{ empty ? "display: block" : "display: none" }}' class='eventnon'> 参与朋友活动后即</view>
 
       <view style='{{loader === true ? "display:none" : "display:block"}}' class="wrapper">
         <block wx:for="{{resultArr}}" wx:key="key" wx:for-item="dateArr">
@@ -43,7 +43,7 @@
                   {{item.start_time}}
                 </view>
                 <!--<view class="request__content">-->
-                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: {{item.color}}" class="request__content">
+                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="request__content">
                   {{ item.title }}
                   <!-- </view>-->
                 </navigator>

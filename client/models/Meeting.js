@@ -45,15 +45,15 @@ class Meeting extends Model {
     let errors = [];
 
     if (!this.title || this.title == '' || this.title.length == 0) {
-      errors.push("Title can't be empty");
+      errors.push("请填写标题");
     }
 
     if (!this.destination || this.destination == '' || this.destination.length == 0) {
-      errors.push("Destination can't be empty");
+      errors.push("请填写目的地");
     }
 
     if (!this.mapObj || this.mapObj == undefined) {
-      errors.push('Need choose destination');
+      errors.push('需要选择目的地');
     }
 
     return errors;

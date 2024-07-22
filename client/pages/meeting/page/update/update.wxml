@@ -56,7 +56,7 @@
 
       <view class="section">
         <view class="section--text">地点</view>
-        <view class='section--elem'>
+        <view class='section--map'>
           <input class="destination" name="title" value="{{destination}}" bindtouchstart="bindMapSelection" />
           <view class='address' style='{{mapObj ? "display:block" : "display:none"}}'>{{mapObj.address}}</view>
         </view>
@@ -67,8 +67,8 @@
           {{i.name}}
         </view>
       </view> -->
-
-      <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container" bindtouchstart="bindMaptop">
+        <!-- 地图删除了bindtouchstart="bindMaptop" 解决误触问题-->
+      <view style='{{mapObj ? "display:block" : "display:none"}}' class="section--elem map_container">
         <map class="map" id="map" longitude="{{mapObj.longitude}}" latitude="{{mapObj.latitude}}" scale="15" show-location="true" markers="{{mapObj.markers}}" bindmarkertap="makertap"></map>
       </view>
 
@@ -108,7 +108,7 @@
 
 
     <!-- 退出行程功能 -->
-    <!-- <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}'  class='quit' src="/img/quit.png"></image> -->
+    <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}'  class='quit' src="/img/quit.png"></image>
 
 
     <!-- 未來的功能-->

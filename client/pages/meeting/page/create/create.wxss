@@ -19,9 +19,6 @@ switch {
   padding:29rpx 15rpx;
 }
 
-form {
-  width: 100%;
-}
 
 .address{
   flex: 2 0;
@@ -85,7 +82,7 @@ form {
 } */
 
 .wrapper {
-  min-height: 90vh;
+  min-height: 87vh;
   box-sizing: border-box;
 }
 
@@ -94,12 +91,9 @@ form {
   color: white;
   border-radius: 8pt;
   background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
-  position: fixed;
   height: 80rpx;
-  margin-right: 20rpx;
-  left: 30rpx;
-  top: 1190rpx;
-
+  text-align: center;
+  font-size: 16px;
 }
 
 .map_container {

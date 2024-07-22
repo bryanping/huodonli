@@ -5,7 +5,9 @@
  * MIT license
  */
  
-
+ form {
+    width: 100%;
+  }
 
  .section {
     display: flex;
@@ -39,7 +41,7 @@
     display: block;
     /* margin: 0 auto 0 auto; */
     /* height: 150rpx; */
-    padding: 5rpx 0 0 5rpx;
+    padding: 16rpx 0 0 20rpx;
   }
 
   .map {

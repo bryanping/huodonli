@@ -21,7 +21,7 @@ page {
   }
 
 .wrapper {
-    min-height: 90vh;
+    min-height: 87vh;
     box-sizing: border-box;
   }
 
@@ -30,7 +30,11 @@ page {
   }  
 
   .section--elem {
-    padding:12rpx 10rpx;
+    flex: auto;
+    text-align: right;
+  }
+  .section--map{
+    padding:10rpx 10rpx;
     flex: 5;
     text-align: right;
   }
@@ -173,14 +177,13 @@ page {
 
 
 .share {
-  height:100rpx;
-  width:60%;
-  color:white;
-  border-radius:30rpx;
-  background:-webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
-  left:38%;
-  bottom:50rpx;
-  position:fixed;
+    width: 90%;
+    color: white;
+    border-radius: 8pt;
+    background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+    bottom: 50rpx;
+    text-align: center;
+    font-size: 16px;
 }
 
 /* * * * * * * * 富文排版 * * * * * * * * */

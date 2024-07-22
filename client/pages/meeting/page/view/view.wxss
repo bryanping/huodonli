@@ -21,22 +21,9 @@ button {
   background-color: #fff;
 }
 
-form {
-  width: 100%;
-}
-
-.section {
-  display: flex;
-  padding: 5rpx;
-  border-bottom: 12rpx solid #eee;
-}
 
 .section:first-child {
-  border-bottom: none;
-}
-
-.section--text {
-  padding: 15rpx 10rpx;
+    border-bottom: 1rpx solid #D9D9D9;
 }
 
 .detail {
@@ -65,13 +52,8 @@ form {
 }
 
 .howlong {
-  text-align: right;
-  font-size: 12px;
-  color: #8e8e93;
   padding: 20rpx 0 0 20rpx;
 }
-
-
 
 .limit--text {
   padding: 15rpx 10rpx;
@@ -118,14 +100,13 @@ form {
 }
 
 .button {
-  right: 3%;
-  bottom: 50rpx;
-  color: white;
-  height: 100rpx;
-  position: fixed;
-  font-size: 40rpx;
-  border-radius: 100rpx;
-  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+    width: 90%;
+    color: white;
+    border-radius: 8pt;
+    background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+    bottom: 50rpx;
+    text-align: center;
+    font-size: 16px;
 }
 
 .share {
@@ -148,10 +129,6 @@ form {
   padding: 0px !important;
 }
 
-.map {
-  width: 100%;
-  height: 20vh;
-}
 
 
 .overlay {
@@ -185,8 +162,17 @@ form {
 
 .members {
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   align-items: flex-start;
+  border-bottom:none;
+  display: flex;
+}
+.members--limit {
+    font-size: 12px;
+    color: rgb(150, 150, 150);
+    display: flex;
+    padding: 15rpx 0 0 15rpx;
+    border-bottom: 1rpx solid #D9D9D9;
 }
 
 .showmenber {
