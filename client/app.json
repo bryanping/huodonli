@@ -11,6 +11,11 @@
     "pages/login/login",
     "pages/user/page/join/join"
   ],
+  
+  "requiredPrivateInfos": [
+        "chooseLocation",
+        "getLocation"
+  ],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置讯息将用于导航使用"
