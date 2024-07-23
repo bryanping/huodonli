@@ -34,7 +34,7 @@
 
       <view class="section">
         <view class="section--text">地点：</view>
-        <view class='section--elem'>
+        <view class='section--map'>
           <view class='destination' bindtouchstart="bindMaptop">{{destination}}</view>
           <view class='address' bindtouchstart="bindMaptop">{{mapObj.address}}</view>
         </view>

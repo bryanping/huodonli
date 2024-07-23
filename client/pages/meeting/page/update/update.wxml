@@ -22,7 +22,7 @@
         <textarea class="input"
         value="{{title}}"
         placeholder="活动标题"
-        placeholder-style="color: #d3d3d4"
+        placeholder-style="color: #808080"
         maxlength="-1"
         auto-height='{{true}}'
         bindinput="bindKeyInput"

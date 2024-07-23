@@ -6,7 +6,7 @@
       <view class='section'>
         <view class="section--text">资讯</view>
         <!-- <view class='section--elem'> -->
-          <textarea class="input" placeholder="活动标题" bindblur="bindTextAreaBlur" maxlength="-1" placeholder-style="color: #d3d3d4" auto-height='{{true}}' name="title" bindinput="bindKeyInput" value="{{title}}"></textarea>
+          <textarea class="input" placeholder="活动标题" bindblur="bindTextAreaBlur" maxlength="-1" placeholder-style="color: #808080" auto-height='{{true}}' name="title" bindinput="bindKeyInput" value="{{title}}"></textarea>
         <!-- </view> -->
       </view>
 
@@ -38,8 +38,8 @@
 
       <view class="section border">
         <view class="section--text">地点</view>
-        <view class="section--elem" bindtouchstart="bindMapSelection">
-          <input class="destination" placeholder="请输入目的地" placeholder-style="color: #d3d3d4" value="{{destination}}" />
+        <view class="section--map" bindtouchstart="bindMapSelection">
+          <input class="destination" placeholder="请输入目的地" placeholder-style="color: #808080" value="{{destination}}" />
           <view class='address' style='{{mapObj ? "display:block" : "display:none"}}'>{{mapObj.address}}</view>
         </view>
       </view>

@@ -30,6 +30,12 @@
     color: #b2b2b2;
     padding: 5rpx;
   }
+  .section--map{
+    padding:12rpx 10rpx 0 20rpx;
+    flex: 5;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 
   .search--box {
     text-align: center;
@@ -42,7 +48,7 @@
     display: block;
     /* margin: 0 auto 0 auto; */
     /* height: 150rpx; */
-    padding: 8rpx 0 0 20rpx;
+    padding: 2rpx 0 0 20rpx;
   }
 
   .map {
@@ -62,6 +68,10 @@
     color: #b6b6b6;
     font-size: 12px;
 }
+
+.section:first-child {
+    border-bottom: 1rpx solid #D9D9D9;
+  }
 
 
  /* page {

@@ -22,9 +22,7 @@ page {
   padding: 5rpx;
   border-bottom: 2rpx solid #eeeeee;
 }
-.section:first-child {
-  border-bottom: 16rpx solid #eeeeee;
-}
+
 
 .section--text {
 

@@ -52,9 +52,7 @@ switch {
   border-bottom: 1rpx solid #D9D9D9;
 }
 
-.section:first-child {
-  border-bottom: 1rpx solid #D9D9D9;
-}
+
 
 
 
