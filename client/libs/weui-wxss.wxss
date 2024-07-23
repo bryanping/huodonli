@@ -34,6 +34,7 @@
   .search--box {
     text-align: center;
     background-color: white;
+    
   }
 
   .input {
@@ -41,7 +42,7 @@
     display: block;
     /* margin: 0 auto 0 auto; */
     /* height: 150rpx; */
-    padding: 12rpx 0 0 20rpx;
+    padding: 8rpx 0 0 20rpx;
   }
 
   .map {
