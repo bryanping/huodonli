@@ -108,7 +108,7 @@
 
 
     <!-- 退出行程功能 -->
-    <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}'  class='quit' src="/img/quit.png"></image>
+    <!-- <image style='{{submit_text === "Share" ? "display:block" : "display:none" }}'  class='quit' src="/img/quit.png"></image> -->
 
 
     <!-- 未來的功能-->

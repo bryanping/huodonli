@@ -90,7 +90,9 @@
 
     <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class="button join">参与行程</button>
 
-    <over-image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></over-image>
+    <button open-type="share" class='share'>分享好友</button>
+
+    <!-- <over-image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></over-image> -->
 
     <!-- <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' open-type="share" type="primary" class='button share'>分享好友</button> -->
 
@@ -104,7 +106,7 @@
 
     <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='button join' bindtap="actionSheetTap">参与行程</button> -->
 
-    <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='button share' tap="listenerButton" bindtap="actionSheetTap" type="primary">分享给朋友</button>
+    <!-- <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='button share' tap="listenerButton" bindtap="actionSheetTap" type="primary">分享给朋友</button>
     <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
       <action-sheet-item open-type="share">
         <button open-type="share">分享给好友</button>
@@ -113,7 +115,7 @@
         <button bindtap="download">生成分享二維碼</button>
       </action-sheet-item>
       <action-sheet-cancel>取消</action-sheet-cancel>
-    </action-sheet>
+    </action-sheet> -->
     
 
   </form>

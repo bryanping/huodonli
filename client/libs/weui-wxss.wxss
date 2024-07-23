@@ -41,7 +41,7 @@
     display: block;
     /* margin: 0 auto 0 auto; */
     /* height: 150rpx; */
-    padding: 16rpx 0 0 20rpx;
+    padding: 12rpx 0 0 20rpx;
   }
 
   .map {

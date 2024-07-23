@@ -110,7 +110,13 @@ button {
 }
 
 .share {
-  width: 79%;
+    width: 90%;
+    color: white;
+    border-radius: 8pt;
+    background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+    bottom: 50rpx;
+    text-align: center;
+    font-size: 16px;
 }
 
 .join {
