@@ -6,7 +6,7 @@
       <view class='section'>
         <view class="section--text">资讯</view>
         <!-- <view class='section--elem'> -->
-          <textarea class="input" placeholder="活动标题" bindblur="bindTextAreaBlur" maxlength="-1" placeholder-style="color: #808080" auto-height='{{true}}' name="title" bindinput="bindKeyInput" value="{{title}}"></textarea>
+          <textarea class="input" placeholder="标题" bindblur="bindTextAreaBlur" maxlength="-1" placeholder-style="color: #808080" auto-height='{{true}}' name="title" bindinput="bindKeyInput" value="{{title}}"></textarea>
         <!-- </view> -->
       </view>
 

@@ -34,15 +34,6 @@ page {
   padding: 12rpx 10rpx;
 
 }
-.date{
-  padding: 12rpx 10rpx;
-
-}
-.time{
-  padding: 12rpx 0rpx;
-  margin-left:5%;
-
-}
 
 .howlong {
   text-align: right;
