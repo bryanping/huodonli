@@ -24,9 +24,9 @@
       <view class="section">
         <view class='section--text'>时间</view>
         <picker class="start" mode="time"  value="{{start_time}}" bindchange="bindTime">
-          <view class="picker">{{start_time}}    －</view>
+          <view class="picker">{{start_time}}</view>
         </picker>
-
+        <view class="time--">－</view>
         <picker mode="time" class="end" value="{{end_time}}" bindchange="bindEndTime">
           <view class="picker">{{end_time}}</view>
         </picker>

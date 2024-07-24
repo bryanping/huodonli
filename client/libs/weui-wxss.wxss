@@ -79,6 +79,9 @@
 .end_time{
     padding:10rpx 12rpx 0 22rpx;
 }
+.time--{
+    padding: 12rpx;
+}
 
 .section:first-child {
     border-bottom: 1rpx solid #D9D9D9;

@@ -97,20 +97,20 @@ switch {
 }
 .date {
     flex: 1;
-    padding:12rpx 25rpx 0 0;
+    padding:12rpx 100rpx 0 0;
     color:#e64340;
     text-align:center;
   }
   
 .start {
-    flex: 1;
-    padding: 12rpx 0 0 100rpx;
-    text-align: right;
+    /* flex: 1; */
+    padding: 12rpx 45rpx 0 130rpx;
+    /* text-align: right; */
   }
   .end {
-    padding:12rpx 0 0 15rpx;
+    padding:12rpx 0 0 40rpx;
     flex: 1;
-    text-align:left;
+    /* text-align:left; */
   }
   .destination {
     padding:0 25rpx 0 0;
