@@ -39,11 +39,11 @@
 
             <block class="wrapper" wx:for="{{dateObj}}" wx:key="key" wx:for-item="item">
               <view class="request__container">
-                <view class="request__time">
+                <view class="meeting__time">
                   {{item.start_time}}
                 </view>
                 <!--<view class="request__content">-->
-                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="request__content">
+                <navigator url="/pages/meeting/page/view/view?id={{item.id}}" style="background-color: #{{item.color}}" class="meeting__content">
                   {{ item.title }}
                   <!-- </view>-->
                 </navigator>
