@@ -12,6 +12,7 @@
         <text class="nickname">{{ nickName }} </text>
         <text class="devent"> 活动发起数: {{ created }}</text>
       </view>
+      <button class="userFocusBT"> 关注 </button>
     </view>
 
     <!-- <open-data type="userGender" lang="zh_CN"></open-data> -->
@@ -23,32 +24,31 @@
 
     <view>
       <!--顶部导航栏-->
-      <!-- <view class="swiper-tab">
-        <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
-          历史</view>
-        <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
-          成就</view>
-        <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">
-          设定</view>
-      </view> -->
+      <view class="swiper-tab">
+         <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+          历史  
+        </view>
+
+        <!-- <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+          关注
+        </view>  -->
+        <!-- <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+          关注
+        </view> -->
+      </view>
 
       <!--内容主体-->
-      <!-- <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
-        <swiper-item>
-
-
-
-
-
+      <swiper class="swiper" current="{{currentTab}}" indicator-dots="{{false}}" duration="200" bindchange="swiperChange">
+        <!-- <swiper-item>
           <view class="swiper-item">开发中敬请期待</view>
-        </swiper-item>
+        </swiper-item> -->
         <swiper-item>
-          <view class="swiper-item">开发中敬请期待</view>
-        </swiper-item>
-        <swiper-item>
-          <view class="swiper-item">开发中敬请期待</view>
-        </swiper-item>
-      </swiper> -->
+          <view class="swiper-item">开发中请耐心等候</view>
+        </swiper-item> 
+        <!-- <swiper-item>
+          <view class="swiper-item">开发中请耐心等候</view>
+        </swiper-item> -->
+      </swiper>
     </view>
   </form>
 </view>

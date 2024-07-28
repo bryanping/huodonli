@@ -16,25 +16,25 @@
 .avatar {
   width: 100rpx;
   height: 100rpx;
-  margin: 0 20rpx;
+  margin: 0 35rpx;
   border-radius: 50%;
   float: left;
 }
 .title{
 flex-direction: column;
-height: 75rpx;
+height: 120rpx;
 }
 
 .nickname {
   color:#aaa;
-  height:40rpx;
+  height:45rpx;
   display: flex;
-  padding: 6rpx 0;
+
 }
 
 .devent {
   color: #aaa;
-  font-size: 25rpx;
+  font-size: 20rpx;
 }
 
 
@@ -60,9 +60,10 @@ height: 75rpx;
 }
 
 .swiper {
-  height: 81vh;
+  height: 23vh;
   width: 100%;
   color: white;
+  margin: 20rpx 0 0 0;
 }
 
 .swiper-item {
@@ -75,4 +76,5 @@ height: 75rpx;
 .block {
   flex: 2 2;
   line-height: 5vh;
+  margin: 15rpx 0 0 0;
 }

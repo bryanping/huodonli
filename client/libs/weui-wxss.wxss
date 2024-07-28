@@ -87,14 +87,14 @@
     border-bottom: 1rpx solid #D9D9D9;
   }
 .userFocusBT{
-    width: 180rpx;
+    width: 170rpx;
     color: white;
     border-radius: 12pt;
-    background: red;
+    background: #ff4a4a;
     /* bottom: 50rpx; */
     /* text-align: right; */
     font-size: 12px;
-    margin: 10rpx 0 0 540rpx;
+    margin: 0 0 0 570rpx;
 }
 
 .meeting__content {

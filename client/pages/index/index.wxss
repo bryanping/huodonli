@@ -48,25 +48,7 @@
   color: #333;
 }
 
-.request__time {
-  padding: 10rpx 15rpx 0 0;
-  flex: 1;
-  color: #c7c7cc;
-  font-size: 16px;
-}
 
-.request__content {
-  flex: 7;
-  text-align: center;
-  font-weight: bold;
-  font-size:16px;
-  padding: 10rpx;
-  border-radius: 7px;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
-  color: white;
-}
 
 .selected_date {
   text-align: center;
