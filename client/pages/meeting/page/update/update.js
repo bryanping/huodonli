@@ -37,6 +37,7 @@ Page({
     formats: {},
     bottom: 0,
     readOnly: false,
+    actionSheetHidden: true,
   },
 
   /**
@@ -72,12 +73,7 @@ Page({
     
       console.log('print resp.data.data');
       console.log(resp.data.data);
-
     });
-   
-
-
-
   },
 
   /**
@@ -158,6 +154,22 @@ Page({
     })
   },
 
+  cancel: function() {
+   
+    wx.navigateBack({
+      delta: 1,
+      success: function(res) {
+        // 可以传递参数到上一页面，通知它 action-sheet 应该收起
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2]; // 获取上一页面
+        if (prevPage) {
+          prevPage.setData({
+            actionSheetHidden: true // 设置上一页面的 action-sheet 为隐藏状态
+          });
+        }
+      }
+    });
+},
   bindTextAreaBlur: function (e) {
     this.setData({
       title: e.detail.value
@@ -522,6 +534,26 @@ Page({
       text: formatDate
     })
   },
+  // 触发显示 action-sheet 的方法
+  showActionSheet: function() {
+    this.setData({
+      actionSheetHidden: false
+    });
+  },
+
+  // 隐藏 action-sheet 的方法
+  hideActionSheet: function() {
+    this.setData({
+      actionSheetHidden: true
+    });
+  },
+
+  // 处理 action-sheet 中的选项点击事件
+  listenerActionSheet: function(event) {
+    console.log('Action sheet option selected:', event);
+    this.hideActionSheet(); // 隐藏 action-sheet
+  },
+
   insertImage() {
     const that = this
     wx.chooseImage({

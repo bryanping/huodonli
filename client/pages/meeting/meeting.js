@@ -98,12 +98,10 @@ Page({
           loader: false,
         }); 
 
-        console.log("length" + invitedMeetingsData.length);
-        console.log("顯示this.data");
-        console.log(this.data);
         this.getDateList(y, mon - 1);
         this.mergeResult();
         console.log('print this.data');
+        console.log("length" + invitedMeetingsData.length);
         console.log(this.data);
       });
     });
@@ -175,67 +173,87 @@ Page({
   },
 
 // 上個月
-  preMonth: function() {
-    if (this.data.loader) {
+preMonth: function() {
+  if (this.data.loader) {
       return false;
-    }
-    var vm = this;
-    var curYear = vm.data.curYear;
-    var curMonth = Util.checkTime(vm.data.curMonth, true);
-    curYear = curMonth - 1 ? curYear : curYear - 1;
-    curMonth = curMonth - 1 ? curMonth - 1 : 12;
-    curMonth = Util.checkTime(curMonth);
-    this.setData({
+  }
+  var vm = this;
+  var curYear = vm.data.curYear;
+  var curMonth = Util.checkTime(vm.data.curMonth, true);
+  curYear = curMonth - 1 ? curYear : curYear - 1;
+  curMonth = curMonth - 1 ? curMonth - 1 : 12;
+  curMonth = Util.checkTime(curMonth);
+  this.setData({
       loader: true,
       curYear: curYear,
       curMonth: curMonth,
-      
-    });
-    var mettings = []
-    this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
-      mettings.push(...resp.data.data)
-      return this.getInvitedMeetingsByDate(curYear, curMonth)
-    }).then((resp) => {
-      mettings.push(...resp.data.data)
+  });
+  var meetings = [];
+  this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
+      if (resp.data.data && Array.isArray(resp.data.data)) {
+          resp.data.data.forEach(event => {
+              event.type = 'self'; // 自建行程的类型
+          });
+          meetings.push(...resp.data.data);
+      }
+      return this.getInvitedMeetingsByDate(curYear, curMonth);
+  }).then((resp) => {
+      if (resp.data.data && Array.isArray(resp.data.data)) {
+          resp.data.data.forEach(event => {
+              event.type = 'invited'; // 邀请行程的类型
+          });
+          meetings.push(...resp.data.data);
+      }
       this.setData({
-        meeting: mettings,
-        loader: false
+          meeting: meetings,
+          loader: false
       });
       this.getDateList(curYear, curMonth - 1);
       this.mergeResult();
-    })
-  },
+  });
+},
 
 // 下個月
-  nextMonth: function() {
-    if (this.data.loader) {
+nextMonth: function() {
+  if (this.data.loader) {
       return false;
-    }
-    var vm = this;
-    var curYear = vm.data.curYear;
-    var curMonth = Util.checkTime(vm.data.curMonth, true);
-    curYear = curMonth + 1 === 13 ? curYear + 1 : curYear;
-    curMonth = curMonth + 1 === 13 ? 1 : curMonth + 1;
-    curMonth = Util.checkTime(curMonth);
-    this.setData({
+  }
+  var vm = this;
+  var curYear = vm.data.curYear;
+  var curMonth = Util.checkTime(vm.data.curMonth, true);
+  curYear = curMonth + 1 === 13 ? curYear + 1 : curYear;
+  curMonth = curMonth + 1 === 13 ? 1 : curMonth + 1;
+  curMonth = Util.checkTime(curMonth);
+  this.setData({
       loader: true,
       curYear: curYear,
       curMonth: curMonth,
-    });
-    var mettings = [];
-    this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
-      mettings.push(...resp.data.data)
-      return this.getInvitedMeetingsByDate(curYear, curMonth)
-    }).then((resp) => {
-      mettings.push(...resp.data.data)
+  });
+  var meetings = [];
+  this.getSelfMeetingsByDate(curYear, curMonth).then((resp) => {
+      if (resp.data.data && Array.isArray(resp.data.data)) {
+          resp.data.data.forEach(event => {
+              event.type = 'self'; // 自建行程的类型
+          });
+          meetings.push(...resp.data.data);
+      }
+      return this.getInvitedMeetingsByDate(curYear, curMonth);
+  }).then((resp) => {
+      if (resp.data.data && Array.isArray(resp.data.data)) {
+          resp.data.data.forEach(event => {
+              event.type = 'invited'; // 邀请行程的类型
+          });
+          meetings.push(...resp.data.data);
+      }
       this.setData({
-        meeting: mettings,
-        loader: false
+          meeting: meetings,
+          loader: false
       });
       this.getDateList(curYear, curMonth - 1);
-      this.mergeResult ();
-    })
-  },
+      this.mergeResult();
+  });
+},
+
   
   // 顯示自己的行程
   getSelfMeetingsByDate: function(year, month) {
@@ -253,58 +271,83 @@ Page({
       });
     });
   },
-  
-  // 顯示邀請的行程
-  getInvitedMeetingsByDate: function(year, month) {
-    return new Promise((resolve, reject) => {
+
+ // 顯示邀請的行程
+ getInvitedMeetingsByDate: function(year, month) {
+  return new Promise((resolve, reject) => {
       getApp().getToken().then(token => {
-        wx.request({
-          url: Config.service.getInvites + `?year=${year}&month=${month}&token=${token}`,
-          success(result) {
-            resolve(result.data)
-          },
-          fail(error) {
-            reject(error);
-          }
-        })
+          wx.request({
+              url: Config.service.getInvites + `?year=${year}&month=${month}&token=${token}`,
+              success(result) {
+                  if (Array.isArray(result.data.data)) {
+                      // 如果是数组，处理数据
+                      result.data.data.forEach(event => {
+                          event.type = 'invited';
+                          console.log('Invited event:', event);
+                      });
+                  } else {
+                      // 如果不是数组，打印数据内容，便于调试
+                  }
+                  resolve(result.data);
+              },
+              fail(error) {
+                  reject(error);
+              }
+          })
       });
-    });
-  },
+  });
+},
 
 
-  mergeResult: function() {
-    console.log("triggered mergeResult")
+
+mergeResult: function() {
+    console.log("triggered mergeResult");
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
+    let curYear = parseInt(this.data.curYear);
+    let curMonth = parseInt(this.data.curMonth);
+
     for (let i = 0; i < meeting.length; i++) {
-      console.log(meeting[i]);
+        let meetingDate = new Date(Util.correctDateString(meeting[i].date));
+        // console.log(`Meeting date: ${meeting[i].date}, Parsed: ${meetingDate}, Type: ${meeting[i].type}`);
 
-      if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) { // overdued meeting
-        meeting[i].color = 'e6e6e5';
-      } else if (meeting[i].type == 'invited') {
-       
-        console.log(" case 2: non-expired self: ");
-        console.log(meeting[i]); // 列印被邀請活動
-
-        meeting[i].color = '5eda74' // <<= 改成你要的顏色
-      }
-    }
-    for (let arrList of dateList) {
-      for (let elem of arrList) {
-        let meetings = meeting.filter((m) => {
-          let date = new Date(Util.correctDateString(m.date));
-          return date.getDate() === elem.date;
-        });
-        if (meetings.length > 0) {
-          elem.meetings = meetings;
+        // 处理过期的活动
+        if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
+            meeting[i].color = 'e6e6e5'; // 过期活动设为灰色
+        } else if (meeting[i].type === 'invited') {
+            meeting[i].color = '5eda74'; // 邀请的活动用绿色显示
+        } else {
+            meeting[i].color = 'ff6280'; // 自己创建的活动用蓝色显示
         }
-      }
     }
+
+    for (let arrList of dateList) {
+        for (let elem of arrList) {
+            let meetings = meeting.filter((m) => {
+                let date = new Date(Util.correctDateString(m.date));
+                // console.log(`Filtering by: ${curYear}-${curMonth}, Meeting date: ${date.getFullYear()}-${date.getMonth() + 1}`);
+                // 确保年份和月份匹配
+                return date.getFullYear() === curYear && (date.getMonth() + 1) === curMonth && date.getDate() === elem.date;
+            });
+
+            // 如果找到了与当前日期匹配的活动，则将其添加到日期对象中
+            if (meetings.length > 0) {
+                elem.meetings = meetings;
+            } else {
+                elem.meetings = []; // 确保没有活动时是空数组
+            }
+        }
+    }
+
     this.setData({
-      resultArr: dateList
-    }); 
-    console.log("顯示dateList");
+        resultArr: dateList
+    });
+
+    console.log("显示dateList");
     console.log(dateList);
-  }
+}
+
+
+
 });

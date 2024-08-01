@@ -58,9 +58,7 @@ page {
   bottom:50rpx;
   position:fixed;
 }
-.share {
-  width:79%;
-}
+
 .join {
   width:94%;
 }
@@ -112,11 +110,7 @@ page {
   text-overflow: ellipsis;
 }
 
-.members {
-  flex-wrap: wrap;
-  justify-content:center;
-  align-items:flex-start;
-}
+
 
 .nav_icon {
  width: 35px;

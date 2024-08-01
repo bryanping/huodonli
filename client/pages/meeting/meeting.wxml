@@ -30,7 +30,7 @@
             {{item.start_time}}
           </view>
           <navigator class="meeting__content" 
-          url="/pages/meeting/page/update/update?id={{item.id}}" 
+          url="/pages/meeting/page/view/view?id={{item.id}}" 
           style="background-color: #{{item.color}}" > 
           {{ item.title }} 
           </navigator>

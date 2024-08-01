@@ -12,7 +12,7 @@
         <text class="nickname">{{ nickName }} </text>
         <text class="devent"> 活动发起数: {{ created }}</text>
       </view>
-      <button class="userFocusBT"> 关注 </button>
+      <!-- <button class="userFocusBT"> 关注 </button> -->
     </view>
 
     <!-- <open-data type="userGender" lang="zh_CN"></open-data> -->

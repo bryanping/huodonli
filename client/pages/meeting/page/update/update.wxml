@@ -98,13 +98,15 @@
 
       <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"}}' class='showmanber'>{{ showAllText }}</button>
 
-      <view class='section'>
-        <button bindtap='onDelete' loading='{{loadingDelete}}' class='control--button delete'>删除活动</button>
-        <button formType="submit" loading='{{loadingUpdate}}' class='control--button update'>更新</button>
+      <view class='section--update'>
+        <button bindtap='cancel' class='delete'>返回</button>
+        <button formType="submit" loading='{{loadingUpdate}}' class='update'>更新</button>
       </view>
     </view>
 
-    <button open-type="share" class='share'>分享好友</button>
+    <!-- <button open-type="share" class='share'>分享好友</button> -->
+   
+    <!-- <image class="set_icon" bindtap="showActionSheet" src="/img/setting.png"></image> -->
 
 
     <!-- 退出行程功能 -->
@@ -112,17 +114,20 @@
 
 
     <!-- 未來的功能-->
-    <!--可生成照片傳送到朋友圈 -->
-
-    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share' bindtap="actionSheetTap">关注活动</button>
-  <button style='{{submit_text === "Share" ? "display:block" : "display:none" }}' class='share'  type="primary" bindtap="actionSheetTap">分享给朋友</button> -->
-
-    <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
-   <action-sheet-item open-type="share">
-         <button open-type="share">分享给好友</button>
-   </action-sheet-item>
-   <action-sheet-item>生成分享卡片</action-sheet-item>
-   <action-sheet-cancel>取消</action-sheet-cancel>
-</action-sheet> -->
+    <!-- 未來的功能--> 
+    <!--可生成照片傳送到朋友圈 --> 
+ 
+    <!-- <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='share' bindtap="actionSheetTap">关注活动</button>  -->
+  <!-- <button bindtap="showActionSheet">更新</button>  -->
+ 
+    <!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet"> 
+      <action-sheet-item> 
+        <button formType="submit" loading='{{loadingUpdate}}' class="update--action">编辑活动</button>
+      </action-sheet-item> 
+      <action-sheet-item>
+        <button bindtap='onDelete' loading='{{loadingDelete}}' class='delete--action'>活动取消</button>
+      </action-sheet-item> 
+      <action-sheet-cancel>取消</action-sheet-cancel> 
+    </action-sheet>  -->
   </form>
 </view>

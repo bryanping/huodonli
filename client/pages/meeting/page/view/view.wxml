@@ -9,8 +9,8 @@
 
     <view class='wrapper'>
       <view class="section">
-        <view class="section--text">资讯：</view>
-        <text auto-height="{{true}}" maxlength="-1" class='section--elem' selectable="true">{{title}}</text>
+        <view class="section--text">资讯</view>
+        <text auto-height="{{true}}" maxlength="-1" class='section--elem' user-select="true">{{title}}</text>
       </view>
 
       <!-- <view class="section">
@@ -19,7 +19,7 @@
       </view> -->
 
       <view class="section">
-        <view class="section--text">时间：</view>
+        <view class="section--text">时间</view>
         <view class="date">
           {{date}}
         </view>
@@ -33,7 +33,7 @@
 
 
       <view class="section">
-        <view class="section--text">地点：</view>
+        <view class="section--text">地点</view>
         <view class='section--map'>
           <view class='destination' bindtouchstart="bindMaptop">{{destination}}</view>
           <view class='address' bindtouchstart="bindMaptop">{{mapObj.address}}</view>
@@ -53,13 +53,16 @@
   <!-- 公開狀態、參與人數 -->
 
   <view class="members--limit">
-        <!-- <view class="limit--text">{公开活动}</view> -->
+        
         <view class="section--text">人数：</view>
         <view class='limit--text'>{{AllMembers.length}} 人参与</view>
+        <!-- <view class="limit--text">{公开活动}</view> -->
         <!-- 查看成員text -->
         <!-- <navigator class="showmenber" url="/pages/user/page/join/join?id={{item.id}}">
           show all
         </navigator> -->
+
+        
       </view>
 
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='members'>
@@ -70,10 +73,6 @@
           </navigator>
         </block>
       </view>
-     
-
-
-
       <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
     </view>
   
@@ -91,6 +90,7 @@
     <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class="button join">参与行程</button>
 
     <button open-type="share" class='share'>分享好友</button>
+    <image class="set_icon" bindtap="showActionSheet" src="/img/setting.png"></image>
 
     <!-- <over-image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></over-image> -->
 
@@ -116,6 +116,15 @@
       </action-sheet-item>
       <action-sheet-cancel>取消</action-sheet-cancel>
     </action-sheet> -->
+    <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet"> 
+      <action-sheet-item> 
+        <button class="update--action" bindtap="navigateToUpdate">编辑活动</button>
+      </action-sheet-item> 
+      <action-sheet-item>
+        <button bindtap='onDelete' loading='{{loadingDelete}}' class='delete--action'>取消活动</button>
+      </action-sheet-item> 
+      <action-sheet-cancel class="action--cancle">返回<view style='height:68rpx;'></view></action-sheet-cancel> 
+    </action-sheet> 
     
 
   </form>

@@ -42,14 +42,15 @@ Page({
     text: '',
     colorTypeSel: 'colorLight',
     cp_cus: ['#000', '#fff', '#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'],
-    cp_color: ''
+    cp_color: '',
+    loadingDelete: false,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     let obj = Meeting.findById(options.id).then(resp => {
       if (!resp.data || !resp.data.data) {
         wx.showModal({
@@ -169,6 +170,7 @@ Page({
       curDate: d,
       selectedDate: y + '/' + mon + '/' + d,
       selectedWeek: this.data.weekArr[i],
+      actionSheetHidden: this.data.actionSheetHidden || true ,
     });
     console.log(text)
   },
@@ -200,11 +202,30 @@ Page({
   onReachBottom: function () {
 
   },
+  showActionSheet: function() {
+    this.setData({
+      actionSheetHidden: false
+    });
+  },
 
+  // 隐藏 action-sheet 的方法
+  hideActionSheet: function() {
+    this.setData({
+      actionSheetHidden: true
+    });
+  },
+
+  // 处理 action-sheet 中的选项点击事件
+  listenerActionSheet: function(event) {
+    console.log('Action sheet option selected:', event);
+    this.hideActionSheet(); // 隐藏 action-sheet
+  },
   actionSheetTap: function () {
     this.setData({
       actionSheetHidden: false
     })
+
+    
     // wx.showActionSheet({
     //   itemList: ['分享給好友', '生成分享卡片'],
     //   success: function (e) {
@@ -361,7 +382,12 @@ Page({
     })
   },
 
-
+  navigateToUpdate: function() {
+    const id = this.data.id; // 从 data 中获取活动的 ID
+    wx.navigateTo({
+      url: `/pages/meeting/page/update/update?id=${id}`,
+    });
+  },
   
 
   mergeResult: function () {
@@ -389,6 +415,59 @@ Page({
     }
     this.setData({
       resultArr: resultArr
+    });
+  },
+
+  onDelete: function() {
+    // 确保正在执行删除操作时不重复触发
+    if (this.data.loadingDelete) {
+      return;
+    }
+
+    // 设置 loading 状态，防止重复点击
+    this.setData({
+      loadingDelete: true
+    });
+
+    wx.showModal({
+      title: '警告',
+      content: '你即将删除已发布的活动',
+      confirmText: '确认',
+      cancelText: '取消',
+      showCancel: true,
+      success: (res) => {
+        if (res.confirm) {
+          // 调用删除操作的接口
+          const id = this.data.id;
+          getApp().getToken().then(token => {
+            wx.request({
+              url: Config.service.deleteEvent,
+              method: "POST",
+              data: {
+                token: token,
+                event_id: id
+              },
+              success: (result) => {
+                console.log('删除成功', result);
+                wx.reLaunch({
+                  url: '/pages/meeting/meeting',
+                });
+              },
+              fail: (error) => {
+                console.log('删除失败', error);
+                this.setData({
+                  loadingDelete: false
+                });
+              }
+            });
+          });
+        } else {
+          // 用户取消删除
+          this.setData({
+            loadingDelete: false
+          });
+        }
+      }
     });
   },
 

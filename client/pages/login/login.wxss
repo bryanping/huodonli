@@ -55,7 +55,7 @@ page {
   padding: 0vh 47vw 0 44vw;
   font-weight: bold;
   font-size: 23px;
-  border-radius: 0px;
+  border-radius: 7px;
   letter-spacing: 15px;
   writing-mode: vertical-lr;
 }

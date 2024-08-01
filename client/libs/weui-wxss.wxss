@@ -89,7 +89,7 @@
 .userFocusBT{
     width: 170rpx;
     color: white;
-    border-radius: 12pt;
+    border-radius: 7px;
     background: #ff4a4a;
     /* bottom: 50rpx; */
     /* text-align: right; */
@@ -115,6 +115,80 @@
     color: #b2b2b2;
     font-size:16px;
   }
+
+
+.address{
+  flex: 2 0;
+  font-size: 12px;
+  color: rgb(150, 150, 150);
+  text-align: left;
+}
+
+.destination{
+  text-overflow:ellipsis;
+  text-align: left;
+}
+.members {
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: flex-start;
+  border-bottom:none;
+  display: flex;
+  padding: 15rpx 0 0 15rpx;
+}
+
+.section--update {
+  display: flex;
+  position: fixed;
+  bottom: 100rpx;
+  width: 93%;
+  left: 5%;
+  margin: 0;
+}
+
+.set_icon {
+  position: fixed;
+  left: 6%;
+  bottom: 117rpx;
+  width: 28px;
+  height: 28px;
+}
+
+.share {
+  background: -webkit-linear-gradient(left, #02f 0%, #0079ff 100%);
+  font-size: 16px;
+  color: white;
+  width: 75%;
+  left: 18%;
+  bottom: 100rpx;
+  position: fixed;
+  border-radius: 7px;
+  
+}
+
+.update {
+  background: -webkit-linear-gradient(left, rgb(58 199 141) 0%, #00af66 100%);
+  font-size: 16px;
+  color: white;
+  width: 64%;
+  left: 30%;
+  bottom: 100rpx;
+  position: fixed;
+  border-radius: 0 7px 7px 0;
+}
+
+.delete {
+  background: -webkit-linear-gradient(left, rgb(255 73 19) 0%, #ff5353 100%);
+  font-size: 16px;
+  color: white;
+  width: 27%;
+  border-radius: 7px 0 0 7px;
+  margin: 0;
+}
+
+.action--cancle {
+  padding: 0 0 20rpx 0 ;
+}
  /* page {
     line-height: 1.6;
     font-family: -apple-system-font, "Helvetica Neue", sans-serif;
