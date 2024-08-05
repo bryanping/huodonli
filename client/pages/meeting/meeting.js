@@ -315,6 +315,9 @@ mergeResult: function() {
         // 处理过期的活动
         if (nowDate > new Date(Util.correctDateString(`${meeting[i].date} ${meeting[i].start_time}`))) {
             meeting[i].color = 'e6e6e5'; // 过期活动设为灰色
+        } else if (meeting[i].is_participating === 0) { // 判断是否未参与
+            meeting[i].color = 'rgba(94, 218, 116, 0.5)'; // 未参与的活动透明绿色显示
+            meeting[i].border = '2px solid #5eda74'; // 添加绿色外框线
         } else if (meeting[i].type === 'invited') {
             meeting[i].color = '5eda74'; // 邀请的活动用绿色显示
         } else {

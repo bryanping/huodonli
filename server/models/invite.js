@@ -1,20 +1,22 @@
 const DB = require('../tools/db');
 
 class EventInvite {
-  constructor(event_id, invited_openid, status, id) {
+  constructor(event_id, invited_openid, status, is_participating = 0, id) {
     if (id) {
       this.id = id;
     }
     this.event_id = event_id;
     this.invited_openid = invited_openid;
     this.status = status;
+    this.is_participating = is_participating;
   }
 
   toMysql() {
     return {
       event_id: this.event_id,
       invited_openid: this.invited_openid,
-      status: this.status
+      status: this.status,
+      is_participating: this.is_participating 
     }
   }
 
@@ -23,7 +25,7 @@ class EventInvite {
       return undefined;
     }
 
-    return new EventInvite(obj.event_id, obj.invited_openid, obj.status, obj.id);
+    return new EventInvite(obj.event_id, obj.invited_openid, obj.status, obj.is_participating, obj.id);
   }
 }
 
@@ -59,7 +61,8 @@ class EventInviteDAO {
       await DB(this.TABLE).insert({
         event_id: event_id,
         invited_openid: invited_openid,
-        status: true
+        status: true,
+        is_participating: 1,
       });
     }
     catch (ex) {
@@ -68,6 +71,23 @@ class EventInviteDAO {
     }
     return true;
   }
+  static async cancelParticipation(event_id, invited_openid) {
+    try {
+      await DB(this.TABLE)
+        .where({
+          event_id: event_id,
+          invited_openid: invited_openid
+        })
+        .update({
+          is_participating: 0 // 取消参与时设置为0
+        });
+    } catch (ex) {
+      console.log('EventDAO:' + ex.message);
+      return false;
+    }
+    return true;
+  }
+  
 }
 
 module.exports = {

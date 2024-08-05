@@ -1,3 +1,5 @@
+//client/pages/share/share.js
+
 import Meeting from '../../models/Meeting.js';
 import Config from '../../config.js';
 import Util from '../../utils/util.js';

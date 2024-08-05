@@ -1,3 +1,5 @@
+<!-- pages/meeting/page/view/view.wxml -->
+
 <view class='container'>
 
   <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
@@ -90,7 +92,16 @@
     <button style='{{submit_text === "Join" ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class="button join">参与行程</button>
 
     <button open-type="share" class='share'>分享好友</button>
-    <image class="set_icon" bindtap="showActionSheet" src="/img/setting.png"></image>
+    <!-- <image class="set_icon" bindtap="showActionSheet" src="/img/setting.png"></image> -->
+    <!-- 如果是创建者 -->
+    <block wx:if="{{isCreator}}">
+      <image class="set_icon" bindtap="showActionSheet" src="/img/setting.png"></image>
+    </block>
+
+    <!-- 如果是参与者 -->
+    <block wx:if="{{isParticipant}}">
+      <image class="quit-button" src="/img/quit.png" bindtap="onLeaveEvent" />
+    </block>
 
     <!-- <over-image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></over-image> -->
 

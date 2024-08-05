@@ -1,3 +1,5 @@
+//pages/meeting/page/view/view.js
+
 import Meeting from '../../../../models/Meeting.js';
 import Config from '../../../../config.js';
 import Util from '../../../../utils/util.js';
@@ -44,7 +46,8 @@ Page({
     cp_cus: ['#000', '#fff', '#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'],
     cp_color: '',
     loadingDelete: false,
-
+    loadingLeave: false,
+    hasLeft: false,  // 新增字段，用于标记用户是否已退出
   },
 
   /**
@@ -66,14 +69,22 @@ Page({
         });
       }
       let obj = resp.data.data;
+      let isParticipant = obj.is_participating === 1;
       let submit_text = '';
+      let isCreator = false;
+      let isParticipant = false;
       switch (obj.user) {
         case Meeting.USER_CREATOR:
+          submit_text = 'Share';
+          isCreator = true;
+          break;
         case Meeting.USER_MEMBER:
           submit_text = 'Share';
+          isParticipant = true;
           break;
         default:
           submit_text = 'Join';
+          hasLeft = true; // 如果用户不再参与活动，标记为已退出
           break;
       }
 
@@ -129,6 +140,9 @@ Page({
         loader: false,
         AllMembers: obj.members,
         members: obj.members,
+        isCreator: isCreator, // 设置身份标识
+        isParticipant: isParticipant, // 设置身份标识
+        hasLeft: hasLeft,
       });
     });
   },
@@ -335,7 +349,10 @@ Page({
       },
       login: true,
       success(result) {
-        console.log('request success', result)
+        console.log('request success', result);
+        this.setData({
+          isParticipant: true // 更新状态为已参与
+        });
         wx.reLaunch({
           url: '/pages/index/index',
         })
@@ -388,8 +405,66 @@ Page({
       url: `/pages/meeting/page/update/update?id=${id}`,
     });
   },
-  
 
+  onLeaveEvent: function () {
+    // 确保正在执行退出操作时不重复触发
+    if (this.data.loadingLeave) {
+        return;
+    }
+
+    this.setData({
+        loadingLeave: true
+    });
+
+    wx.showModal({
+        title: '确认',
+        content: '你确定要退出这个活动吗？',
+        confirmText: '确认',
+        cancelText: '取消',
+        showCancel: true,
+        success: (res) => {
+            if (res.confirm) {
+                const id = this.data.id;
+                getApp().getToken().then(token => {
+                    wx.request({
+                        url: Config.service.cancelParticipation,  // 你的API路径
+                        method: "POST",
+                        data: {
+                            token: token,
+                            event_id: id
+                        },
+                        success: (result) => {
+                            console.log('退出成功', result);
+                            this.setData({
+                              isParticipant: false,
+                              hasLeft: true,
+                              // color: 'transparent',  // 透明背景
+                              // border: '2px solid #ccc'  // 边框样式
+                            });
+                            wx.reLaunch({
+                                url: '/pages/meeting/meeting',
+                            });
+                        },
+                        fail: (error) => {
+                            console.log('退出失败', error);
+                            this.setData({
+                                loadingLeave: false
+                            });
+                        }
+                    });
+                });
+            } else {
+                // 用户取消退出
+                this.setData({
+                    loadingLeave: false
+                });
+            }
+        }
+    });
+},
+
+  
+  
   mergeResult: function () {
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;

@@ -35,6 +35,9 @@
           {{ item.title }} 
           </navigator>
           <!-- #是故意让字幕背景变灰 -->
+          <!-- <view class="meeting__container" wx:if="{{item.departure}}">
+        <view class="meeting__departure">{{item.departure}}</view>
+      </view> -->
 
           
         </view>

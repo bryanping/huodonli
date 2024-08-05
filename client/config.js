@@ -48,7 +48,9 @@ var config = {
         
       acceptInvite: `${host}/weapp/event/acceptInvite`,
 
-      deleteEvent: `${host}/weapp/event/deleteEvent`
+      deleteEvent: `${host}/weapp/event/deleteEvent`,
+
+      cancelParticipation: `${host}/weapp/event/cancelParticipation`
     }
 };
 

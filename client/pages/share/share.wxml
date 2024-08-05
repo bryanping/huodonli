@@ -1,3 +1,4 @@
+<!-- client/pages/share/share.wxml -->
 <view class='container'>
 
   <view style='{{loader === false ? "display:none" : "display:block"}}' class='overlay'>
