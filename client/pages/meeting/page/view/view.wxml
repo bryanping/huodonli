@@ -100,7 +100,7 @@
 
     <!-- 如果是参与者 -->
     <block wx:if="{{isParticipant}}">
-      <image class="quit-button" src="/img/quit.png" bindtap="onLeaveEvent" />
+      <!-- <image class="quit-button" src="/img/quit.png" bindtap="onLeaveEvent" /> -->
     </block>
 
     <!-- <over-image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></over-image> -->

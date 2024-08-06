@@ -149,9 +149,9 @@
 .set_icon {
   position: fixed;
   left: 6%;
-  bottom: 117rpx;
-  width: 28px;
-  height: 28px;
+  bottom: 115rpx;
+  width: 25px;
+  height: 25px;
 }
 
 .share {

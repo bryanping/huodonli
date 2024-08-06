@@ -47,7 +47,7 @@ Page({
     cp_color: '',
     loadingDelete: false,
     loadingLeave: false,
-    hasLeft: false,  // 新增字段，用于标记用户是否已退出
+    
   },
 
   /**
@@ -72,7 +72,6 @@ Page({
       let isParticipant = obj.is_participating === 1;
       let submit_text = '';
       let isCreator = false;
-      let isParticipant = false;
       switch (obj.user) {
         case Meeting.USER_CREATOR:
           submit_text = 'Share';
@@ -84,7 +83,7 @@ Page({
           break;
         default:
           submit_text = 'Join';
-          hasLeft = true; // 如果用户不再参与活动，标记为已退出
+
           break;
       }
 
@@ -142,7 +141,7 @@ Page({
         members: obj.members,
         isCreator: isCreator, // 设置身份标识
         isParticipant: isParticipant, // 设置身份标识
-        hasLeft: hasLeft,
+
       });
     });
   },
@@ -349,16 +348,17 @@ Page({
       },
       login: true,
       success(result) {
-        console.log('request success', result);
+        console.log('参与请求成功，服务器返回结果:', result);
         this.setData({
           isParticipant: true // 更新状态为已参与
         });
+        console.log("isParticipant 状态更新为: ", this.data.isParticipant);
         wx.reLaunch({
           url: '/pages/index/index',
         })
       },
       fail(error) {
-        console.log('request fail', error);
+        console.log('参与请求失败:', error);
       }
     }
     wx.request(options);
@@ -436,11 +436,12 @@ Page({
                         success: (result) => {
                             console.log('退出成功', result);
                             this.setData({
-                              isParticipant: false,
-                              hasLeft: true,
+                              isParticipant: 0,
+                              
                               // color: 'transparent',  // 透明背景
                               // border: '2px solid #ccc'  // 边框样式
                             });
+                            console.log("isParticipant 状态更新为: ", this.data.isParticipant);
                             wx.reLaunch({
                                 url: '/pages/meeting/meeting',
                             });
