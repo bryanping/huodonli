@@ -304,7 +304,7 @@ Page({
       });
 
       wx.navigateTo({
-        url: '/pages/meeting/page/update/update?id=' + res.data.data.id,
+        url: '/pages/meeting/page/view/view?id=' + res.data.data.id,
       })
     });
   },
