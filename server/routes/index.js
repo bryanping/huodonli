@@ -1,3 +1,5 @@
+//server/routes/index.js
+
 const tokenMiddleware = require('../middlewares/token.js');
 const router = require('koa-router')({
     prefix: '/weapp'

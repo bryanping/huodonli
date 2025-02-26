@@ -47,8 +47,7 @@ Page({
     cp_color: '',
     loadingDelete: false,
     loadingLeave: false,
-    
-    
+    personNumber: '',
   },
 
   /**
@@ -140,6 +139,7 @@ Page({
         loader: false,
         AllMembers: obj.members,
         members: obj.members,
+        personNumber: obj.personNumber || 99,
         isCreator: isCreator, // 设置身份标识
         isParticipant: isParticipant, // 设置身份标识
         
@@ -187,7 +187,6 @@ Page({
       selectedWeek: this.data.weekArr[i],
       actionSheetHidden: this.data.actionSheetHidden || true ,
     });
-    console.log(text)
   },
 
   /**

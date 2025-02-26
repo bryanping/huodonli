@@ -46,8 +46,8 @@ Page({
     options: null,
     imageList: [],
     formId: '',
-    isPersonLimit: false, // 新增，是否限制人数
-    personNumber: 99, // 新增，限制人数
+    isPersonLimit: false,
+    personNumber: 99,
   },
 
   /**
@@ -87,9 +87,21 @@ Page({
 
   // 处理人数输入
   bindPersonNumberInput: function (e) {
-    this.setData({
-      personNumber: e.detail.value
-    });
+    let value = e.detail.value;
+    // 允许为空
+    if (value === '') {
+      this.setData({
+        personNumber: null
+      });
+      return;
+    }
+    // 确保输入的是有效数字
+    const num = parseInt(value);
+    if (!isNaN(num)) {
+      this.setData({
+        personNumber: num  // 存储为数字类型而不是字符串
+      });
+    }
   },
 
   /**
@@ -273,6 +285,8 @@ Page({
     let imageList = this.data.imageList;
     let address = this.data.address;
     let personNumber = this.data.isPersonLimit ? parseInt(this.data.personNumber) : 99;
+    console.log('number', typeof personNumber === 'number' )
+    console.log('Submitting personNumber:', personNumber);
     let obj = {
       title: title,
       color: color,
@@ -283,16 +297,10 @@ Page({
       mapObj: mapObj,
       imageList: imageList,
       formId,
-      personNumber: personNumber,
+      personNumber: parseInt(this.data.personNumber) || 99,
     }
+    console.log('Creating meeting with:', obj);
     console.log('Submitting personNumber:', personNumber);
-    if (this.data.isPersonLimit && (personNumber < 1 || personNumber > 99)) {
-      wx.showToast({
-        title: '请输入1到99之间的人数',
-        icon: 'none',
-      });
-      return;
-    }
     console.log("准备保存的对象:", obj); 
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
@@ -325,7 +333,7 @@ Page({
         loading: false,
         formId: '',
         address: '',
-        personNumber: null,
+        personNumber: '',
       });
 
       wx.navigateTo({

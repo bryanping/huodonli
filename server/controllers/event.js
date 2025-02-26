@@ -1,3 +1,5 @@
+//server/controllers/event.js
+
 const DB = require('../tools/db');
 
 const EventClass = require('../models/event.js');
@@ -39,7 +41,7 @@ let updateEvent = async (ctx, next) => {
     let end_time = ctx.request.body.end_time;
     let destination = ctx.request.body.destination;
     let mapObj = ctx.request.body.mapObj;
-    let personNumber = ctx.request.body.personNumber ? parseInt(ctx.request.body.personNumber) : 99; // 确保未启用限制人数时为99
+    let personNumber = ctx.request.body.personNumber !== undefined ? parseInt(ctx.request.body.personNumber) : null;
     console.log('Received personNumber:', personNumber);
     
 
@@ -63,37 +65,46 @@ let updateEvent = async (ctx, next) => {
 
 // Create new event
 let addEvent = async (ctx, next) => {
-  try {
-    console.log('addEvent function is called');
-    console.log('Event object:', addEvent);
-    console.log('ctx.request.body', ctx.request.body); 
-    // Your existing code here
-} catch (error) {
-    console.error('Error in addEvent:', error);
-    ctx.state.data = {result: false, message: 'An unexpected error occurred'};
-}
-    console.log('Event object:', addEvent);
-    console.log('ctx.request.body', ctx.request.body); 
-    let title = ctx.request.body.title;
-    let date = ctx.request.body.date;
-    let start_time = ctx.request.body.start_time;
-    let end_time = ctx.request.body.end_time;
-    let color = ctx.request.body.color;
-    let destination = ctx.request.body.destination;
-    let creator_openid = ctx.user.openid;
-    let mapObj = ctx.request.body.mapObj;
-    let personNumber = ctx.request.body.personNumber;
-    console.log('打印打印 personNumber:');
-    console.log('Received personNumber:', personNumber);
+    try {
+        console.log('========== START ADD EVENT ==========');
+        console.log('Raw request body:', ctx.request.body);
+        console.log('Request personNumber:', ctx.request.body.personNumber);
+        console.log('Request personNumber type:', typeof ctx.request.body.personNumber);
+        
+        const eventParams = {
+            title: ctx.request.body.title,
+            date: ctx.request.body.date,
+            start_time: ctx.request.body.start_time,
+            end_time: ctx.request.body.end_time,
+            destination: ctx.request.body.destination,
+            color: ctx.request.body.color,
+            creator_openid: ctx.user.openid,
+            mapObj: ctx.request.body.mapObj,
+            personNumber: ctx.request.body.personNumber !== undefined ? parseInt(ctx.request.body.personNumber) : null
+        };
+        
+        console.log('Processed eventParams:', eventParams);
+        console.log('Processed personNumber:', eventParams.personNumber);
+        
+        let event = new Event(eventParams);
+        console.log('Created Event object:', event);
+        
+        let errors = event.validate();
+        if (errors.length > 0) {
+            console.log('Validation errors:', errors);
+            ctx.state.data = {result: false, message: errors[0]};
+            return;
+        }
 
-    let event = new Event(title, date, start_time, end_time, destination, color, creator_openid, mapObj, personNumber);
-
-    let errors = event.validate();
-    if (errors.length > 0) {
-        ctx.state.data = {result: false, message: errors[0]};
-    } else {
+        console.log('Before calling EventDAO.createNew');
         let id = await EventDAO.createNew(event);
+        console.log('After EventDAO.createNew, ID:', id);
+        
         ctx.state.data = {result: true, id: id};
+        console.log('========== END ADD EVENT ==========');
+    } catch (error) {
+        console.error('Error in addEvent:', error);
+        ctx.state.data = {result: false, message: error.message};
     }
 };
 

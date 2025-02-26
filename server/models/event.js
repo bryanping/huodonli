@@ -1,21 +1,43 @@
+//server/models/event.js
+
 const DB = require('../tools/db');
 
 const dateToYMD = require('../tools/helper').dateToYMD;
 
 class Event {
-  constructor(id, title, date, start_time, end_time, destination, color, creator_openid, mapObj, personNumber) {
-    if (id) {
-      this.id = id;
+  constructor(params = {}) {
+    console.log('version1');
+    console.log('Constructing Event with params:', params);
+    
+    // 允许 personNumber 为任意整数或 null
+    let personNumber = params.personNumber !== undefined ? parseInt(params.personNumber) : null;
+    if (isNaN(personNumber)) {
+      personNumber = null; // 设置为 null
     }
-    this.title = title || '';
-    this.date = date || '';
-    this.start_time = start_time || '';
-    this.end_time = end_time || '';
-    this.destination = destination || '';
-    this.color = color || '';
-    this.creator_openid = creator_openid || '';
-    this.mapObj = mapObj || '';
-    this.personNumber = (typeof personNumber === 'number' && personNumber > 0 && personNumber <= 99) ? personNumber : 99;
+    
+    this.id = params.id || null;
+    this.title = params.title || '';
+    this.date = params.date || '';
+    this.start_time = params.start_time || '';
+    this.end_time = params.end_time || '';
+    this.destination = params.destination || '';
+    this.color = params.color || '';
+    this.creator_openid = params.creator_openid || '';
+    this.mapObj = params.mapObj || '';
+    this.personNumber = personNumber;
+    
+    console.log('Constructed Event:', this);
+  }
+
+  validatePersonNumber(value) {
+    console.log('Validating personNumber:', value);
+    const num = parseInt(value);
+    if (isNaN(num) || num < 1 || num > 99) {
+      console.log('Invalid personNumber, using default 99');
+      return 99;
+    }
+    console.log('Valid personNumber:', num);
+    return num;
   }
 
   validate() {
@@ -36,13 +58,6 @@ class Event {
     if (this.creator_openid === '') {
       errors.push('creator_openid is empty');
     }
-    if (this.personNumber === null) {
-      return;
-    }
-    this.personNumber = Number(this.personNumber);
-    if (isNaN(this.personNumber) || this.personNumber <= 0 || this.personNumber > 99) {
-        errors.push('参与人数限制必须为1到99之间');
-    }
 
     return errors;
   }
@@ -57,12 +72,13 @@ class Event {
       destination: this.destination,
       color: this.color,
       mapObj: this.mapObj,
-      personNumber: this.personNumber,
+      personNumber: this.personNumber, // 直接返回 personNumber
     }
   }
 
   toMysql() {
-    return {
+    console.log('version1');
+    const data = {
       title: this.title,
       date: this.date,
       start_time: this.start_time,
@@ -70,20 +86,22 @@ class Event {
       destination: this.destination,
       color: this.color,
       creator_openid: this.creator_openid,
-      mapObj: this.mapObj,
-      personNumber: this.personNumber,
+      mapObj: typeof this.mapObj === 'string' ? this.mapObj : JSON.stringify(this.mapObj),
+      personNumber: this.personNumber // 允许为 null
     };
+    console.log('toMysql generated data:', data);
+    return data;
   }
 
   static fromObject(obj) {
     if(!obj){
       return undefined;
     }
-    let personNumber = parseInt(obj.personNumber);
-    if (isNaN(personNumber) || personNumber < 1 || personNumber > 99) {
-      personNumber = 99; // 设置默认值为 99
+    let personNumber = obj.personNumber !== undefined ? parseInt(obj.personNumber) : null;
+    if (isNaN(personNumber)) {
+      personNumber = null; // 设置为 null
     }
-    return new Event(obj.id, obj.title, obj.date, obj.start_time, obj.end_time, obj.destination, obj.color, obj.creator_openid, obj.mapObj, obj.personNumber)
+    return new Event(obj.id, obj.title, obj.date, obj.start_time, obj.end_time, obj.destination, obj.color, obj.creator_openid, obj.mapObj, personNumber)
   }
 }
 
@@ -100,9 +118,39 @@ class EventDAO {
   }
 
   static async createNew(event) {
-    let elem = await DB(this.TABLE).insert(event.toMysql()).returning('id');
-    console.log('SQL Insert executed:', elem);
-    return elem[0];
+    const trx = await DB.transaction();
+    try {
+      console.log('Starting transaction for new event');
+      console.log('Event data:', event);
+      
+      const mysqlData = event.toMysql();
+      console.log('MySQL data:', mysqlData);
+      
+      // 确保 personNumber 是数字类型
+      if (typeof mysqlData.personNumber !== 'number') {
+        mysqlData.personNumber = parseInt(mysqlData.personNumber) || 99;
+      }
+      
+      console.log('Final MySQL data to insert:', mysqlData);
+      
+      const result = await trx(this.TABLE).insert(mysqlData);
+      console.log('Insert result:', result);
+      
+      // 验证插入是否成功
+      const insertedEvent = await trx(this.TABLE)
+        .where('id', result[0])
+        .first();
+      console.log('Inserted event:', insertedEvent);
+      
+      await trx.commit();
+      console.log('Transaction committed');
+      
+      return result[0];
+    } catch (error) {
+      await trx.rollback();
+      console.error('Error in createNew:', error);
+      throw error;
+    }
   }
 
   static async update(id, title, date, start_time, end_time, destination, color, mapObj, personNumber) {
@@ -129,11 +177,13 @@ class EventDAO {
       obj.mapObj = mapObj;
     }
     if (personNumber !== undefined) {
-      obj.personNumber = (typeof personNumber === 'number' && personNumber > 0 && personNumber <= 99) ? personNumber : 99;
+      const event = new Event();
+      obj.personNumber = event.validatePersonNumber(personNumber);
     }
-  const sql = DB(this.TABLE).where('id', id).update(obj).toString();
-  console.log('SQL Update executed:', sql); // Print the SQL statement
-  return await DB(this.TABLE).where('id', id).update(obj);
+
+    const sql = DB(this.TABLE).where('id', id).update(obj).toString();
+    console.log('SQL Update executed:', sql);
+    return await DB(this.TABLE).where('id', id).update(obj);
   }
 
   static async findById(id) {
