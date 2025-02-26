@@ -43,14 +43,14 @@ class EventInviteDAO {
 
   static async getEventsByMonth(openid, year, month){
     return await DB.select().from(this.TABLE).rightJoin('event', 'event_invite.event_id', '=', 'event.id')
-        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color')
+        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color','event.personNumber')
         .where(DB.raw(`YEAR(event.date) = ${year} AND MONTH(event.date) = ${month} AND event_invite.invited_openid = "${openid}" AND event.deleted IS NULL`))
         .orderByRaw('event.date, event.start_time');
   }
 
   static async getEventsByOpenid(openid){
     return await DB.select().from(this.TABLE).rightJoin('event', 'event_invite.event_id', '=', 'event.id')
-        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color')
+        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color', 'event.personNumber')
       .where(DB.raw(`event_invite.invited_openid = "${openid}" AND event.date >= date(now()) AND  event.deleted IS NULL `))
       // .where(DB.raw(`event_invite.invited_openid = "${openid}" AND event.deleted IS NULL `))
         .orderByRaw('event.date, event.start_time');

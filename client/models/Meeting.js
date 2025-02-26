@@ -12,7 +12,8 @@ class Meeting extends Model {
       start_time: '',
       end_time: '',
       destination: '',
-      mapObj: undefined
+      mapObj: undefined,
+      personNumber: obj && obj.personNumber ? parseInt(obj.personNumber) : 99,
     }, obj)
   }
 
@@ -73,7 +74,9 @@ class Meeting extends Model {
           start_time: this.start_time,
           end_time: this.end_time,
           destination: this.destination,
-          mapObj: this.mapObj ? JSON.stringify(this.mapObj) : undefined
+          mapObj: this.mapObj ? JSON.stringify(this.mapObj) : undefined,
+          personNumber: this.personNumber ? parseInt(this.personNumber) : 99,
+          is_participating: this.participating,
         },
         login: true,
         success(result) {
@@ -103,7 +106,8 @@ class Meeting extends Model {
                     start_time: obj.start_time,
                     end_time: obj.end_time,
                     destination: obj.destination,
-                  mapObj: obj.mapObj ? JSON.stringify(obj.mapObj) : undefined
+                    personNumber: obj.personNumber ? parseInt(obj.personNumber) : null,
+                    mapObj: obj.mapObj ? JSON.stringify(obj.mapObj) : undefined
                 },
                 login: true,
                 success(result) {

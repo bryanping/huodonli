@@ -30,6 +30,7 @@ Page({
     loader: true,
     request: false,
     viewshow: 'none',
+    personNumber: null,
   },
 
   /**
@@ -107,7 +108,8 @@ Page({
         mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
         loader: false,
         AllMembers: obj.members,
-        members: members
+        members: members,
+        personNumber: null,
       });
     });
   },

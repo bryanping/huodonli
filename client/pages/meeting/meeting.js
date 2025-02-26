@@ -100,9 +100,8 @@ Page({
 
         this.getDateList(y, mon - 1);
         this.mergeResult();
-        console.log('print this.data');
-        console.log("length" + invitedMeetingsData.length);
-        console.log(this.data);
+        // console.log('print this.data');
+        // console.log(this.data);
       });
     });
   },
@@ -301,7 +300,7 @@ nextMonth: function() {
 
 
 mergeResult: function() {
-    console.log("triggered mergeResult");
+    // console.log("triggered mergeResult");
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
@@ -347,7 +346,7 @@ mergeResult: function() {
         resultArr: dateList
     });
 
-    console.log("显示dateList");
+    console.log("dateList:");
     console.log(dateList);
 }
 

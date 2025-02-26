@@ -48,6 +48,7 @@ Page({
     loadingDelete: false,
     loadingLeave: false,
     
+    
   },
 
   /**
@@ -141,6 +142,7 @@ Page({
         members: obj.members,
         isCreator: isCreator, // 设置身份标识
         isParticipant: isParticipant, // 设置身份标识
+        
 
       });
     });

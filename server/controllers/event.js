@@ -39,8 +39,11 @@ let updateEvent = async (ctx, next) => {
     let end_time = ctx.request.body.end_time;
     let destination = ctx.request.body.destination;
     let mapObj = ctx.request.body.mapObj;
+    let personNumber = ctx.request.body.personNumber ? parseInt(ctx.request.body.personNumber) : 99; // 确保未启用限制人数时为99
+    console.log('Received personNumber:', personNumber);
+    
 
-    if (!isNaN(parseInt(id)) && (title || date || start_time || end_time || destination || color || mapObj)) {
+    if (!isNaN(parseInt(id)) && (title || date || start_time || end_time || destination || color || mapObj || personNumber)) {
 
         let event = await EventDAO.findById(id);
         // Only creator can edit event
@@ -49,7 +52,7 @@ let updateEvent = async (ctx, next) => {
             return;
         }
 
-        await EventDAO.update(id, title, date, start_time, end_time, destination, color, mapObj);
+        await EventDAO.update(id, title, date, start_time, end_time, destination, color, mapObj, personNumber);
 
         ctx.state.data = {result: true};
     } else {
@@ -60,7 +63,17 @@ let updateEvent = async (ctx, next) => {
 
 // Create new event
 let addEvent = async (ctx, next) => {
-
+  try {
+    console.log('addEvent function is called');
+    console.log('Event object:', addEvent);
+    console.log('ctx.request.body', ctx.request.body); 
+    // Your existing code here
+} catch (error) {
+    console.error('Error in addEvent:', error);
+    ctx.state.data = {result: false, message: 'An unexpected error occurred'};
+}
+    console.log('Event object:', addEvent);
+    console.log('ctx.request.body', ctx.request.body); 
     let title = ctx.request.body.title;
     let date = ctx.request.body.date;
     let start_time = ctx.request.body.start_time;
@@ -69,8 +82,11 @@ let addEvent = async (ctx, next) => {
     let destination = ctx.request.body.destination;
     let creator_openid = ctx.user.openid;
     let mapObj = ctx.request.body.mapObj;
+    let personNumber = ctx.request.body.personNumber;
+    console.log('打印打印 personNumber:');
+    console.log('Received personNumber:', personNumber);
 
-    let event = new Event(title, date, start_time, end_time, destination, color, creator_openid, mapObj);
+    let event = new Event(title, date, start_time, end_time, destination, color, creator_openid, mapObj, personNumber);
 
     let errors = event.validate();
     if (errors.length > 0) {

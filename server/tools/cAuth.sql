@@ -55,6 +55,7 @@ CREATE TABLE `event` (
 `destination` text COLLATE utf8mb4_unicode_ci,
 `mapObj` text COLLATE utf8mb4_unicode_ci,
 `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`personNumber` INT DEFAULT NULL,
 PRIMARY KEY (`id`),
 KEY `id` (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='';

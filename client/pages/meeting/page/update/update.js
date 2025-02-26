@@ -38,6 +38,7 @@ Page({
     bottom: 0,
     readOnly: false,
     actionSheetHidden: true,
+    personNumber: null,
   },
 
   /**
@@ -69,6 +70,7 @@ Page({
         loader: false,
         members: members,
         AllMembers: obj.members,
+        personNumber: null,
       }); 
     
       console.log('print resp.data.data');
@@ -210,6 +212,7 @@ Page({
     let address = this.data.address;
     let id = this.data.id;
     let members = this.data.members;
+    let personNumber = this.data.personNumber;
    
     let obj = {
       id: id,
@@ -219,7 +222,8 @@ Page({
       start_time: start_time,
       end_time: end_time,
       destination: destination,
-      mapObj: mapObj
+      mapObj: mapObj,
+      personNumber: personNumber,
     }
     
     let meeting = new Meeting(obj);
