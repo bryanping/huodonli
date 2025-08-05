@@ -71,6 +71,46 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+  checkUserAuth: function() {
+    return new Promise((resolve, reject) => {
+      if (getApp().checkUserInfo()) {
+        resolve();
+      } else {
+        wx.showModal({
+          title: '需要授权',
+          content: '请先授权获取头像和昵称',
+          success: (res) => {
+            if (res.confirm) {
+              wx.getUserProfile({
+                desc: '用于完善会员资料',
+                success: (res) => {
+                  getApp().loginWithUserProfile(res.userInfo);
+                  resolve();
+                },
+                fail: (err) => {
+                  console.log('getUserProfile fail:', err);
+                  reject(err);
+                }
+              });
+            } else {
+              reject(new Error('用户拒绝授权'));
+            }
+          }
+        });
+      }
+    });
+  },
+
+  addEvent: function() {
+    this.checkUserAuth().then(() => {
+      wx.navigateTo({
+        url: '/pages/meeting/page/update/update'
+      });
+    }).catch(err => {
+      console.log('授权失败:', err);
+    });
+  },
+
   onShow: function() {
     const {
       options
@@ -80,29 +120,48 @@ Page({
     var mon = Util.checkTime(options.mon || (today.getMonth() + 1));
     var d = today.getDate();
     var i = today.getDay();
-    this.getSelfMeetingsByDate(y, mon).then(resp1 => {
-      var selfMeetingData = resp1.data.data;
-      this.getInvitedMeetingsByDate(y, mon).then(resp2 => {
-        var invitedMeetingsData = resp2.data.data;
-        for (var i = 0; i < invitedMeetingsData.length; i++) {
-          invitedMeetingsData[i].type = 'invited';
-          
-        }
-        this.setData({
-          curYear: y,
-          curMonth: mon,
-          curDate: d,
-          selectedDate: y + '/' + mon + '/' + d,
-          selectedWeek: this.data.weekArr[i],
-          meeting: selfMeetingData.concat(invitedMeetingsData),
-          loader: false,
-        }); 
+    
+    Promise.all([
+      this.getSelfMeetingsByDate(y, mon),
+      this.getInvitedMeetingsByDate(y, mon)
+    ]).then(([resp1, resp2]) => {
+      var selfMeetingData = resp1.data.data || [];
+      var invitedMeetingsData = resp2.data.data || [];
+      
+      // 标记行程类型
+      selfMeetingData.forEach(event => {
+        event.type = 'self';
+      });
+      
+      invitedMeetingsData.forEach(event => {
+        event.type = 'invited';
+      });
 
-        this.getDateList(y, mon - 1);
-        this.mergeResult();
-        console.log('print this.data');
-        console.log("length" + invitedMeetingsData.length);
-        console.log(this.data);
+      this.setData({
+        curYear: y,
+        curMonth: mon,
+        curDate: d,
+        selectedDate: y + '/' + mon + '/' + d,
+        selectedWeek: this.data.weekArr[i],
+        meeting: selfMeetingData.concat(invitedMeetingsData),
+        loader: false
+      });
+
+      this.getDateList(y, mon - 1);
+      this.mergeResult();
+    }).catch(error => {
+      console.error('获取行程失败:', error);
+      wx.showToast({
+        title: '获取行程失败，请下拉刷新重试',
+        icon: 'none',
+        duration: 2000
+      });
+      this.setData({
+        loader: false,
+        meeting: [], // 清空活动列表
+        curYear: new Date().getFullYear(),
+        curMonth: new Date().getMonth() + 1,
+        curDate: new Date().getDate()
       });
     });
   },
@@ -301,7 +360,7 @@ nextMonth: function() {
 
 
 mergeResult: function() {
-    console.log("triggered mergeResult");
+    // console.log("triggered mergeResult");
     let meeting = this.data.meeting;
     let dateList = this.data.dateList;
     let nowDate = new Date();
@@ -347,7 +406,7 @@ mergeResult: function() {
         resultArr: dateList
     });
 
-    console.log("显示dateList");
+    console.log("dateList:");
     console.log(dateList);
 }
 

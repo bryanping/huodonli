@@ -1,3 +1,5 @@
+//server/controllers/event.js
+
 const DB = require('../tools/db');
 
 const EventClass = require('../models/event.js');
@@ -39,8 +41,11 @@ let updateEvent = async (ctx, next) => {
     let end_time = ctx.request.body.end_time;
     let destination = ctx.request.body.destination;
     let mapObj = ctx.request.body.mapObj;
+    let personNumber = ctx.request.body.personNumber !== undefined ? parseInt(ctx.request.body.personNumber) : null;
+    console.log('Received personNumber:', personNumber);
+    
 
-    if (!isNaN(parseInt(id)) && (title || date || start_time || end_time || destination || color || mapObj)) {
+    if (!isNaN(parseInt(id)) && (title || date || start_time || end_time || destination || color || mapObj || personNumber)) {
 
         let event = await EventDAO.findById(id);
         // Only creator can edit event
@@ -49,7 +54,7 @@ let updateEvent = async (ctx, next) => {
             return;
         }
 
-        await EventDAO.update(id, title, date, start_time, end_time, destination, color, mapObj);
+        await EventDAO.update(id, title, date, start_time, end_time, destination, color, mapObj, personNumber);
 
         ctx.state.data = {result: true};
     } else {
@@ -60,24 +65,46 @@ let updateEvent = async (ctx, next) => {
 
 // Create new event
 let addEvent = async (ctx, next) => {
+    try {
+        console.log('========== START ADD EVENT ==========');
+        console.log('Raw request body:', ctx.request.body);
+        console.log('Request personNumber:', ctx.request.body.personNumber);
+        console.log('Request personNumber type:', typeof ctx.request.body.personNumber);
+        
+        const eventParams = {
+            title: ctx.request.body.title,
+            date: ctx.request.body.date,
+            start_time: ctx.request.body.start_time,
+            end_time: ctx.request.body.end_time,
+            destination: ctx.request.body.destination,
+            color: ctx.request.body.color,
+            creator_openid: ctx.user.openid,
+            mapObj: ctx.request.body.mapObj,
+            personNumber: ctx.request.body.personNumber !== undefined ? parseInt(ctx.request.body.personNumber) : null
+        };
+        
+        console.log('Processed eventParams:', eventParams);
+        console.log('Processed personNumber:', eventParams.personNumber);
+        
+        let event = new Event(eventParams);
+        console.log('Created Event object:', event);
+        
+        let errors = event.validate();
+        if (errors.length > 0) {
+            console.log('Validation errors:', errors);
+            ctx.state.data = {result: false, message: errors[0]};
+            return;
+        }
 
-    let title = ctx.request.body.title;
-    let date = ctx.request.body.date;
-    let start_time = ctx.request.body.start_time;
-    let end_time = ctx.request.body.end_time;
-    let color = ctx.request.body.color;
-    let destination = ctx.request.body.destination;
-    let creator_openid = ctx.user.openid;
-    let mapObj = ctx.request.body.mapObj;
-
-    let event = new Event(title, date, start_time, end_time, destination, color, creator_openid, mapObj);
-
-    let errors = event.validate();
-    if (errors.length > 0) {
-        ctx.state.data = {result: false, message: errors[0]};
-    } else {
+        console.log('Before calling EventDAO.createNew');
         let id = await EventDAO.createNew(event);
+        console.log('After EventDAO.createNew, ID:', id);
+        
         ctx.state.data = {result: true, id: id};
+        console.log('========== END ADD EVENT ==========');
+    } catch (error) {
+        console.error('Error in addEvent:', error);
+        ctx.state.data = {result: false, message: error.message};
     }
 };
 
@@ -124,8 +151,12 @@ const acceptInvite = async (ctx, next) => {
             if(!invite){
                 invite = await EventInviteDAO.acceptInvite(event_id, invited_openid);
                 ctx.state.data = {result: true};
+            } else if(invite.is_participating === 0) {
+                // 如果之前接受過但取消參與了，重新設置參與狀態
+                await EventInviteDAO.acceptInvite(event_id, invited_openid);
+                ctx.state.data = {result: true};
             } else {
-                ctx.state.data = {result: false, message: 'Already accepted'};
+                ctx.state.data = {result: false, message: 'Already participating'};
             }
         } else {
             ctx.state.data = {result: false, message: 'Event not exists'};

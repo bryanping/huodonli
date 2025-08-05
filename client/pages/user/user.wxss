@@ -78,3 +78,17 @@ height: 120rpx;
   line-height: 5vh;
   margin: 15rpx 0 0 0;
 }
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.update-tip {
+  position: absolute;
+  right: 30rpx;
+  color: #5ac8fa;
+  font-size: 24rpx;
+}

@@ -42,7 +42,7 @@
     },
     "appid": "wxac1f33bcb2f4e746",
     "projectname": "LC1.0.0",
-    "libVersion": "3.5.0",
+    "libVersion": "2.25.3",
     "compileType": "miniprogram",
     "simulatorType": "wechat",
     "simulatorPluginLibVersion": {},

@@ -55,6 +55,7 @@ CREATE TABLE `event` (
 `destination` text COLLATE utf8mb4_unicode_ci,
 `mapObj` text COLLATE utf8mb4_unicode_ci,
 `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`personNumber` int(11) NOT NULL DEFAULT NULL,
 PRIMARY KEY (`id`),
 KEY `id` (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='';
@@ -81,3 +82,17 @@ KEY `openid` (`openid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='';
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+ALTER TABLE `event` MODIFY COLUMN `personNumber` int(11) NOT NULL DEFAULT 99;
+
+-- 首先检查表结构
+SHOW CREATE TABLE event;
+
+-- 然后确保 personNumber 列的定义正确
+ALTER TABLE `event` 
+MODIFY COLUMN `personNumber` int(11) NOT NULL DEFAULT 99,
+ADD CONSTRAINT check_person_number 
+CHECK (personNumber >= 1 AND personNumber <= 99);
+
+-- 验证修改
+DESCRIBE event;

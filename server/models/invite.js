@@ -43,14 +43,14 @@ class EventInviteDAO {
 
   static async getEventsByMonth(openid, year, month){
     return await DB.select().from(this.TABLE).rightJoin('event', 'event_invite.event_id', '=', 'event.id')
-        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color')
+        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color','event.personNumber')
         .where(DB.raw(`YEAR(event.date) = ${year} AND MONTH(event.date) = ${month} AND event_invite.invited_openid = "${openid}" AND event.deleted IS NULL`))
         .orderByRaw('event.date, event.start_time');
   }
 
   static async getEventsByOpenid(openid){
     return await DB.select().from(this.TABLE).rightJoin('event', 'event_invite.event_id', '=', 'event.id')
-        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color')
+        .select('event.id', 'event.date', 'event.title', 'event.destination', 'event.start_time', 'event.end_time', 'event.mapObj', 'event.color', 'event.personNumber')
       .where(DB.raw(`event_invite.invited_openid = "${openid}" AND event.date >= date(now()) AND  event.deleted IS NULL `))
       // .where(DB.raw(`event_invite.invited_openid = "${openid}" AND event.deleted IS NULL `))
         .orderByRaw('event.date, event.start_time');
@@ -58,12 +58,27 @@ class EventInviteDAO {
 
   static async acceptInvite(event_id, invited_openid) {
     try {
-      await DB(this.TABLE).insert({
-        event_id: event_id,
-        invited_openid: invited_openid,
-        status: true,
-        is_participating: 1,
-      });
+      const invite = await this.getInvite(event_id, invited_openid);
+      if (!invite) {
+        // 如果邀請記錄不存在，創建新記錄
+        await DB(this.TABLE).insert({
+          event_id: event_id,
+          invited_openid: invited_openid,
+          status: true,
+          is_participating: 1,
+        });
+      } else {
+        // 如果邀請記錄存在，更新參與狀態
+        await DB(this.TABLE)
+          .where({
+            event_id: event_id,
+            invited_openid: invited_openid
+          })
+          .update({
+            status: true,
+            is_participating: 1
+          });
+      }
     }
     catch (ex) {
       console.log('EventDAO:' + ex.message);

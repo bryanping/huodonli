@@ -38,42 +38,71 @@ Page({
     bottom: 0,
     readOnly: false,
     actionSheetHidden: true,
+    personNumber: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let obj = Meeting.findById(options.id).then(resp => {
-      let obj = resp.data.data;
-      let members = [];
-      
-      if (obj.members.length > 7) {
-        for (let i = 0; i < 7; i++) {
-          members.push(obj.members[i]);
+    if (!options.id) {
+      wx.showToast({
+        title: '活动ID不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      setTimeout(() => {
+        wx.navigateBack();
+      }, 2000);
+      return;
+    }
+
+    this.setData({ loader: true });
+
+    Meeting.findById(options.id)
+      .then(resp => {
+        if (!resp.data || !resp.data.data) {
+          throw new Error('活动数据获取失败');
         }
-      } else {
-        members = obj.members;
-      }
-      let how_long = Util.calculateHowLong(obj.start_time, obj.end_time);
-      this.setData({
-        id: obj.id,
-        title: obj.title,
-        color: obj.color,
-        date: obj.date,
-        start_time: obj.start_time,
-        how_long: how_long,
-        end_time: obj.end_time,
-        destination: obj.destination,
-        mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
-        loader: false,
-        members: members,
-        AllMembers: obj.members,
-      }); 
-    
-      console.log('print resp.data.data');
-      console.log(resp.data.data);
-    });
+
+        let obj = resp.data.data;
+        let members = [];
+        
+        if (obj.members && obj.members.length > 7) {
+          members = obj.members.slice(0, 7);
+        } else {
+          members = obj.members || [];
+        }
+
+        let how_long = Util.calculateHowLong(obj.start_time, obj.end_time);
+        
+        this.setData({
+          id: obj.id,
+          title: obj.title || '',
+          color: obj.color || '',
+          date: obj.date || '',
+          start_time: obj.start_time || '',
+          how_long: how_long,
+          end_time: obj.end_time || '',
+          destination: obj.destination || '',
+          mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
+          members: members,
+          AllMembers: obj.members || [],
+          personNumber: null,
+          loader: false
+        });
+      })
+      .catch(error => {
+        console.error('获取活动详情失败:', error);
+        wx.showToast({
+          title: '获取活动详情失败',
+          icon: 'none',
+          duration: 2000
+        });
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 2000);
+      });
   },
 
   /**
@@ -210,6 +239,7 @@ Page({
     let address = this.data.address;
     let id = this.data.id;
     let members = this.data.members;
+
    
     let obj = {
       id: id,
@@ -219,7 +249,10 @@ Page({
       start_time: start_time,
       end_time: end_time,
       destination: destination,
-      mapObj: mapObj
+      mapObj: mapObj,
+      address: address,
+      members: members,
+
     }
     
     let meeting = new Meeting(obj);
@@ -232,15 +265,35 @@ Page({
       });
       return;
     }
+    
     this.setData({
       loadingUpdate: true
     });
+    
     let eventDate = new Date(`${date} ${start_time}`);
-    Meeting.update(obj).then(x => {
-      wx.reLaunch({
-        url: `/pages/meeting/meeting?id=${this.data.id}`,
-        // ?y=${ eventDate.getFullYear() } & mon=${ eventDate.getMonth() + 1 }
-      })
+    Meeting.update(obj).then(res => {
+      // 由於後端更新操作可能成功但返回 false，我們需要重新檢查數據
+      wx.showToast({
+        title: '更新成功',
+        icon: 'success',
+        duration: 1500
+      });
+      setTimeout(() => {
+        wx.reLaunch({
+          url: `/pages/meeting/page/view/view?id=${this.data.id}`,
+        });
+      }, 1500);
+    }).catch(error => {
+      console.error('更新活动失败:', error);
+      wx.showToast({
+        title: '更新失败，请稍后重试',
+        icon: 'none',
+        duration: 2000
+      });
+    }).finally(() => {
+      this.setData({
+        loadingUpdate: false
+      });
     });
 
   },
@@ -275,50 +328,77 @@ Page({
   
 
   bindMapSelection: function (e) {
-    console.log('hello world');
     wx.chooseLocation({
       success: (res) => {
-        console.log(res)
-        let mapObj = {};
-        // let buff = elem.location.split(',');
-        mapObj.longitude = res.longitude;
-        mapObj.latitude = res.latitude;
-        mapObj.markers = [];
-        let marker = {
-          iconPath: "../../../../img/UI-3i@3x.png",
+        if (!res.longitude || !res.latitude) {
+          wx.showToast({
+            title: '获取位置信息失败',
+            icon: 'none',
+            duration: 2000
+          });
+          return;
+        }
+
+        let mapObj = {
           longitude: res.longitude,
           latitude: res.latitude,
-          width: 25,
-          height: 25,
+          address: res.address,
+          markers: [{
+            iconPath: "../../../../img/UI-3i@3x.png",
+            longitude: res.longitude,
+            latitude: res.latitude,
+            width: 25,
+            height: 25,
+          }]
         };
-        mapObj.markers.push(marker);
 
         this.setData({
           tips: [],
-          destination: res.name,
-          address: res.address,
+          destination: res.name || '未命名地点',
+          address: res.address || '',
           mapObj: mapObj
         });
-
+      },
+      fail: (error) => {
+        console.error('选择位置失败:', error);
+        wx.showToast({
+          title: '选择位置失败，请重试',
+          icon: 'none',
+          duration: 2000
+        });
       }
-    })
+    });
   },
 
   //地圖導航
 
   bindMaptop: function () {
-    // console.log({
-    //   longitude: this.data.mapObj.longitude,
-    //   latitude: this.data.mapObj.latitude,
-    //   name: this.data.destination,
-    //   address: this.data.mapObj.address
-    // });
+    if (!this.data.mapObj || !this.data.mapObj.longitude || !this.data.mapObj.latitude) {
+      wx.showToast({
+        title: '位置信息不完整',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+
     wx.openLocation({
       longitude: Number(this.data.mapObj.longitude),
       latitude: Number(this.data.mapObj.latitude),
-      name: this.data.destination,
-      address: this.data.mapObj.address
-    })
+      name: this.data.destination || '未命名地点',
+      address: this.data.mapObj.address || '',
+      success: () => {
+        console.log('打开位置成功');
+      },
+      fail: (error) => {
+        console.error('打开位置失败:', error);
+        wx.showToast({
+          title: '打开位置失败，请重试',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   },
 
   bindSearch: function(e) {

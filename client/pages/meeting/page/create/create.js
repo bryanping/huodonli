@@ -46,6 +46,8 @@ Page({
     options: null,
     imageList: [],
     formId: '',
+    isPersonLimit: false,
+    personNumber: 99,
   },
 
   /**
@@ -65,7 +67,8 @@ Page({
       how_long: '00:00',
       imageList: '',
       tips: [],
-      address: ''
+      address: '',
+      personNumber: null,
     });
   },
 
@@ -73,7 +76,32 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+  },
+
+  // 处理人数限制开关
+  switch1Change: function (e) {
+    this.setData({
+      isPersonLimit: e.detail.value // 根据开关状态更新 isPersonLimit
+    });
+  },
+
+  // 处理人数输入
+  bindPersonNumberInput: function (e) {
+    let value = e.detail.value;
+    // 允许为空
+    if (value === '') {
+      this.setData({
+        personNumber: null
+      });
+      return;
+    }
+    // 确保输入的是有效数字
+    const num = parseInt(value);
+    if (!isNaN(num)) {
+      this.setData({
+        personNumber: num  // 存储为数字类型而不是字符串
+      });
+    }
   },
 
   /**
@@ -217,9 +245,6 @@ Page({
     })
   },
 
-  switch1Change: function (e) {
-    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
-  },
 
 
   // dealFormIds: function (formId) {
@@ -258,7 +283,10 @@ Page({
     let mapObj = this.data.mapObj;
     let destination = this.data.destination;
     let imageList = this.data.imageList;
-    let address = this.data.address
+    let address = this.data.address;
+    let personNumber = this.data.isPersonLimit ? parseInt(this.data.personNumber) : 99;
+    console.log('number', typeof personNumber === 'number' )
+    console.log('Submitting personNumber:', personNumber);
     let obj = {
       title: title,
       color: color,
@@ -269,7 +297,11 @@ Page({
       mapObj: mapObj,
       imageList: imageList,
       formId,
+      personNumber: parseInt(this.data.personNumber) || 99,
     }
+    console.log('Creating meeting with:', obj);
+    console.log('Submitting personNumber:', personNumber);
+    console.log("准备保存的对象:", obj); 
     let meeting = new Meeting(obj);
     let errors = meeting.validate();
     if (errors.length > 0) {
@@ -301,10 +333,11 @@ Page({
         loading: false,
         formId: '',
         address: '',
+        personNumber: '',
       });
 
       wx.navigateTo({
-        url: '/pages/meeting/page/update/update?id=' + res.data.data.id,
+        url: '/pages/meeting/page/view/view?id=' + res.data.data.id,
       })
     });
   },
@@ -353,7 +386,7 @@ Page({
   },
 
   bindMapSelection: function (e) {
-    console.log('hello world');
+    console.log('bindMapSelection');
     var that = this
     wx.chooseLocation({
       success: function (res) {

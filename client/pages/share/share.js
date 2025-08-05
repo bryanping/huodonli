@@ -30,6 +30,7 @@ Page({
     loader: true,
     request: false,
     viewshow: 'none',
+    personNumber: null,
   },
 
   /**
@@ -46,7 +47,7 @@ Page({
           showCancel: false,
           success: function (res) {
             wx.reLaunch({
-              url: 'pages/meeting/page/view/view?id={{this.data.id}}',
+              url: '/pages/meeting/meeting',
             });
           }
         });
@@ -107,7 +108,8 @@ Page({
         mapObj: obj.mapObj ? JSON.parse(obj.mapObj) : undefined,
         loader: false,
         AllMembers: obj.members,
-        members: members
+        members: members,
+        personNumber: null,
       });
     });
   },
@@ -170,19 +172,25 @@ Page({
    */
 
   onShareAppMessage: function (res) {
-
     return {
       title: "你有一个行程邀请：" + this.data.title,
-      path: 'pages/meeting/page/view/view?id=' + this.data.id,
-      success: function (res) {
-        // Forwarding successful
-        console.log("Share successfull");
-        console.log(res);
+      path: '/pages/share/share?id=' + this.data.id,
+      imageUrl: '/images/share-cover.png',
+      success: (res) => {
+        wx.showToast({
+          title: '分享成功',
+          icon: 'success',
+          duration: 2000
+        });
+        console.log("分享成功", res);
       },
-      fail: function (res) {
-        // Forwarding failed
-        console.log("Share failed");
-        console.log(res);
+      fail: (error) => {
+        wx.showToast({
+          title: '分享失败',
+          icon: 'none',
+          duration: 2000
+        });
+        console.error("分享失败", error);
       }
     }
   },
@@ -239,14 +247,42 @@ Page({
         event_id: id
       },
       login: true,
-      success(result) {
+      success: (result) => {
         console.log('request success', result)
-        wx.reLaunch({
-          url: '/pages/meeting/meeting',
+        if (result.data.code === 0) {
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+            duration: 2000,
+            success: () => {
+              setTimeout(() => {
+                wx.reLaunch({
+                  url: '/pages/meeting/meeting',
+                })
+              }, 2000)
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '加入失败',
+            icon: 'error',
+            duration: 2000
+          })
+        }
+        this.setData({
+          request: false
         })
       },
-      fail(error) {
-        console.log('request fail', error);
+      fail: (error) => {
+        console.log('request fail', error)
+        wx.showToast({
+          title: '加入失败',
+          icon: 'error',
+          duration: 2000
+        })
+        this.setData({
+          request: false
+        })
       }
     }
     wx.request(options);

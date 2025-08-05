@@ -15,34 +15,39 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //this.addUser(res.code);
         this.globalData.requestCode = res.code;
-        // 获取用户信息
-        wx.getSetting({
-          success: res => {
-            if (res.authSetting['scope.userInfo']) {
-              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-              wx.getUserInfo({
-                success: res => {
-                  // 可以将 res 发送给后台解码出 unionId
-                  this.globalData.userInfo = res.userInfo;
-                  this.addUser(this.globalData.requestCode, this.globalData.userInfo);
-
-                  // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                  // 所以此处加入 callback 以防止这种情况
-                  if (this.userInfoReadyCallback) {
-                    this.userInfoReadyCallback(res)
-                  }
-                }
-              })
-            } else {
-              wx.redirectTo({
-                url: '/pages/login/login',
-              })
-            }
+        // 检查是否已有token，如果有则直接使用
+        const token = wx.getStorageSync('token');
+        if (token) {
+          this.globalData.token = token;
+          const userInfo = wx.getStorageSync('userInfo');
+          if (userInfo) {
+            this.globalData.userInfo = userInfo;
           }
-        })
+        } else {
+          // 没有token，跳转到登录页面
+          wx.redirectTo({
+            url: '/pages/login/login',
+          })
+        }
+      }
+    })
+  },
 
+  // 新增：使用wx.getUserProfile获取用户信息后的登录方法
+  loginWithUserProfile: function(userInfo) {
+    wx.login({
+      success: res => {
+        this.globalData.requestCode = res.code;
+        this.globalData.userInfo = userInfo;
+        this.addUser(res.code, userInfo);
+      },
+      fail: error => {
+        console.log('wx.login fail', error);
+        wx.showToast({
+          icon: 'none',
+          title: '登录失败，请重试'
+        })
       }
     })
   },
@@ -67,10 +72,24 @@ App({
       login: true,
       success(result)  {
         console.log('request success', result)
-        that.globalData.token = result.data.data.token;
+        if (result.data && result.data.data && result.data.data.token) {
+          that.globalData.token = result.data.data.token;
+          // 保存token和用户信息到本地存储
+          wx.setStorageSync('token', result.data.data.token);
+          wx.setStorageSync('userInfo', userInfo);
+          
+          wx.showToast({
+            icon: 'success',
+            title: '登录成功'
+          })
+        }
       },
       fail(error) {
         console.log('request fail', error);
+        wx.showToast({
+          icon: 'none',
+          title: '登录失败，请重试'
+        })
       }
     }
 

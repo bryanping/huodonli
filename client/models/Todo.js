@@ -24,6 +24,7 @@ class Todo extends Model {
       summury: "",//todo 的总结
       isContinuous: false,//默认todo为不持续的
       weight: 1,//重要程度，默认为1，与level设计的有点重复，不过无所谓了
+      personNumber: null,
     }, model)
 
     // 日期格式化

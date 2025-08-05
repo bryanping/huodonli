@@ -56,8 +56,8 @@
 
   <view class="members--limit">
         
-        <view class="section--text">人数：</view>
-        <view class='limit--text'>{{AllMembers.length}} 人参与</view>
+        <!-- <view class="section--text">人数：</view>
+        <view class='limit--text'>{{AllMembers.length}} 人参与</view> -->
         <!-- <view class="limit--text">{公开活动}</view> -->
         <!-- 查看成員text -->
         <!-- <navigator class="showmenber" url="/pages/user/page/join/join?id={{item.id}}">
@@ -66,7 +66,7 @@
 
         
       </view>
-
+    <!-- 参与人头像 -->
       <view style='{{ AllMembers.length == 0 ? "display:none" : ""}}' class='members'>
         <block wx:for="{{members}}" wx:key="key" wx:for-item="item">
           <navigator class='user' url="/pages/user/page/view/view?id={{item.id}}">
@@ -75,7 +75,7 @@
           </navigator>
         </block>
       </view>
-      <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button>
+      <!-- <button catchtap='viewAllMembers' style='{{ AllMembers.length > 7 ? "display:block" : "display: none"  }}'>{{ showAllText }}</button> -->
     </view>
   
 
@@ -102,6 +102,7 @@
     <block wx:if="{{isParticipant}}">
       <!-- <image class="quit-button" src="/img/quit.png" bindtap="onLeaveEvent" /> -->
     </block>
+    
 
     <!-- <over-image style='{{submit_text === "Join"  ? "display:block" : "display:none" }}' formType="submit" loading='{{request}}' class='quit' src="/img/join.png"></over-image> -->
 
@@ -140,3 +141,8 @@
 
   </form>
 </view>
+
+<!-- <view class="section">
+    <text class="label">参与人数限制：</text>
+    <text>{{personNumber}}人</text>
+</view> -->

@@ -9,11 +9,41 @@ Page({
   },
 
   getUserInfo: function (e) {
-    if (e.detail && e.detail.rawData && e.detail.userInfo) {
-      getApp().loadUserData();
-      wx.reLaunch({
-        url: '/pages/meeting/meeting',
+    // 检查是否支持wx.getUserProfile
+    if (wx.getUserProfile) {
+      wx.getUserProfile({
+        desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，不超过30个字符
+        success: (res) => {
+          console.log('getUserProfile success', res);
+          // 获取到用户信息后，调用app.js中的登录逻辑
+          getApp().loginWithUserProfile(res.userInfo);
+          wx.reLaunch({
+            url: '/pages/meeting/meeting',
+          })
+        },
+        fail: (res) => {
+          console.log('getUserProfile fail', res);
+          if (res.errMsg === "getUserProfile:fail auth deny") {
+            wx.showToast({
+              icon: 'none',
+              title: '需要授权才能使用'
+            })
+          }
+        }
       })
+    } else {
+      // 兼容低版本，使用旧的getUserInfo方式
+      if (e.detail && e.detail.rawData && e.detail.userInfo) {
+        getApp().loginWithUserProfile(e.detail.userInfo);
+        wx.reLaunch({
+          url: '/pages/meeting/meeting',
+        })
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: '获取用户信息失败'
+        })
+      }
     }
   },
   /**

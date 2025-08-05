@@ -47,7 +47,7 @@ Page({
     cp_color: '',
     loadingDelete: false,
     loadingLeave: false,
-    
+    personNumber: '',
   },
 
   /**
@@ -139,8 +139,10 @@ Page({
         loader: false,
         AllMembers: obj.members,
         members: obj.members,
+        personNumber: obj.personNumber || 99,
         isCreator: isCreator, // 设置身份标识
         isParticipant: isParticipant, // 设置身份标识
+        
 
       });
     });
@@ -185,7 +187,6 @@ Page({
       selectedWeek: this.data.weekArr[i],
       actionSheetHidden: this.data.actionSheetHidden || true ,
     });
-    console.log(text)
   },
 
   /**
@@ -335,33 +336,60 @@ Page({
 
   formSubmit: function (e) {
     let id = this.data.id;
-    let token = getApp().globalData.token;
     this.setData({
-      request: true
+      request: true,
+      loadingLeave: true
     });
-    let options = {
+    const that = this;
+    
+    wx.request({
       url: Config.service.acceptInvite,
-      method: "post",
+      method: 'POST',
       data: {
-        token: token,
         event_id: id
       },
-      login: true,
+      header: {
+        'x-wx-skey': getApp().getToken()
+      },
       success(result) {
-        console.log('参与请求成功，服务器返回结果:', result);
-        this.setData({
-          isParticipant: true // 更新状态为已参与
-        });
-        console.log("isParticipant 状态更新为: ", this.data.isParticipant);
-        wx.reLaunch({
-          url: '/pages/index/index',
-        })
+        console.log('参与请求成功，服务器返回结果:', result.data);
+        if (result.data && result.data.result) {
+          that.setData({
+            isParticipant: true
+          });
+          wx.showToast({
+            title: '参与成功',
+            icon: 'success',
+            duration: 1500
+          });
+          setTimeout(() => {
+            wx.reLaunch({
+              url: '/pages/meeting/meeting'
+            });
+          }, 1500);
+        } else {
+          wx.showToast({
+            title: result.data.message || '参与失败',
+            icon: 'none',
+            duration: 2000
+          });
+        }
       },
       fail(error) {
-        console.log('参与请求失败:', error);
+        console.error('参与请求失败:', error);
+        wx.showToast({
+          title: '参与失败，请重试',
+          icon: 'none',
+          duration: 2000
+        });
+      },
+      complete() {
+        that.setData({
+          request: false,
+          loadingLeave: false
+        });
       }
-    }
-    wx.request(options);
+    });
   },
 
   // code() {

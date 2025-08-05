@@ -43,15 +43,28 @@
           <view class='address' style='{{mapObj ? "display:block" : "display:none"}}'>{{mapObj.address}}</view>
         </view>
       </view>
-
+<!-- <switch class='switch' bindchange="switch1Change" />
+        <view class="limit--text">公开活动</view> -->
 <!-- 
       <view class="section">
-        <switch class='switch' bindchange="switch1Change" />
-        <view class="limit--text">公开活动</view>
-        <view class='limit--text'>｜ 人数</view>
-        <switch class='switch' bindchange="switch1Change" />
-        <view class='limit--text'>不限制</view>
+        
+
+    <view class='limit--text'>人数</view>
+    <switch class='switch' bindchange="switch1Change" checked="{{isPersonLimit}}" />
+    
+    <view class='limit--text'>{{isPersonLimit ? '' : '不限制'}}</view>
+    <view class="section" style="{{isPersonLimit ? 'display:block;' : 'display:none;'}}">
+    
+    <input type="number" min="1" max="99" value="{{personNumber}}" bindinput="bindPersonNumberInput" />
+    </view>
+    <view class="section" style="{{isPersonLimit ? 'display:block;' : 'display:none;'}}">
+    <view class="section--text">人</view>
+    </view>
+
       </view> -->
+
+    <!-- 新增人数输入框 -->
+    
 
       <!-- <view class="section">
         <view class="section--text">举办方</view>

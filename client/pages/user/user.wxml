@@ -7,10 +7,13 @@
   <form class="userinfo" style='{{loader === true ? "display:none" : "display:block"}}'>
     <view class="block">
 
-      <image class="avatar" src='{{avatarUrl}}'></image>
-      <view class="title">
-        <text class="nickname">{{ nickName }} </text>
-        <text class="devent"> 活动发起数: {{ created }}</text>
+      <view class="user-profile" bindtap="updateUserProfile">
+        <image class="avatar" src='{{avatarUrl}}'></image>
+        <view class="title">
+          <text class="nickname">{{ nickName }} </text>
+          <text class="devent"> 活动发起数: {{ created }}</text>
+        </view>
+        <!-- <text class="update-tip">点击更新头像和昵称</text> -->
       </view>
       <!-- <button class="userFocusBT"> 关注 </button> -->
     </view>
